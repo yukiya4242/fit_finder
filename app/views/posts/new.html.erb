@@ -1,2 +1,28 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<!-- app/views/posts/new.html.erb -->
+
+<h1>新しい投稿</h1>
+
+<%= form_with model: @post, local: true do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %>件のエラーがあります:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content, "文章" %>
+    <%= f.text_area :content, required: true %>
+  </div>
+
+  <h4>画像</h4>
+  <%= f.file_field :image, accept: "image/*" %>
+
+  <div class="actions">
+    <%= f.submit "投稿する" %>
+  </div>
+<% end %>

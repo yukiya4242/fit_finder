@@ -1,19 +1,22 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :check_guest_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
-    redirect_to posts_path(@post.id)
+    redirect_to posts_path
     else
     render :new
     end
+  end
 
   def index
-    @posts = Posts.all
+    @posts = Post.all
   end
 
   def edit
@@ -28,7 +31,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comment = Comment
+    @comment = Comment.new
   end
 
   def destroy
@@ -43,4 +46,9 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content, :image)
   end
 
+  def check_guest_user
+    if current_user.email == 'guest@exmple.com'
+      redirect_to root_path, alert: 'ゲストユーザーは編集できません'
+    end
+  end
 end

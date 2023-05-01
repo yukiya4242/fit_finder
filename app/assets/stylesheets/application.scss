@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+.top-image {
+  background-image: asset-url('gem4.jpg');
+  background-size: cover;
+  background-position: cover;
+  height: 700px; // 画像の高さを指定してください。
+}

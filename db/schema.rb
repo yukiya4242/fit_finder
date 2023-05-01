@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_30_224830) do
+ActiveRecord::Schema.define(version: 2023_05_01_093453) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -89,9 +89,11 @@ ActiveRecord::Schema.define(version: 2023_04_30_224830) do
 
   create_table "posts", force: :cascade do |t|
     t.text "content", null: false
-    t.string "image", null: false
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "relation_ships", force: :cascade do |t|
@@ -125,6 +127,7 @@ ActiveRecord::Schema.define(version: 2023_04_30_224830) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "posts", "users"
   add_foreign_key "relation_ships", "users", column: "followed_id"
   add_foreign_key "relation_ships", "users", column: "follower_id"
 end
