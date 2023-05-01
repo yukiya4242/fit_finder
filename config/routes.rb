@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   get 'homes/about' => 'homes#about'
   devise_for :users
 
-  resources :posts
-  resources :comments, only:[:create, :destroy]
+  resources :posts do
+    resources :comments, only:[:create, :destroy]
+    resource  :likes,    only:[:create, :destroy] #[resouce]単数系だと/:idが含まれなくなる
+  end
+
+
   resources :messages, only:[:index, :show, :create]
 
 
