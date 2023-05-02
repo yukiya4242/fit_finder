@@ -18,8 +18,10 @@
     <%= f.text_area :content, required: true %>
   </div>
 
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
+<div class="field">
+ <%= f.label :image %>
+ <%= f.file_field :images, multiple: true %>
+ </div>
 
   <div class="actions">
     <%= f.submit "投稿する" %>

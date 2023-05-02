@@ -27,4 +27,10 @@ class UsersController < ApplicationController
 
   def search
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation)
+  end
 end

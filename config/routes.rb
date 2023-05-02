@@ -3,11 +3,13 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)     #adminに必要なルーティングは全て自動生成
   root to:  'homes#top'
   get 'homes/about' => 'homes#about'
-  
+
+
   devise_for :users, controllers: {
-    session: 'users/sessions'
+    session:       'users/sessions',
+    registrations: 'users/registrations'
   }
-  
+
   devise_scope :user do
     post 'users_guest_sign_in', to: 'users/sessions#new_guest'
   end

@@ -1,12 +1,11 @@
-<h1>投稿一覧</h1>
+<h1>投稿詳細</h1>
 
-<% @posts.each do |post| %>
-
-<p>文章</p>
-<span><%= post.content%></span>
+<p>投稿文</p>
+<span><%= @post.content %></span>
 
 <p>画像</p>
-<%= image_tag post.image, size: "150x150" %>
+<%= image_tag @post.image, size: "150x150" if @post.image.attached? %>
 
+<%= link_to '編集', edit_post_path(@post.id) %>
 
-<% end %>
+<%= link_to '削除', post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？？" %>

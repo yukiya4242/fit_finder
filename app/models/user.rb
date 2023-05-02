@@ -2,15 +2,33 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
-  
+
+         validates :email,           presence: true
+         validates :username,        presence: true
+         validates :profile_picture, presence: true
+         validates :introduction,    presence: true
+         validates :location,        presence: true
+
+
+
+         attr_accessor :username
+
+  def get_profile_picture
+    unless profile_picture_attached?
+      file_path = Rails.root.join('app/assets/images/ogura.png')
+      profile_picture.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
+    end
+    profile_picture.variant(resize_to_limit: [witdh, height]).processed
+  end
+
+
   def self.guest      #ゲストログイン機能
     find_or_create_by(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
     end
-  end         
+  end
 
-  has_one_attached :profile_image
+  has_one_attached :profile_picture
 
   has_many :posts,    dependent: :destroy                #投稿
   has_many :comments, dependent: :destroy                #コメント

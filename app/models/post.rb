@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  has_one_attached :image
+  has_one_attached :image                 #複数枚画像投稿
 
   belongs_to :user                          #ユーザー
   has_many   :comments, dependent: :destroy #コメント

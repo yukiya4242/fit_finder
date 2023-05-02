@@ -1,2 +1,16 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<!-- ユーザーの詳細 -->
+<div>
+  <h3><%= @user.email %></h3>
+
+  <h1><%= link_to "新しい投稿", new_post_path %></h1>
+
+  <!-- ユーザーの投稿一覧 -->
+  <% @user.posts.each do |post| %>
+    <p>投稿文</p>
+    <span><%= post.content %></span>
+    <p>画像</p>
+    <%= image_tag post.image, size: "150x150" if post.image.attached? %>
+    <%= link_to '編集', edit_post_path(post.id) %>
+    <%= link_to '削除', post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
+  <% end %>
+</div>
