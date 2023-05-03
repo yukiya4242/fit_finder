@@ -51,6 +51,12 @@ class UsersController < ApplicationController
   end
 
   def search
+    @keyword = params[:keyword] #検索キーワドを取得
+    if @keyword.present? #もしキーワードが入力されていたら
+      @users = User.where("username LIKE ?", "%#{@keyword}" ) #そのキーワードを持つユーザーを取得し@usersに格納
+    else
+      @users = User.all #キーワードが入力されていない場合はすべてのユーザーを取得
+    end
   end
 
   private
