@@ -1,0 +1,18 @@
+<h4>コメント</h4>
+
+<% post.comments.each do |comment| %>
+<p>
+  <%= comment.user.username %>: <%= comment.content %>
+  <!--削除できるのは自分の投稿のみ-->
+  <% if current_user == comment.user %>
+    <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  <% end %>
+</p>
+<% end %>
+
+<h3>コメントする</h3>
+<%= form_with(model: [post, Comment.new], local: true) do |f| %>
+<%= f.hidden_field :post_id, value: post.id %>
+<%= f.text_field :content, placeholder: "コメントを入力してください" %>
+<%= f.submit "コメントする" %>
+<% end %>

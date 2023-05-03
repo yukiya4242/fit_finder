@@ -29,8 +29,8 @@ class User < ApplicationRecord
 
   has_many :posts,       dependent: :destroy                #投稿
   has_many :comments,    dependent: :destroy                #コメント
-  has_many :likes,       dependent: :destroy                #いいね
-  has_many :liked_posts, through: :likes, source: :post
+  has_many :likes,       dependent: :destroy                #いいねを持つ
+  has_many :liked_posts, through: :likes, source: :post     #liked_postsという名前でlikesを経由、その後postに紐づけられる
 
   #フォロー中のユーザー
   has_many :active_relationships, class_name: 'RelationShip', foreign_key: 'follower_id', dependent: :destroy

@@ -4,6 +4,7 @@
 
 <p>投稿文</p>
 <span><%= post.content %></span>
+<%= render 'comments', post: post %>
 
 <p>画像</p>
 <%= image_tag post.image, size: "150x150" if post.image.attached? %>
