@@ -10,9 +10,6 @@ class User < ApplicationRecord
          validates :location,        presence: true
 
 
-
-         attr_accessor :username
-
   def get_profile_picture
     unless profile_picture_attached?
       file_path = Rails.root.join('app/assets/images/ogura.png')
