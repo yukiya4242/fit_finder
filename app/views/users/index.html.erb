@@ -9,6 +9,11 @@
   <p>No profile picture</p>
 <% end %>
 
+<div>
+<p><%= user.username %></p>
+<p>フォロー: <%= user.following.count %></p>
+<p>フォロワー: <%= user.followers.count %></p>
+</div>
 <p><%= user.introduction %></p>
 <p><%= user.location %></p>
 <p><%= user.email %></p>

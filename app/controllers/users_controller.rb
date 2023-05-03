@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only:[:edit, :update]
+  before_action :set_user,           only:[:edit, :update]
+
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def index
     @users = User.all
@@ -15,10 +22,27 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    @user.update
-    redirect_to user_path
+    if @user = User.update(user_params)
+    redirect_to user_path, notice: "ユーザーの情報が更新されました。"
+    else
+    render :edit
+    end
   end
+
+
+  def follow
+    @user = User.find(params[:id])
+    current_user.following << @user #current_userが対象のユーザー(@user)をfollowing
+    redirect_to @user
+  end
+
+
+  def unfollow
+    @user = User.find(params[:id])
+    current_user.active_relationships.find_by(followed_id: @user.id).destroy #current_userと解除対象ユーザー（@user.id）を.destroy
+    redirect_to @user
+  end
+
 
   def following
   end
@@ -32,6 +56,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
+    params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation)
+  end
+
+  def update_params
     params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation)
   end
 end

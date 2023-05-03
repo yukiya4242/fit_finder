@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :messages, only:[:index, :show, :create]
 
 
-  resources :users,    only:[:index, :show, :edit, :update] do #usersリソースのルーティングを開始と終了のブロック
+  resources :users  do #usersリソースのルーティングを開始と終了のブロック
     member do
       get    :following, :followers
       post   :follow
