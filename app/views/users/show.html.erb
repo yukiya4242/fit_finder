@@ -14,6 +14,9 @@
   <h3><%= @user.username %></h3>
   <p>フォロー: <%= @user.following.count %></p>
   <p>フォロワー: <%= @user.followers.count %></p>
+  <% if @conversation.present? %>
+    <%= link_to "DM", conversation_path(@conversation) %>
+  <% end %>
   <p><%= @user.email %></p>
   <%= image_tag url_for(@user.profile_picture) if @user.profile_picture.attached? %>
   <p><%= @user.introduction %></p>

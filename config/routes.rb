@@ -19,8 +19,11 @@ Rails.application.routes.draw do
     resource  :likes,    only:[:create, :destroy] #[resouce]単数系だと/:idが含まれなくなる
   end
 
+  resources :conversations do
+    resources :messages, only:[:index, :show, :create]
+  end
 
-  resources :messages, only:[:index, :show, :create]
+  resources :messages, only:[:create]
 
 
   resources :users  do #usersリソースのルーティングを開始と終了のブロック

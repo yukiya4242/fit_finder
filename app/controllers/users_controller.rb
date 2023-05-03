@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @conversation = Conversation.find_or_initialize_by(sender_id: current_user.id, receiver_id: @user.id)
+    @conversation.save
     @posts = @user.posts
   end
 

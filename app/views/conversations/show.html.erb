@@ -1,0 +1,15 @@
+<%= form_with model: @message, url: messages_path, method: :post, local: true do |f| %>
+
+<%= f.hidden_field :conversation_id, value: @conversation.id %>
+<%= f.label :content, "メッセージ" %>
+<%= f.text_area :content, cols: 40, rows: 5 %>
+<%= f.submit "送信" %>
+
+<% end %>
+
+<h4>メッセージ</h4>
+<% @messages.each do |message| %>
+  <p>
+    <%= message.sender.username %>: <%= message.content %>
+  </p>
+<% end %>
