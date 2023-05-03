@@ -1,38 +1,48 @@
-<h1>ユーザー一覧</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">ユーザー一覧</h1>
 
-<% @users.each do |user| %>
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class="col-md-2 mb-2">
+        <div class="card">
+          <% if user.profile_picture.attached? %>
+            <%= image_tag user.profile_picture, width: '100', height: '100', class: 'card-img-top' %>
+          <% else %>
+            <p class="card-img-top bg-secondary text-white text-center py-5">No profile picture</p>
+          <% end %>
 
-
-<% if user.profile_picture.attached? %>
-  <%= image_tag user.profile_picture %>
-<% else %>
-  <p>No profile picture</p>
-<% end %>
-
-<div>
-<p><%= user.username %></p>
-<p>フォロー: <%= user.following.count %></p>
-<p>フォロワー: <%= user.followers.count %></p>
-</div>
-<p><%= user.introduction %></p>
-<p><%= user.location %></p>
-<p><%= user.email %></p>
-<p><%= user.created_at %></p>
-
-
-<% end %>
-
-<% @posts.each do |post| %>
-  <div>
-    <p><%= post.content %></p>
-    <p>投稿画像</p>
-    <% if post.image.attached? %>
-    <%= image_tag post.image, size: "50×50" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= user.username %></h5>
+            <p>フォロー: <%= user.following.count %></p>
+            <p>フォロワー: <%= user.followers.count %></p>
+            <p><%= user.introduction %></p>
+            <p><%= user.location %></p>
+            <p><%= user.email %></p>
+            <p><%= user.created_at %></p>
+          </div>
+        </div>
+      </div>
     <% end %>
-    <% if @users == current_user %>
-    <%= link_to '編集', edit_post_path(post) %>
-    <%= link_to '削除', post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
-    <% end %>
-
   </div>
-<% end %>
+
+  <h2 class="mt-5 mb-4">投稿一覧</h2>
+
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-2 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <p><%= post.content %></p>
+            <% if post.image.attached? %>
+              <%= image_tag post.image, width: '100', height: '100', class: 'card-img-top' %>
+            <% end %>
+            <% if @users == current_user %>
+              <%= link_to '編集', edit_post_path(post) %>
+              <%= link_to '削除', post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
