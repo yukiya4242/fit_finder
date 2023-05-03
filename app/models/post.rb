@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user                          #ユーザー
   has_many   :comments, dependent: :destroy #コメント
   has_many   :likes,    dependent: :destroy #いいね
+  has_many   :likers,   through:   :likes, source: :user 
 
 
   def liked_by(user)

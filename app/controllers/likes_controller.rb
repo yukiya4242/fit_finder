@@ -5,7 +5,7 @@ class LikesController < ApplicationController
     post = Post.find(params[:post_id])
     likes = current_user.likes.new(post_id: post.id)
     likes.save
-    redirect_to post_path(post)
+    redirect_to posts_path(post)
   end
 
 
@@ -13,7 +13,7 @@ class LikesController < ApplicationController
     post = Post.find(params[:post_id])
     likes = current_user.likes.find_by(post_id: post.id)
     likes.destroy
-    redirect_to post_path(post)
+    redirect_to posts_path(post)
   end
 
 end

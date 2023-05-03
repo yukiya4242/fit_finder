@@ -27,9 +27,10 @@ class User < ApplicationRecord
 
   has_one_attached :profile_picture
 
-  has_many :posts,    dependent: :destroy                #投稿
-  has_many :comments, dependent: :destroy                #コメント
-  has_many :likes,    dependent: :destroy                #いいね
+  has_many :posts,       dependent: :destroy                #投稿
+  has_many :comments,    dependent: :destroy                #コメント
+  has_many :likes,       dependent: :destroy                #いいね
+  has_many :liked_posts, through: :likes, source: :post
 
   #フォロー中のユーザー
   has_many :active_relationships, class_name: 'RelationShip', foreign_key: 'follower_id', dependent: :destroy
