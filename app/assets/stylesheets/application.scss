@@ -21,6 +21,24 @@
 //   height: 700px; // 画像の高さを指定してください。
 // }
 
+
+.box-top {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  height: 800px;
+  overflow-x: auto;
+  padding: 10px; /* 左右に少し空白を設定 */
+}
+
+.box-top div {
+  scroll-snap-align: start;
+  width: calc(100% - 20px); /* 左右の空白分（10px*2）を引いた幅に設定 */
+  margin: 5px;
+  flex-shrink: 0;
+}
+
+
 * {
   font-family: Helvetica, sans-serif;
 }
