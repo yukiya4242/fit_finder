@@ -1,23 +1,30 @@
-<h1>投稿一覧</h1>
-<h1><%= link_to "新しい投稿", new_post_path %></h1>
+<div class="container mt-3">
+  <h1 class="mb-3">投稿一覧</h1>
+  <h1><%= link_to "新しい投稿", new_post_path, class: "btn btn-custom" %></h1>
 
-<% @posts.each do |post| %>
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-4 col-lg-3 mb-3">
+        <div class="card h-100">
+          <%= link_to user_path(post.user) do %>
+            <div class="card-body">
+              <p class="card-text"><%= post.content %></p>
+              <%= image_tag post.image, size: "120x120", class: "card-img-top mb-2" if post.image.attached? %>
+            </div>
+          <% end %>
 
-<%= link_to user_path(post.user) do %>
+          <%= render 'comments', post: post %>
 
-  <span><%= post.content %></span>
+          <div class="card-footer">
+            <% if current_user == post.user %>
+              <%= link_to '編集', edit_post_path(post.id) %>
+              <%= link_to '削除', post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
+            <% end %>
 
-  <%= image_tag post.image, size: "120x120" if post.image.attached? %>
-<% end %>
-
-<%= render 'comments', post: post %>
-
-<% if current_user == post.user %>
-  <%= link_to '編集', edit_post_path(post.id) %>
-  <%= link_to '削除', post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
-<% end %>
-
-<%= render 'likes', post: post %>
-
-<% end %>
-
+            <%= render 'likes', post: post %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

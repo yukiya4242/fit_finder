@@ -1,42 +1,87 @@
-<h1><%= link_to "新しい投稿", new_post_path %></h1>
-
-<% if current_user != @user %>
-<% if current_user.following.include?(@user) %>
-  <%= button_to "フォロー解除", unfollow_user_path(@user), method: :delete %>
-<% else %>
-  <%= button_to "フォロー", follow_user_path(@user), method: :post %>
-<% end %>
-<% end %>
+ <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Helvetica, sans-serif;
+    }
+  </style>
 
 
 
-<div>
-  <h3><%= @user.username %></h3>
-  <p><%= link_to "フォロー: #{@user.following.count}", following_user_path(@user) %></p>
-  <p><%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user) %></p>
-  <%# if current_user != @user && @conversation.present? %>
-    <%= link_to "DM", conversation_path(@conversation) %>
-  <%# end %>
+<body>
 
-  <% if current_user == @user %>
-    <%= link_to "編集", edit_user_path %>
-  <% end %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="user-info-container mb-5">
+        <% if user_signed_in? %>
+        <h1 class="text-center mb-4 user-info"><%= link_to "新しい投稿", new_post_path %></h1>
+        <% end %>
+        <div class="d-flex justify-content-center user-info-row">
+          <%= image_tag url_for(@user.profile_picture), class: 'profile-picture' if @user.profile_picture.attached? %>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+          <h3 class="user-info mr-2 mt-2"><%= @user.username %></h3>
+          <% if current_user != @user %>
+            <div class="d-flex align-items-center mb-3 pb-3 ml-3" >
+              <% if current_user.following.include?(@user) %>
+                <span><%= button_to "フォロー解除", unfollow_user_path(@user), method: :delete, class: 'follow-btn small-btn' %></span>
+              <% else %>
+                <span><%= button_to "フォロー", follow_user_path(@user), method: :post, class: 'follow-btn small-btn' %></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
 
-  <p>メールアドレス: <%= @user.email %></p>
-  <%= image_tag url_for(@user.profile_picture) if @user.profile_picture.attached? %>
-  <p><%= @user.introduction %></p>
-  <p><%= @user.location %></p>
-</div>
+
+
+
+    <div class="text-center">
+        <h3 class="user-info"><%#= @user.username %></h3>
+          <div class="follow-info">
+            <p class="user-info"><%= link_to "フォロー: #{@user.following.count}", following_user_path(@user) %></p>
+            <p class="user-info"><%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user) %></p>
+          </div>
+
+        <%# if current_user != @user && @conversation.present? %>
+          <%= link_to conversation_path(@conversation), class: 'user-info' do %>
+            <i class="fab fa-telegram fa-lg"></i>
+          <% end %>
+        <%# end %>
+
+
+
+      <% if current_user == @user %>
+        <%= link_to edit_user_path, class: 'user-info' do %>
+          <i class="fas fa-user-edit fa-lg"></i>
+        <% end %>
+      <% end %>
+
+      <p class="user-info">メールアドレス: <%= @user.email %></p>
+      <p class="user-info">自己紹介: <%= @user.introduction %></p>
+      <p class="user-info">場所: <%= @user.location %></p>
+    </div>
+  </div>
 
 <% @posts.each do |post| %>
-  <div>
-    <p><%= post.content %></p>
-    <% if post.image.attached? %>
-    <%= image_tag post.image, size: "50×50" %>
-    <% end %>
-    <%= link_to '編集', edit_post_path(post) %>
-    <%= link_to '削除', post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
+  <div class="post-container mb-3">
+    <div class="post-content">
+      <% if post.image.attached? %>
+        <%= image_tag post.image, width: "100", height: "100" %>
+      <% end %>
+      <p class="post-text"><%= post.content %></p>
+    </div>
+    <%= link_to '編集', edit_post_path(post), class: 'user-info' %>
+    <%= link_to '削除', post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？？", class: 'user-info' %>
   </div>
 <% end %>
 
-<p><%= link_to "投稿一覧に戻る", posts_path %></p>
+
+  <p class="user-info"><%= link_to "投稿一覧に戻る", posts_path %></p>
+</div>
+  </div>
+</div>
+<!-- jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
