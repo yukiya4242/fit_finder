@@ -14,10 +14,15 @@
   <h3><%= @user.username %></h3>
   <p><%= link_to "フォロー: #{@user.following.count}", following_user_path(@user) %></p>
   <p><%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user) %></p>
-  <% if @conversation.present? %>
+  <%# if current_user != @user && @conversation.present? %>
     <%= link_to "DM", conversation_path(@conversation) %>
+  <%# end %>
+
+  <% if current_user == @user %>
+    <%= link_to "編集", edit_user_path %>
   <% end %>
-  <p><%= @user.email %></p>
+
+  <p>メールアドレス: <%= @user.email %></p>
   <%= image_tag url_for(@user.profile_picture) if @user.profile_picture.attached? %>
   <p><%= @user.introduction %></p>
   <p><%= @user.location %></p>
@@ -34,3 +39,4 @@
   </div>
 <% end %>
 
+<p><%= link_to "投稿一覧に戻る", posts_path %></p>

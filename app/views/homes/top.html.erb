@@ -12,6 +12,11 @@
             <li class="nav-item">
               <%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary me-2" %>
             </li>
+            <% if user_signed_in? %>
+            <li class= "nav-item">
+              <%= link_to "マイページ", user_path(current_user), class: "btn btn-primary me-2 "%>
+            </li>
+            <% end %>
             <li class="nav-item">
               <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-success" %>
             </li>
