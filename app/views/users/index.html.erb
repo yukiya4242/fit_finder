@@ -12,9 +12,9 @@
           <% end %>
 
           <div class="card-body">
-            <h5 class="card-title"><%= user.username %></h5>
-            <p>フォロー: <%= user.following.count %></p>
-            <p>フォロワー: <%= user.followers.count %></p>
+            <h5 class="card-title"><%= link_to user.username, user_path(user) %></h5>
+            <p><%= link_to "フォロー: #{user.following.count}", following_user_path(user) %></p>
+            <p><%= link_to "フォロワー: #{user.followers.count}", followers_user_path(user) %></p>
             <p><%= user.introduction %></p>
             <p><%= user.location %></p>
             <p><%= user.email %></p>

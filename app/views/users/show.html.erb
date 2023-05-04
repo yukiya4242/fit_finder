@@ -12,8 +12,8 @@
 
 <div>
   <h3><%= @user.username %></h3>
-  <p>フォロー: <%= @user.following.count %></p>
-  <p>フォロワー: <%= @user.followers.count %></p>
+  <p><%= link_to "フォロー: #{@user.following.count}", following_user_path(@user) %></p>
+  <p><%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user) %></p>
   <% if @conversation.present? %>
     <%= link_to "DM", conversation_path(@conversation) %>
   <% end %>
