@@ -3,6 +3,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+         has_many :user_rooms
+         has_many :chats
+         has_many :rooms, through: :user_rooms
+         has_many :active_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+         has_many :following, through: :active_relationships, source: :followed
+
+
+
          validates :email,           presence: true
          validates :username,        presence: true
          validates :profile_picture, presence: true
@@ -25,6 +33,10 @@ class User < ApplicationRecord
     end
   end
 
+  def following?(other_user)
+    following.find_by(id: other_user.id).present?
+  end
+
   has_one_attached :profile_picture
 
   has_many :posts,       dependent: :destroy                #投稿
@@ -40,10 +52,6 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'RelationShip', foreign_key: 'followed_id', dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
 
-  #送信したメッセージ
-  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id', dependent: :destroy
 
-  #受信したメッセージ
-  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id', dependent: :destroy
 
 end

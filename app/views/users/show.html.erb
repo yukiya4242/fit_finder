@@ -32,6 +32,10 @@
           <% end %>
         </div>
 
+        <%= render 'chats/info' %>
+
+
+
 
 
 
@@ -43,9 +47,9 @@
           </div>
 
         <%# if current_user != @user && @conversation.present? %>
-          <%= link_to conversation_path(@conversation), class: 'user-info' do %>
+          <%#= link_to conversation_path(@conversation), class: 'user-info' do %>
             <i class="fab fa-telegram fa-lg"></i>
-          <% end %>
+          <%# end %>
         <%# end %>
 
 

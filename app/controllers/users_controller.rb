@@ -13,9 +13,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    # binding.pry
     @user = User.find(params[:id])
-    @conversation = Conversation.find_or_initialize_by(sender_id: current_user.id, receiver_id: @user.id)
-    @conversation.save
     @posts = @user.posts
   end
 
