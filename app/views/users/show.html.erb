@@ -32,7 +32,9 @@
           <% end %>
         </div>
 
-        <%= render 'chats/info' %>
+
+
+        <%= link_to "チャット履歴をみる", chat_history_user_path(current_user) %>
 
 
 
@@ -46,11 +48,8 @@
             <p class="user-info"><%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user) %></p>
           </div>
 
-        <%# if current_user != @user && @conversation.present? %>
-          <%#= link_to conversation_path(@conversation), class: 'user-info' do %>
-            <i class="fab fa-telegram fa-lg"></i>
-          <%# end %>
-        <%# end %>
+
+        <%= render 'chats/info' %>
 
 
 

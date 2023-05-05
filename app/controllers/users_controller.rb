@@ -30,6 +30,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def chat_history
+    rooms = current_user.user_rooms.pluck(:room_id) # ログイン中のユーザーの部屋情報を全て取得
+    @chat_users = User.joins(:user_rooms).where(user_rooms: { room_id: rooms }).where.not(id: current_user)
+  end
+
+
 
   def follow
     @user = User.find(params[:id])
