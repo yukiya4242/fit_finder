@@ -62,3 +62,4 @@ gem "rails-i18n"
 gem "activeadmin"
 gem "kaminari"
 gem 'pry-rails'
+gem 'active_admin_flat_skin'

@@ -10,7 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ .
  *= require_self
  */
 
@@ -21,6 +21,10 @@
 //   height: 700px; // 画像の高さを指定してください。
 // }
 
+.top-image1 {
+  background-image: url('top-image1.png');
+}
+
 
 .box-top {
   display: flex;
@@ -28,7 +32,7 @@
   width: 100%;
   height: 800px;
   overflow-x: auto;
-  padding: 10px; /* 左右に少し空白を設定 */
+  padding: 10px;
 }
 
 .box-top div {
@@ -49,7 +53,9 @@ body {
 
 .profile-picture {
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 50% !important;
+  width: 100px;
+  height: 100px;
 }
 
 .card {
@@ -72,7 +78,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 150px;
   border-radius: 50%;
   font-weight: bold;
 }
@@ -114,13 +120,30 @@ body {
   color: white;
 }
 
+.profile-picture-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
 
 .profile-picture {
   object-fit: cover;
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  border-radius: 50% !important;
+  width: 100px;
+  height: 100px;
 }
+
+.picture-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 96px;
+  height: 100px;
+  border: 2px solid #f1c40f;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
 
 .user-info {
   color: #0F1419;

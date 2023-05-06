@@ -10,8 +10,10 @@
 // Active Admin's got SASS!
 
 // 元からあったやつ______
-// @import "active_admin/mixins";
-// @import "active_admin/base";
+@import "active_admin/mixins";
+@import "active_admin/base";
+@import 'active_admin_flat_skin';
+
 // _____________________________
 
 // Overriding any non-variable Sass must be done after the fact.
