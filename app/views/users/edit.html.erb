@@ -33,4 +33,10 @@
       <%= f.submit "更新", class: "btn btn-custom" %>
     </div>
   <% end %>
+
+    <div class="form_group">
+      <% if user_signed_in? && @user.id == current_user.id %>
+        <%= link_to "退会", users_hide_user_path(current_user), method: :delete, "data-confirm" => "本当に退会しますか？？", class: "btn btn-outline-danger" %>
+        <% end %>
+    </div>
 </div>

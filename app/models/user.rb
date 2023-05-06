@@ -33,8 +33,17 @@ class User < ApplicationRecord
     end
   end
 
+  def guest?
+    email == 'guest@example.com'
+  end
+
   def following?(other_user)
     following.find_by(id: other_user.id).present?
+  end
+
+   #退会ユーザーはログインできなくする
+  def actuve_for_authentication?
+    super && (self.is_deleted == false)
   end
 
   has_one_attached :profile_picture

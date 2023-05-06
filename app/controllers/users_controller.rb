@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only:[:edit, :update]
   before_action :set_user,           only:[:edit, :update]
+  before_action :check_user_status,  only:[:show]
 
 
   def set_user
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @posts = Post.all
+    @users = User.where(is_deleted: false)
   end
 
   def show
@@ -29,6 +31,16 @@ class UsersController < ApplicationController
     render :edit
     end
   end
+
+
+  def hide
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true) #is_deletedカラムにフラグを立てる(defaultはfalse)
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to root_path
+  end
+
 
   def chat_history
     rooms = current_user.user_rooms.pluck(:room_id) # ログイン中のユーザーの部屋情報を全て取得
@@ -81,4 +93,11 @@ class UsersController < ApplicationController
   def update_params
     params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation)
   end
+
+  def check_user_status
+    user = User.find(params[:id])
+    if user.is_deleted
+      redirect_to root_path
+  end
+end
 end
