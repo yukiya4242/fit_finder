@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :users  do #usersリソースのルーティングを開始と終了のブロック
     member do
+      get    :liked_posts
       get    :chat_history
       get    :following, :followers
       post   :follow
