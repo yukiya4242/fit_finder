@@ -303,6 +303,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.3)
+  mini_magick
   pry-rails
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

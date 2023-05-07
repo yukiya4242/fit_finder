@@ -63,3 +63,4 @@ gem "activeadmin"
 gem "kaminari"
 gem 'pry-rails'
 gem 'active_admin_flat_skin'
+gem 'mini_magick'

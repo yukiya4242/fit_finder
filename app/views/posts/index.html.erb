@@ -1,30 +1,94 @@
-<div class="container mt-3">
-  <h1 class="mb-3">投稿一覧</h1>
-  <h1><%= link_to "新しい投稿", new_post_path, class: "btn btn-custom" %></h1>
 
-  <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-md-4 col-lg-3 mb-3">
-        <div class="card h-100">
-          <%= link_to user_path(post.user) do %>
-            <div class="card-body">
-              <p class="card-text"><%= post.content %></p>
-              <%= image_tag post.image, size: "120x120", class: "card-img-top mb-2" if post.image.attached? %>
+  <style>
+    body {
+      background-color: #ffe7cc;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    .main-container {
+      background-color: #ffffff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .post-container {
+      background-color: #ffffff;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      border: 1px solid #e1e4e8;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .post-image {
+      max-width: 100%;
+      max-height: 50%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    .post-header {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    .post-content {
+      font-size: 15px;
+      margin-bottom: 0.5rem;
+    }
+    .btn-custom {
+      background-color: #ffcc99;
+      border: none;
+      color: #ffffff;
+      transition: all 0.3s;
+    }
+    .btn-custom:hover {
+      background-color: #ffb366;
+      color: #ffffff;
+    }
+    .icon-button {
+      color: #ffcc99;
+      transition: all 0.3s;
+    }
+    .icon-button:hover {
+      color: #ffb366;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-3">
+    <div class="main-container">
+      <h1 class="mb-3" style="font-size: 24px; font-weight: bold;">投稿一覧</h1>
+      <h1><%= link_to "新しい投稿", new_post_path, class: "btn btn-custom" %></h1>
+
+      <div class="row">
+        <% @posts.each do |post| %>
+          <div class="col-12 mb-3">
+            <div class="post-container">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <%= link_to user_path(post.user) do %>
+                    <p class="post-header"><%= post.user.username %></p>
+                  <% end %>
+                  <p class="post-content"><%= post.content %></p>
+ <%= image_tag post.image, class: "post-image" if post.image.attached? %>
             </div>
-          <% end %>
 
-          <%= render 'comments', post: post %>
-
-          <div class="card-footer">
-            <% if current_user == post.user %>
-              <%= link_to '編集', edit_post_path(post.id) %>
-              <%= link_to '削除', post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
-            <% end %>
-
-            <%= render 'likes', post: post %>
+            <div>
+              <%= render 'comments', post: post %>
+              <%= render 'likes', post: post %>
+              <% if current_user == post.user %>
+                <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+                <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "icon-button btn btn-link" do %>
+                  <i class="fas fa-trash"></i>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+  </div>
+</body>
+</html>
