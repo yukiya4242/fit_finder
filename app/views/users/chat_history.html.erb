@@ -2,8 +2,11 @@
 
 <ul>
   <% @chat_users.each do |user| %>
+    <% unless user.is_deleted %>
     <li>
       <%= link_to user.username, chat_path(user.id) %>
     </li>
   <% end %>
+<% end %>
+
 </ul>

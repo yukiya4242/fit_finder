@@ -13,7 +13,8 @@
         <div class="container mt-3">
           <div class="row">
             <div class="col-3">
-              <div class="col-md-2"></div>
+               <div class="main-container">
+                 <div class="col-md-2"></div>
 
         <div class="sidebar">
           <nav class="nav flex-column">
@@ -35,13 +36,22 @@
               <% end %>
             </li>
 
+            <% unless current_user.guest? %>
+              <li class="nav-item mb-3">
+                <%= link_to chat_history_user_path(current_user), class: 'nav-link' do %>
+                  <i class="fab fa-telegram-plane fa-lg"></i> メッセージ
+                <% end %>
+              </li>
+            <% end %>
+
             <li class="nav-item mb-3">
-              <%= link_to chat_history_user_path(current_user), class: 'nav-link' do %>
-                <i class="fab fa-telegram-plane fa-lg"></i> メッセージ
+              <%= link_to liked_posts_user_path(@user), class: 'nav-link' do %>
+                <i class="fas fa-heart fa-lg"></i> いいね一覧
               <% end %>
             </li>
           </nav>
         </div>
+      </div>
       </div>
       <div class="col-9">
         <div class="main-container">

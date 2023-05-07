@@ -25,6 +25,19 @@
   background-image: url('top-image1.png');
 }
 
+.nav-link {
+  color: #708090;
+  font-family: inherit;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+   &:hover {
+    color: #FFA500;
+    background-color: #F5F5F5;
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+   }
+}
+
 
 .box-top {
   display: flex;
@@ -87,10 +100,10 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
-}
 
-.card-post:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+   &:hover {
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+   }
 }
 
 .form-label {
@@ -129,7 +142,7 @@ body {
 .profile-picture {
   object-fit: cover;
   border-radius: 50% !important;
-  width: 100px;
+  width: 95px;
   height: 100px;
 }
 
