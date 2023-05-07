@@ -11,9 +11,11 @@ class LikesController < ApplicationController
 
   def destroy
     post = Post.find(params[:post_id])
-    likes = current_user.likes.find_by(post_id: post.id)
-    likes.destroy
-    redirect_to posts_path(post)
+    like = current_user.likes.find_by(post_id: post.id)
+    if like.destroy
+      render json: { status: 'success'}
+    else
+      render json: { status: 'error' }
   end
-
+end
 end

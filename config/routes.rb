@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only:[:create, :destroy]
-    resource  :likes,    only:[:create, :destroy] #[resouce]単数系だと/:idが含まれなくなる
+    resources  :likes,    only:[:create, :destroy] #[resouce]単数系だと/:idが含まれなくなる
   end
 
 

@@ -1,8 +1,9 @@
 <p>
-  <i class="far fa-heart <%= 'active' if current_user.liked_posts.include?(post) %>"></i>
+  <% if current_user.liked_posts.include?(post) %>
+    <% like = current_user.likes.find_by(post: post) %>
+    <i class="fas fa-heart active" data-url="<%= post_like_path(post, like) %>"></i>
+  <% else %>
+    <i class="fas fa-heart" data-url="<%= post_likes_path(post) %>"></i>
+  <% end %>
   <span class="like-count"><%= post.likes.count %></span>
 </p>
-
-<%= form_with(model: [post, post.likes.build], local: true) do |f| %>
-  <%= f.submit '', class: 'd-none' %>
-<% end %>

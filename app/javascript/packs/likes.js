@@ -1,6 +1,6 @@
 $(function() {
   // いいねボタンがクリックされたら
-  $('.fa-heart').click(function(){
+  $('body').on('click', '.fa-heart', function(){
     // 現在の状態を取得
     var active = $(this).hasClass('active');
     // いいねの数の要素を取得
@@ -14,10 +14,10 @@ $(function() {
 
     // いいねが成功したら
     $.ajax({
-      url: $(this).attr('href'),
-      type: 'POST',
+      url: $(this).data('url'),
+      type: active ? 'DELETE' : 'POST',
       dataType: 'json',
-      data: {'_method': 'POST'}
+      data: {'_method': active ? 'DELETE' : 'POST'}
     })
     .done(function(data) {
       console.log(data);
