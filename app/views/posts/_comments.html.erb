@@ -1,18 +1,23 @@
-<h4>コメント</h4>
-
 <% post.comments.each do |comment| %>
-<p>
-  <%= comment.user.username %>: <%= comment.content %>
-  <!--削除できるのは自分の投稿のみ-->
-  <% if current_user == comment.user %>
-    <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-  <% end %>
-</p>
+  <div class="comment-container">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <p class="comment-header"><%= comment.user.username %>:</p>
+        <p class="comment-content"><%= comment.content %></p>
+      </div>
+      <% if current_user == comment.user %>
+        <div>
+          <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
-<h3>コメントする</h3>
 <%= form_with(model: [post, Comment.new], local: true) do |f| %>
-<%= f.hidden_field :post_id, value: post.id %>
-<%= f.text_field :content, placeholder: "コメントを入力してください" %>
-<%= f.submit "コメントする" %>
+  <%= f.hidden_field :post_id, value: post.id %>
+  <div class="form-group">
+    <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control" %>
+  </div>
+  <%= f.submit "コメントする", class: "btn btn-custom" %>
 <% end %>

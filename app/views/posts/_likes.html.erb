@@ -1,7 +1,8 @@
-<p>いいね数: <%= post.likes.count %></p>
+<p>
+  <i class="far fa-heart <%= 'active' if current_user.liked_posts.include?(post) %>"></i>
+  <span class="like-count"><%= post.likes.count %></span>
+</p>
 
-<% if current_user.liked_posts.include?(post) %>
-  <%= button_to "いいね解除", post_likes_path(post, post.likes.find_by(user_id: current_user.id)), method: :delete %>
-<% else %>
-  <%= button_to "いいね", post_likes_path(post), method: :post %>
+<%= form_with(model: [post, post.likes.build], local: true) do |f| %>
+  <%= f.submit '', class: 'd-none' %>
 <% end %>
