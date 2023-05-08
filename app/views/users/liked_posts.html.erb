@@ -2,10 +2,11 @@
 <h1><%= @user.username %></h1>
 
 <% @liked_posts.each do |post| %>
-
-<div class="post">
-  <p class="posts-header"><%= post.user.username %></p>
-  <p class="post-content"><%= post.content%></p>
-  <%= image_tag post.image, class: "post-image", height: 200, width: 200 if post.image.attached? %>
-</div>
+  <% unless post.user.is_deleted %>
+    <div class="post">
+      <p class="posts-header"><%= post.user.username %></p>
+      <p class="post-content"><%= post.content%></p>
+      <%= image_tag post.image, class: "post-image", height: 200, width: 200 if post.image.attached? %>
+    </div>
+ <% end %>
 <% end %>

@@ -11,6 +11,7 @@
 
 <div class="container mt-5">
   <div class="row justify-content-center">
+    <%= render 'posts/sidebar' %>
     <div class="col-md-8">
       <div class="user-info-container mb-5">
         <% if user_signed_in? %>
@@ -32,10 +33,6 @@
           <% end %>
         </div>
 
-<% if current_user.present? && !current_user.guest? %>
-　　<%= link_to "チャット履歴をみる", chat_history_user_path(current_user) %>
-<% end %>
-
 
 
 
@@ -47,12 +44,6 @@
             <p class="user-info"><%= link_to "フォロー: #{@user.following.count}", following_user_path(@user) %></p>
             <p class="user-info"><%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user) %></p>
           </div>
-
-          <div>
-            <%= link_to "いいねした投稿を表示", liked_posts_user_path(@user) %>
-          </div>
-
-
         <%= render 'chats/info' %>
 
 
