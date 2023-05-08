@@ -10,9 +10,11 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post = current_user.posts.build(post_params)
     if @post.save
+      flash[:success] = '投稿が完了しました'
     redirect_to posts_path
     else
-    render :new
+      flash[:danger] = '投稿に失敗しました。もう一度お試しください'
+    redirect_to posts_path
     end
   end
 

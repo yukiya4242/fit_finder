@@ -7,6 +7,8 @@ class Post < ApplicationRecord
   has_many   :likes,    dependent: :destroy #いいね
   has_many   :likers,   through:   :likes, source: :user
 
+  validates :content, length: { in: 1..140 }
+
 
   def liked_by(user)
     likes.exsits?(user_id: user.id)

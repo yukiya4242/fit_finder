@@ -14,7 +14,7 @@
     <div class="col-md-8">
       <div class="user-info-container mb-5">
         <% if user_signed_in? %>
-        <h1 class="text-center mb-4 user-info"><%= link_to "新しい投稿", new_post_path %></h1>
+        <h1 class="text-center mb-4 user-info"><%= render 'posts/new_posts' %></h1>
         <% end %>
         <div class="d-flex justify-content-center user-info-row">
           <%= image_tag url_for(@user.profile_picture), class: 'profile-picture' if @user.profile_picture.attached? %>

@@ -21,6 +21,11 @@
 //   height: 700px; // 画像の高さを指定してください。
 // }
 
+// @import "~bootstrap/scss/bootstrap";
+
+
+
+
 .top-image1 {
   background-image: url('top-image1.png');
 }
@@ -126,12 +131,28 @@ body {
   color: white;
   font-weight: bold;
   transition: 0.3s;
+
+   &:hover {
+     background-color: #0056b3;
+     color: white;
+   }
 }
 
-.btn-custom:hover {
-  background-color: #0056b3;
+
+.btn-custom-posts {
+  background-color: #ff9c5b;
   color: white;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-weight: bold;
+
+   &:hover {
+     background-color: #ff7e33;
+     color: white;
+     text-decoration: none;
+   }
 }
+
 
 .profile-picture-container {
   position: relative;
@@ -450,4 +471,58 @@ body {
   100% {
     transform: scale(1);
   }
+}
+
+
+
+
+
+.form-group {
+  margin: 1.5rem;
+}
+
+.form-control-posts {
+  border-radius: 0.25rem;
+  width: 100%;
+  height: 150px;
+  &:focas {
+    box-shadow: 0 0 0 0.2rem rgba(255, 156, 91, 0.25);
+    border-color: #ff9c5b;
+  }
+}
+
+.input-group-text {
+  background-color: #ff9c5b;
+  border-color: #ff9c5b;
+  color: white;
+}
+
+.submit-btn {
+  background-color: #ff9c5b;
+  color: white;
+  &:hover {
+    background-color: #ff7e33;
+    color: white;
+  }
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100%;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
 }

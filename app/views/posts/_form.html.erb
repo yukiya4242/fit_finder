@@ -1,0 +1,18 @@
+<%= form_with(model: post, local: true, html: {class: "form"}, scope: :post) do |f| %>
+  <div class="form-group">
+    <%= f.label :投稿内容, class: "form-label" %>
+    <%= f.text_area :content, class: "form-control-posts", placeholder: "1~140文字以内" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :画像, class: "form-label" %>
+    <span class="btn btn-default btn-file">
+      <i class="fas fa-images fa-lg"></i>
+      <%= f.file_field :image, class: "form-control" %>
+    </span>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "投稿", class: "btn btn-primary" %>
+  </div>
+<% end %>
