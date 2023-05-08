@@ -7,51 +7,41 @@
   <h1 class="mb-3">ユーザー一覧</h1>
   <%= render 'search' %>
 
-  <div class="row">
+  <div class="user-list">
     <% @users.each do |user| %>
-      <div class="col-md-3 col-lg-2 mb-3">
-        <div class="card h-100">
-          <% if user.profile_picture.attached? %>
-            <%= image_tag user.profile_picture, class: 'card-img-top profile-picture' %>
-          <% else %>
-            <div class="no-profile-picture">No profile picture</div>
-          <% end %>
-
-          <div class="card-body">
-            <h6 class="card-title mb-1"><%= link_to user.username, user_path(user) %></h6>
-            <p class="mb-1"><%= link_to "フォロー: #{user.following.count}", following_user_path(user) %></p>
-            <p class="mb-1"><%= link_to "フォロワー: #{user.followers.count}", followers_user_path(user) %></p>
-            <p class="mb-1"><%= user.introduction %></p>
-            <p class="mb-1"><%= user.location %></p>
-            <p class="mb-1"><%= user.email %></p>
-            <p class="mb-1"><%= user.created_at %></p>
-          </div>
-        </div>
-      </div>
+      <% next if user == current_user %>
+      <div class="user-item">
+        <div class="user-info">
+        <% if user.profile_picture.attached? %>
+          <%= image_tag user.profile_picture, class: 'profile-picture' %>
+        <% else %>
+              <%= image_tag "default_profile_picture.png", class: 'profile-picture' %>
     <% end %>
+
+    <div class="profile-info">
+      <h6 class="mb-1"><%= link_to user.username, user_path(user) %></h6>
+      <div>
+        <span class="mr-2"><%= link_to "フォロー: #{user.following.count}", following_user_path(user) %></span>
+        <span><%= link_to "フォロワー: #{user.followers.count}", followers_user_path(user) %></span>
+      </div>
+      <p class="mb-1"><%= user.introduction %></p>
+    </div>
+    </div>
+
+
+   <div class="follow-unfollow-buttons">
+    <% if user_signed_in? %>
+      <% if current_user.following?(user) %>
+        <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}" %>
+        <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}", style: 'display:none;' %>
+      <% else %>
+        <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}" %>
+        <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}", style: 'display:none;' %>
+      <% end %>
+    <% end %>
+</div>
   </div>
-
-<!--  <h2 class="mt-3 mb-3">投稿一覧</h2>-->
-
-<!--  <div class="row">-->
-<!--    <% @posts.each do |post| %>-->
-
-<!--    <div class="col-md-3 col-lg-2 mb-3">-->
-<!--<div class="card h-100 card-post">-->
-<!--<div class="card-body">-->
-<!--<p class="mb-1"><%= post.content %></p>-->
-<!--<% if post.image.attached? %>-->
-<!--<%= image_tag post.image, width: '100%', height: 'auto', class: 'card-img-top mb-2' %>-->
-<!--<% end %>-->
-<!--<% if @users == current_user %>-->
-<!--<%= link_to '編集', edit_post_path(post) %>-->
-<!--<%= link_to '削除', post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？？" %>-->
-<!--<% end %>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<% end %>-->
-
-  </div>
+<% end %>
+ </div>
 </div>
 </body>

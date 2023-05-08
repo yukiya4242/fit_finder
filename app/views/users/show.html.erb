@@ -24,9 +24,9 @@
           <% if current_user.present? && !current_user.guest? && current_user != @user && @user.present? %>
             <div class="d-flex align-items-center mb-3 pb-3 ml-3" >
               <% if current_user.following.include?(@user) %>
-                <span><%= button_to "フォロー解除", unfollow_user_path(@user), method: :delete, class: 'follow-btn small-btn' %></span>
+                <span><%= button_to "unfollow", unfollow_user_path(@user), method: :delete, class: 'follow-btn small-btn' %></span>
               <% else %>
-                <span><%= button_to "フォロー", follow_user_path(@user), method: :post, class: 'follow-btn small-btn' %></span>
+                <span><%= button_to "Follow", follow_user_path(@user), method: :post, class: 'follow-btn small-btn' %></span>
               <% end %>
             </div>
           <% end %>

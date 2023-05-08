@@ -23,6 +23,7 @@
 
 // @import "~bootstrap/scss/bootstrap";
 
+@import "custom";
 
 
 
@@ -203,11 +204,13 @@ body {
   text-decoration: none;
   cursor: pointer;
   box-shadow: 4px 4px 0 #000;
+  
+   &:hover {
+   transform: translate(4px, 4px);
+   box-shadow: none;
+   }
 }
-.follow-btn:hover {
-  transform: translate(4px, 4px);
-  box-shadow: none;
-}
+
 .follow-btn:active {
   box-shadow: inset 4px 4px 0 #000;
 }

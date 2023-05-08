@@ -55,17 +55,23 @@ class UsersController < ApplicationController
 
 
   def follow
-    @user = User.find(params[:id])
-    current_user.following << @user #current_userが対象のユーザー(@user)をfollowing
-    redirect_to @user
+  @user = User.find(params[:id])
+  current_user.following << @user #current_userが対象のユーザー(@user)をfollowing
+  respond_to do |format|
+    format.html { redirect_to @user}
+    format.js
   end
-
+  end
 
   def unfollow
     @user = User.find(params[:id])
     current_user.active_relationships.find_by(followed_id: @user.id).destroy #current_userと解除対象ユーザー（@user.id）を.destroy
-    redirect_to @user
+    respond_to do |format|
+      format.html { redirect_to @user}
+      format.js
+      end
   end
+
 
 
   def following
