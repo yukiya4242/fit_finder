@@ -19,12 +19,10 @@
     <% end %>
 
     <div class="profile-info">
+      <div class="user-details">
       <h6 class="mb-1"><%= link_to user.username, user_path(user) %></h6>
-      <div>
-        <span class="mr-2"><%= link_to "フォロー: #{user.following.count}", following_user_path(user) %></span>
-        <span><%= link_to "フォロワー: #{user.followers.count}", followers_user_path(user) %></span>
-      </div>
       <p class="mb-1"><%= user.introduction %></p>
+      </div>
     </div>
     </div>
 
