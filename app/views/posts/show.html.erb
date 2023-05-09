@@ -1,11 +1,33 @@
-<h1>投稿詳細</h1>
+<div class="container">
+  <div class="row pt-5">
+    <%= render 'sidebar' %>
+    <div class="col-md-6 offset-md-1 mr-2">
+      <h4>作成日時: <%= @post.created_at %></h4>
+      <h4>更新日時: <%= @post.updated_at %></h4>
+      <div class="card mt-5" style="border-color: #ffcc99;">
+        <div class="card-header text-center" style="background-color: #ffcc99;">
+          <h1>投稿詳細</h1>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <lael class="h4">投稿文</lael>
+            <p><%= @post.content%></p>
+          </div>
 
-<p>投稿文</p>
-<span><%= @post.content %></span>
+          <div class="form-group">
+            <label class="h4">画像</label>
+            <%= image_tag @post.image, size: "150×150", class: 'img-thumbnail' if @post.image.attached? %>
+          </div>
 
-<p>画像</p>
-<%= image_tag @post.image, size: "150x150" if @post.image.attached? %>
+          <div class="form-group">
+            <%= link_to '編集', edit_post_path(@post.id), class: 'btn btn-border2 btn-block' %>
+          </div>
 
-<%= link_to '編集', edit_post_path(@post.id) %>
-
-<%= link_to '削除', post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？？" %>
+          <div class="form-grouop">
+            <%= link_to '削除', post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-border-red btn-block' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

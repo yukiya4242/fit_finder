@@ -14,16 +14,29 @@
  *= require_self
  */
 
-// .top-image {
-//   background-image: asset-url('gem4.jpg');
-//   background-size: cover;
-//   background-position: cover;
-//   height: 700px; // 画像の高さを指定してください。
-// }
+ @import "custom";
 
-// @import "~bootstrap/scss/bootstrap";
+.top-image1 {
+  background-image: asset-url('training1.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 700px; // 画像の高さを指定してください。
+}
 
-@import "custom";
+.top-image2 {
+  background-image: asset-url('training2.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 700px; // 画像の高さを指定してください。
+}
+
+.top-image3 {
+  background-image: asset-url('top-image3.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 700px; // 画像の高さを指定してください。
+}
+
 
 a.btn-border {
   border: 2px solid #000;
@@ -58,9 +71,6 @@ a.btn-border {
 
 
 
-.top-image1 {
-  background-image: url('top-image1.png');
-}
 
 .nav-link {
   color: #708090;
@@ -583,4 +593,32 @@ body {
 
 .search-form-008 {
   float: left;
+}
+
+.follow-items {
+  font-family: impact;
+}
+
+
+a.btn-border2 {
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #fff;
+
+  &:hover {
+    color: #fff;
+    background: #87CEEB;
+  }
+}
+
+
+a.btn-border-red {
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #fff;
+
+  &:hover {
+    color: #fff;
+    background: #FF6347;
+  }
 }

@@ -1,4 +1,11 @@
-<h2><%= link_to raw('<i class="fas fa-plus-circle"></i> 新しい投稿'), "#newPostModal", class: "btn btn-custom-posts", data: {toggle: "modal"} %></h2>
+
+<h2>
+  <% if current_or_guest_user.email == 'guest@example.com' %>
+    <%= link_to raw('<i class="fas fa-plus-circle"></i> 新しい投稿'), "#", class: "btn btn-custom-posts", id: "guest-alert" %>
+  <% else %>
+    <%= link_to raw('<i class="fas fa-plus-circle"></i> 新しい投稿'), "#newPostModal", class: "btn btn-custom-posts", data: {toggle: "modal"} %>
+  <% end %>
+</h2>
 
 
 <div class="modal fade" id="newPostModal" tabindex="-1" role="dialog" aria-labelledby="newPostModalLabel" aria-hidden="true">
@@ -16,3 +23,13 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('guest-alert').addEventListener('click', (event) => {
+      event.preventDefault();
+      alert('ゲストユーザーはこの操作はできません');
+    });
+  });
+</script>

@@ -3,7 +3,6 @@
     background-color: #ffe7cc;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-
 </style>
 </head>
 <body>
@@ -12,87 +11,53 @@
       <div class="col-md-10">
         <div class="container mt-3">
           <div class="row">
-            <div class="col-3">
-               <div class="main-container">
-                 <div class="col-md-2"></div>
-
-        <div class="sidebar">
-          <nav class="nav flex-column">
-            <li class="nav-item mb-3">
-              <%= link_to root_path, class: 'nav-link' do %>
-                <i class="fas fa-home fa-lg"></i> ホーム
-              <% end %>
-            </li>
-
-            <li class="nav-item mb-3">
-              <%= link_to posts_path, class: 'nav-link' do %>
-                <i class="fas fa-list fa-lg"></i> 投稿一覧
-              <% end %>
-            </li>
-
-            <li class="nav-item mb-3">
-              <%= link_to user_path(current_user), class: 'nav-link' do %>
-                <i class="fas fa-user fa-lg"></i> マイページ
-              <% end %>
-            </li>
-
-            <% unless current_user.guest? %>
-              <li class="nav-item mb-3">
-                <%= link_to chat_history_user_path(current_user), class: 'nav-link' do %>
-                  <i class="fab fa-telegram-plane fa-lg"></i> メッセージ
-                <% end %>
-              </li>
-            <% end %>
-
-            <li class="nav-item mb-3">
-              <%= link_to liked_posts_user_path(@user), class: 'nav-link' do %>
-                <i class="fas fa-heart fa-lg"></i> いいね一覧
-              <% end %>
-            </li>
-          </nav>
-        </div>
-      </div>
-      </div>
-      <div class="col-9">
-        <div class="main-container">
-    <div class="main-container">
-      <h1 class="mb-3" style="font-size: 24px; font-weight: bold;">投稿一覧</h1>
-      <%= render 'posts/new_posts' %>
-
-      <div class="row">
-        <% @posts.each do |post| %>
-        <!--退会済みのユーザーが投稿した内容は表示させない-->
-          <% unless post.user.is_deleted %>
-            <div class="col-12 mb-3">
-              <div class="post-container">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <%= link_to user_path(post.user) do %>
-                      <p class="post-header"><%= post.user.username %></p>
+            <%= render 'sidebar' %>
+            <div class="col-9">
+              <div class="main-container">
+                <div class="main-container">
+                  <h1 class="mb-3" style="font-size: 24px; font-weight: bold;">投稿一覧</h1>
+                  <%= render 'posts/new_posts' %>
+                  <div class="row">
+                    <% @posts.each do |post| %>
+                      <% unless post.user.is_deleted %>
+                        <div class="col-12 mb-3">
+                          <div class="post-container">
+                            <div class="d-flex justify-content-between align-items-start">
+                              <div>
+                                <%= link_to user_path(post.user) do %>
+                                  <p class="post-header"><%= post.user.username %></p>
+                                <% end %>
+                                <p class="post-content"><%= post.content %></p>
+                                <%= image_tag post.image, class: "post-image", height: 400, width: 400 if post.image.attached? %>
+                              </div>
+                              <div>
+                                <%= render 'comments', post: post %>
+                                <%= render 'likes', post: post %>
+                                <% if current_user == post.user %>
+                                  <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link" do %>
+                                    <i class="fas fa-edit"></i>
+                                  <% end %>
+                                  <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "icon-button btn btn-link" do %>
+                                    <i class="fas fa-trash"></i>
+                                  <% end %>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
                     <% end %>
-                    <p class="post-content"><%= post.content %></p>
-                    <%= image_tag post.image, class: "post-image", height: 400, width: 400 if post.image.attached? %>
                   </div>
-
-            <div>
-              <%= render 'comments', post: post %>
-              <%= render 'likes', post: post %>
-              <% if current_user == post.user %>
-                <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link" do %>
-                  <i class="fas fa-edit"></i>
-                <% end %>
-                <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "icon-button btn btn-link" do %>
-                  <i class="fas fa-trash"></i>
-                <% end %>
-              <% end %>
-              <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
-</div>
+    </div>
   </div>
 </body>
 </html>
+
+
+

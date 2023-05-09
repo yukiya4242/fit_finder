@@ -10,6 +10,16 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+
+  helper_method :current_or_guest_user
+  def current_or_guest_user
+  if current_user
+    return current_user
+  else
+    return User.guest
+  end
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -19,4 +29,6 @@ class ApplicationController < ActionController::Base
   def set_current_user #どのページでも@userがcurrent_userとして使える様になる
     @user = current_user
   end
+
+
 end

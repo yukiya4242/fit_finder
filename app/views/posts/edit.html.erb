@@ -1,12 +1,28 @@
-<h1>投稿編集</h1>
-<%= form_with model: @post, url: post_path(@post), method: :patch do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card mt-5" style="border-color: #ffcc99;">
+        <div class="card-header text-center" style="background-color: FFcc99;">
+          <h1>投稿編集</h1>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @post, url: post_path(@post), method: :patch do |f| %>
+            <div class="form-group">
+              <%= f.label :投稿文, class: 'h4' %>
+              <%= f.text_area :content, class: 'form-control' %>
+            </div>
 
-<h4>投稿文</h4>
-<%= f.text_area :content %>
+            <div class="form-group">
+              <%= f.label :画像, class: 'h4' %>
+              <%= f.file_field :image, accept: "/image/*", class: 'form-control-file' %>
+            </div>
 
-<h4>画像</h4>
-<%= f.file_field :image, accept: "/image/*" %>
-
-<%= f.submit '保存' %>
-
-<% end %>
+            <div class="form-group">
+              <%= f.submit '保存', class: 'btn btn-primary btn-block' %>
+            </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

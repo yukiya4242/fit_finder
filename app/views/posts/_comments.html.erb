@@ -16,8 +16,30 @@
 
 <%= form_with(model: [post, Comment.new], local: true) do |f| %>
   <%= f.hidden_field :post_id, value: post.id %>
+
+  <% if current_or_guest_user.email == 'guest@example.com' %>
+  <div class="form-group">
+    <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control" %>
+  </div>
+  <%= f.submit "コメントする", class: "btn btn-custom guest-action" %>
+
+  <% else %>
   <div class="form-group">
     <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control" %>
   </div>
   <%= f.submit "コメントする", class: "btn btn-custom" %>
 <% end %>
+<% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  let guestActions = document.querySelectorAll('.guest-action');
+  guestActions.forEach((element) => {
+    element.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert('ゲストユーザーはこの操作はできません');
+    });
+  });
+});
+
+</script>
