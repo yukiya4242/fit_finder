@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <%= link_to image_tag('logo2.png', alt: 'Portfolio', class: 'navbar-brand'), root_path %>
@@ -5,23 +6,23 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary me-2" %>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ml-auto">
+            <li class="nav-item me-2">
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-border mr-2" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary me-2" %>
+            <li class="nav-item me-2">
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-border mr-2" %>
             </li>
             <% if user_signed_in? %>
-            <li class= "nav-item">
-              <%= link_to "マイページ", user_path(current_user), class: "btn btn-primary me-2 "%>
+            <li class="nav-item me-2">
+              <%= link_to "マイページ", user_path(current_user), class: "btn btn-border mr-2" %>
             </li>
             <% end %>
-            <li class="nav-item">
-              <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-success" %>
+            <li class="nav-item me-2">
+              <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-border mr-2" %>
             </li>
-             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary me-2" %>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-border" %>
             </li>
           </ul>
         </div>
