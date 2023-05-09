@@ -2,8 +2,8 @@
   <div class="row pt-5">
     <%= render 'sidebar' %>
     <div class="col-md-6 offset-md-1 mr-2">
-      <h4>作成日時: <%= @post.created_at %></h4>
-      <h4>更新日時: <%= @post.updated_at %></h4>
+      <h4>作成日時: <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></h4>
+      <h4>更新日時: <%= @post.updated_at.strftime("%Y-%m-%d %H:%M") %></h4>
       <div class="card mt-5" style="border-color: #ffcc99;">
         <div class="card-header text-center" style="background-color: #ffcc99;">
           <h1>投稿詳細</h1>

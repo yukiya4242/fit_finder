@@ -14,7 +14,8 @@ module FitFinder
     config.i18n.default_locale = :ja
     config.assets.paths << Rails.root.join("app", "assets", "stylesheets", "admin")
 
-
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
 
 
     # Configuration for the application, engines, and railties goes here.
