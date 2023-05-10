@@ -7,6 +7,7 @@ class LikesController < ApplicationController
     likes.save
     redirect_to posts_path(post)
 
+    #通知
     post = Post.find(params[:id])
     post.create_notification_like!(current_user)
     respond_to :js
@@ -20,6 +21,6 @@ class LikesController < ApplicationController
       render json: { status: 'success'}
     else
       render json: { status: 'error' }
+    end
   end
-end
 end

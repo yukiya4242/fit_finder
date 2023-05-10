@@ -6,6 +6,16 @@ class CommentsController < ApplicationController
     comment.post_id = post.id
     comment.save
     redirect_to posts_path(post)
+
+    #通知
+    @comment = Comment.new(comment_params)
+    @post = @comment.post
+    if @comment.save
+      @post.create_notification_comment!(current_user, @comment.id)
+      respond_to :js
+    else
+      render 'posts/show'
+    end
   end
 
 
