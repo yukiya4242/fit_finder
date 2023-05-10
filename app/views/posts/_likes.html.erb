@@ -1,4 +1,4 @@
-<p>
+<p class="btn-likes">
   <% if current_user.liked_posts.include?(post) && !current_user.guest? %>
     <% like = current_user.likes.find_by(post: post) %>
     <i class="fas fa-heart active" data-url="<%= post_like_path(post, like) %>"></i>

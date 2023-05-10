@@ -1,18 +1,71 @@
-<h1>ユーザー検索</h1>
+ <style>
+    body {
+      background-color: #ffe7cc;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="container mt-3">
+          <div class="row">
+            <%= render 'posts/sidebar' %>
+            <div class="col-9">
+              <div class="main-container">
+                <h1 class="mb-5" style="font-size: 24px; font-weight: bold;">検索結果</h1>
+                <% if @users.present? %>
+                  <!-- ユーザーが存在した場合の処理 -->
+                  <div class="user-list">
+                    <% @users.each do |user| %>
+                      <% unless user.is_deleted %>
+                        <!-- ゲストユーザーを除外 -->
+                        <%# next if user == current_user %>
 
-<%= render "search" %>
+                        <div class="user-item">
+                          <div class="user-info">
+                            <% if user.profile_picture.attached? %>
+                              <%= image_tag user.profile_picture, class: 'profile-picture' %>
+                            <% else %>
+                              <%= image_tag "default_profile_picture.png", class: 'profile-picture' %>
+                            <% end %>
 
-<!--もしキーワードが入力されてそのユーザーがいたら-->
-<% if @users.present? %> 
-<ul>
-  <% @users.each do |user| %>
-  <li>
-    <%= link_to user.username, user_path(user) %>
-  </li>
-  <% end %>
-</ul>
+                            <div class="profile-info">
+                              <div class="user-details">
+                                <h6 class="mb-1"><%= link_to user.username, user_path(user) %></h6>
+                                <p class="mb-1"><%= user.introduction %></p>
+                              </div>
+                            </div>
+                          </div>
 
-<!--いなかったら-->
-<% else %>
-<p>該当するユーザーはいません</p>
-<% end %>
+                          <div class="follow-unfollow-buttons">
+                            <% if user_signed_in? %>
+                              <% if current_user.guest? %>
+                                <button onclick="alert('ゲストユーザーはこの操作はできません')" class='follow-button'>Follow</button>
+                              <% elsif current_user.following?(user) %>
+                                <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}" %>
+                                <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}", style: 'display:none;' %>
+                              <% else %>
+                                <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}" %>
+                                <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}", style:'display:none;' %>
+                                 <% end %>
+                            <% end %>
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <!-- ユーザーが存在しなかった場合の処理 -->
+                  <p>該当するユーザーはいません</p>
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
