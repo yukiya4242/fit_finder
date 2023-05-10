@@ -2,10 +2,11 @@ class Post < ApplicationRecord
   has_one_attached :image
   # after_create     :resize_image
 
-  belongs_to :user                          #ユーザー
-  has_many   :comments, dependent: :destroy #コメント
-  has_many   :likes,    dependent: :destroy #いいね
-  has_many   :likers,   through:   :likes, source: :user
+  belongs_to :user                               #ユーザー
+  has_many   :comments,      dependent: :destroy #コメント
+  has_many   :likes,         dependent: :destroy #いいね
+  has_many   :likers,        through:   :likes, source: :user
+  has_many   :notifications, dependent: :destroy
 
   validates :content, length: { in: 1..140 }
 
