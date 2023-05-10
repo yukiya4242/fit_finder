@@ -6,6 +6,10 @@ class LikesController < ApplicationController
     likes = current_user.likes.new(post_id: post.id)
     likes.save
     redirect_to posts_path(post)
+
+    post = Post.find(params[:id])
+    post.create_notification_like!(current_user)
+    respond_to :js
   end
 
 
