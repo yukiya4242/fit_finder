@@ -24,29 +24,30 @@ class ChatsController < ApplicationController
   @chats = @room.chats
   render :validater unless @chat.save
 
-  room = @chat.room
   if @chat.save
-    another_room = Post.where(room_id: room.id).where.not(user_id: current_user.id)
-    theid = another_room.find_by(room_id: room.id)
+    another_entry = UserRoom.where(room_id: @room.id).where.not(user_id: current_user.id).first
+    visited_id = another_entry.user_id
+
     notification = current_user.active_notifications.new(
-      room_id: room.id,
+      room_id: @room.id,
       chat_id: @chat.id,
-      visited_id: theid.user_id,
+      visited_id: visited_id,
       visitor_id: current_user.id,
       action: 'dm'
-      )
+    )
 
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
-      end
+    if notification.visitor_id == notification.visited_id
+      notification.checked = true
+    end
 
-      notification.save if notification.valid?
+    notification.save if notification.valid?
 
-      redirect_to room_path(@chat.room)
+    redirect_to room_path(@chat.room)
   else
-      redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path)
   end
-end
+  end
+
 
 
   private
