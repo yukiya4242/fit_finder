@@ -17,24 +17,32 @@ class Post < ApplicationRecord
 
 
    #いいねの通知メソッド
-  def create_notification_like!(current_user)
-    #いいね済みか検証
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?",
-                                current_user.id, user_id, id, 'like'])
-    #いいねされていない場合に通知レコードを作成
-    if temp.blank?
-      notification = current_user.active_notifications.new(
-        post_id: id,
-        visited_id: user_id,
-        action: 'like'
-      )
-      #自分の投稿に対するいいねの場合は通知済みとする
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
+    def create_notification_like!(current_user)
+      #いいね済みか検証
+      temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?",
+                                  current_user.id, user_id, id, 'like'])
+      #いいねされていない場合に通知レコードを作成
+      if temp.blank?
+        notification = current_user.active_notifications.new(
+          post_id: id,
+          visited_id: user_id,
+          action: 'like'
+        )
+        #自分の投稿に対するいいねの場合は通知済みとする
+        if notification.visitor_id == notification.visited_id
+          notification.checked = true
+        end
+        if notification.valid?
+          notification.save
+          puts "Notification has been created." # ログ出力
+        else
+          puts "Notification is invalid. Error messages: #{notification.errors.full_messages.join(', ')}" # ログ出力
+        end
+      else
+        puts "Notification already exists." # ログ出力
       end
-      notification.save if notification.valid?
     end
-  end
+
 
 
 

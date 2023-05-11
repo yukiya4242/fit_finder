@@ -19,34 +19,35 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = current_user.chats.new(chat_params)
-    @room = @chat.room
-    @chats = @room.chats
-    render :validater unless @chat.save
+  @chat = current_user.chats.new(chat_params)
+  @room = @chat.room
+  @chats = @room.chats
+  render :validater unless @chat.save
 
-    room = chat.room
-    if chat.save
-      another_room = Post.where(room_id: room.id).where.not(user_id: current_user.id)
-      theid = another_room.find_by(room_id: room.id)
-      notification = current_user.active_notifications.new(
-        room_id: room.id,
-        chat_id: chat.id,
-        visited_id: theid.user_id,
-        visitor_id: current_user_id,
-        action: 'dm'
-        )
+  room = @chat.room
+  if @chat.save
+    another_room = Post.where(room_id: room.id).where.not(user_id: current_user.id)
+    theid = another_room.find_by(room_id: room.id)
+    notification = current_user.active_notifications.new(
+      room_id: room.id,
+      chat_id: @chat.id,
+      visited_id: theid.user_id,
+      visitor_id: current_user.id,
+      action: 'dm'
+      )
 
-        if notification.visitor_id == notification.visited_id
-          notification.checked = true
-        end
+      if notification.visitor_id == notification.visited_id
+        notification.checked = true
+      end
 
-        notification.save if notification.valid?
+      notification.save if notification.valid?
 
-        redirect_to room_psth(chat.room)
-    else
-        redirect_back(fallback_location: root_path)
-    end
+      redirect_to room_path(@chat.room)
+  else
+      redirect_back(fallback_location: root_path)
   end
+end
+
 
   private
 

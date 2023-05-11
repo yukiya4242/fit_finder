@@ -58,6 +58,13 @@ class UsersController < ApplicationController
   def follow
   @user = User.find(params[:id])
   current_user.following << @user #current_userが対象のユーザー(@user)をfollowing
+
+  notification = current_user.active_notifications.new(
+    visited_id: @user.id,
+    action: 'follow'
+    )
+
+  notification.save if notification.valid?
   respond_to do |format|
     format.html { redirect_to @user}
     format.js
