@@ -13,7 +13,7 @@
       あなたをフォローしました
       <% when 'dm' %>
       あなたに
-        <%= link_to 'メッセージ', notification.room %>
+        <%= link_to 'メッセージ', chat_history_user_path(current_user) %>
         を送りました
       <% when 'like' %>
         <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
@@ -37,7 +37,7 @@
     </span>
   </div>
   <div class="small text-muted text-right">
-    <%= time_ago_in_words(notification.created_at).upcase %>
+    <%#= time_ago_in_words(notification.created_at).upcase %>
     <%= notification.decorate.how_long_ago %>
   </div>
   <hr>

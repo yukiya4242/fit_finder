@@ -1,3 +1,48 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="container mt-3">
+        <div class="row">
+          <%= render 'posts/sidebar' %>
+          <div class="col-9">
+            <div class="main-container">
+              <h1 class="mb-3" style="font-size: 24px; font-weight: bold;">
+                メッセージ履歴
+              </h1>
+              <div class="row">
+                <% @chat_users.each do |chat| %>
+                  <% unless @user.is_deleted %>
+                    <div class="col-12 mb-1">
+                      <div class="post-container">
+                        <div class="d-flex justify-content-between align-items-start">
+                          <div class="post-tops d-flex justify-content-between">
+                            <div>
+                              <% if @user.profile_picture.attached? %>
+                                <%= image_tag @user.profile_picture, class: 'profile_picture' %>
+                              <% else %>
+                                <%= image_tag "default_profile_picture.png", class: 'profile_picture' %>
+                              <% end %>
+                            </div>
+                            <div class="ml-3">
+                              <h6 class="post-header"><%= link_to @user.username, user_path(@user) %></h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <h1>チャット履歴</h1>
 
 <ul>
