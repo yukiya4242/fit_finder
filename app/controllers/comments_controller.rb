@@ -2,17 +2,13 @@ class CommentsController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])
-    comment = current_user.comments.new(comments_params)
-    comment.post_id = post.id
-    comment.save
-    redirect_to posts_path(post)
+    @comment = current_user.comments.new(comments_params)
+    @comment.post_id = post.id
 
-    #通知
-    @comment = Comment.new(comment_params)
-    @post = @comment.post
     if @comment.save
-      @post.create_notification_comment!(current_user, @comment.id)
-      respond_to :js
+      post.create_notification_comment!(current_user, @comment.id)
+      flash[:notice] = "コメントを投稿しました"
+      redirect_to post_path(@user)
     else
       render 'posts/show'
     end

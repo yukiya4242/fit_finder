@@ -27,10 +27,16 @@
       <% end %>
     </li>
 
+    <li class="nav-item mb-3">
+      <%= link_to user_path(current_user), class: 'nav-link' do %>
+        <i class="fas fa-user fa-lg"></i> マイページ
+      <% end %>
+    </li>
+
     <% unless current_user.guest? %>
       <li class="nav-item mb-3">
-        <%= link_to chat_history_user_path(current_user), class: 'nav-link' do %>
-          <i class="fab fa-telegram-plane fa-lg"></i> メッセージ
+        <%= link_to notifications_path(current_user), class: 'nav-link' do %>
+          <i class="fas fa-bell fa-lg"></i>&nbsp; 通知
         <% end %>
       </li>
     <% end %>
