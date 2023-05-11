@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :chats, only:[:show, :create]
   resources :relationships, only:[:create]
   resources :notifications, only:[:index, :update]
-  resources :rooms
+  resources :rooms, only:[:show]
 
 
 

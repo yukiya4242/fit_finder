@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  helper_method :unchecked_notifications
+  def unchecked_notifications
+    current_user.passive_notifications.where(checked: false)
+  end
+
 
   helper_method :current_or_guest_user
   def current_or_guest_user

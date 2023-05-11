@@ -39,6 +39,11 @@
       <li class="nav-item mb-3">
         <%= link_to notifications_path(current_user), class: 'nav-link' do %>
           <i class="fas fa-bell fa-lg"></i>&nbsp; 通知
+          <% unless unchecked_notifications.empty? %>
+            <span class="badge badge-danger">
+              <%= unchecked_notifications.count %>
+            </span>
+            <% end %>
         <% end %>
       </li>
     <% end %>
