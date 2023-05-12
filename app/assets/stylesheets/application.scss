@@ -338,14 +338,19 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  max-height: 700px;
-  overflow-y: auto;
 }
 
 .message-sender {
   margin-bottom: 5px;
   font-size: 0.8em;
   color: #666;
+}
+
+.message-container {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 20px;
+  height: calc(100vh - 120px); // 120pxは.chat-topbarと.chat-formの高さの合計値
 }
 
 .message-body {

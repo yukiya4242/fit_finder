@@ -1,21 +1,30 @@
+<style>
+body {
+  position: relative;
+}
+</style>
+
+
 <div class="chat-container">
   <div class="chat-topbar">
     <h2><%= link_to @user.username, user_path(@user) %> さんとのチャット</h2>
-
   </div>
-  <div class="message">
-    <%= render "chats/messages", chats: @chats %>
+
+  <div class="message-container">
+    <div class="message">
+      <%= render "chats/messages", chats: @chats %>
+    </div>
   </div>
 
   <div class="chat-form">
     <%= form_with model: @chat, data: {remote: true} do |f| %>
-
       <%= f.text_field :message, placeholder: "メッセージを入力してください", autocomplete: "off" %>
       <%= f.hidden_field :room_id, value: @room.id %>
       <%= f.submit "送信" %>
     <% end %>
   </div>
 </div>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', (event) => {
