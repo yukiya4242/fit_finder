@@ -1,7 +1,8 @@
+
 <div class="col-md-6 mx-auto">
   <% visitor = notification.visitor %>
   <% visited = notification.visited %>
-  <div class="card mb-3">
+  <div class="card mb-1">
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center">
         <div>
@@ -10,6 +11,39 @@
             <strong><%= visitor.username %></strong>
           <% end %>
           <span class="ml-2">さんが</span>
+        </div>
+        <div class="text-muted small">
+          <%= notification.decorate.how_long_ago %>
+        </div>
+      </div>
+      <div class="mt-2">
+        <% case notification.action %>
+        <% when 'follow' %>
+          <i class="fas fa-user-plus mr-1"></i>あなたをフォローしました
+        <% when 'dm' %>
+          <i class="fas fa-envelope mr-1"></i>あなたに
+          <%= link_to 'メッセージ', chat_history_user_path(current_user) %>
+          を送りました
+        <% when 'like' %>
+          <i class="fas fa-heart mr-1"></i>
+          <%= link_to 'あなたの投稿', notification.post, class: "font-weight-bold" %>
+          にいいねしました
+        <% when 'comment' %>
+          <i class="fas fa-comments mr-1"></i>
+          <% if notification.post.user_id == visited.id %>
+            <%= link_to "あなたの投稿", notification.post, class: "font-weight-bold" %>
+          <% else %>
+            <%= link_to post_path(notification.post) do %>
+              <%#= image_tag avatar_url(notification.post.user).to_s, class: "icon_mini" %>
+              <strong><%= notification.post.user.username + 'さんの投稿' %></strong>
+            <% end %>
+          <% end %>
+          にコメントしました
+          <p class="text-muted mb-0">
+            <%#= Comment.find_by(id: notification.comment_id)&.comment %>
+          </p>
+        <% end %>
+
       </div>
     </div>
   </div>
