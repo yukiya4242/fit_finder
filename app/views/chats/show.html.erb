@@ -16,3 +16,18 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const chatBox = document.querySelector('.message');
+    chatBox.addEventListener('scroll', (e) => {
+      if (chatBox.scrollHeight - chatBox.scrollTop === chatBox.clientHeight) {
+        const lastChatId = chatBox.lastElementChild.id;
+        const xhr = new XMLHttpRequest();
+        xhr.open('PATCH', `/chats/${lastChatId}/read`);
+        xhr.setRequestHeader('X-CSRF-Token', document.querySelector('meta[name="csrf-token"]').content);
+        xhr.send();
+      }
+    });
+  });
+</script>
