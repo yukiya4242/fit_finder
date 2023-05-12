@@ -53,40 +53,44 @@
 <div class="row">
   <% @posts.each do |post| %>
     <% unless post.user.is_deleted %>
-      <div class="col-12 mb-2">
-        <div class="post-container p-2">
-          <div class="d-flex justify-content-between align-items-start">
-            <div class="d-flex justify-content-start">
-              <div class="post-tops">
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-1">
                 <%= link_to user_path(post.user) do %>
-                  <p class="post-header"><%= post.user.username %></p>
+                  <%= image_tag url_for(post.user.profile_picture), class: 'img-fluid rounded-circle' if post.user.profile_picture.attached? %>
                 <% end %>
-
-                <%= render 'posts/image_video', post: post %>
-                <%= render 'posts/likes', post: post %>
-
-                <% if current_user == post.user %>
-                  <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link" do %>
-                    <i class="fas fa-edit"></i>
-                  <% end %>
-                  <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "icon-button btn btn-link" do %>
-                    <i class="fas fa-trash"></i>
-                  <% end %>
-                <% end %>
-                <div>
-                  <%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
-                </div>
               </div>
-              <div class="post-side ml-3">
-                <p class="post-content"><%= post.content %></p>
+              <div class="col-md-11">
+                <h5 class="card-title">
+                  <%= link_to user_path(post.user), class: 'text-decoration-none text-dark' do %>
+                    <strong><%= post.user.username %></strong>
+                  <% end %>
+                  <small class="text-muted"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+                </h5>
+                <p class="card-text"><%= post.content %></p>
+                <%= render 'posts/image_video', post: post %>
               </div>
             </div>
+          </div>
+          <div class="card-footer text-muted">
+            <%= render 'posts/likes', post: post %>
+            <% if current_user == post.user %>
+              <%= link_to edit_post_path(post.id), class: "btn btn-link" do %>
+                <i class="fas fa-edit"></i> Edit
+              <% end %>
+              <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "btn btn-link" do %>
+                <i class="fas fa-trash"></i> Delete
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
     <% end %>
   <% end %>
 </div>
+
 
 
 
