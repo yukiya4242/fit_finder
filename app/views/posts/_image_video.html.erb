@@ -1,0 +1,5 @@
+<% if post.image.attached? %>
+  <%= image_tag post.image, class: "post-image", height: 400, width: 400 %>
+<% elsif post.video.attached? %>
+  <%= video_tag url_for(post.video), controls: true, class: "post-video", height: 400, width: 400 %>
+<% end %>

@@ -28,7 +28,9 @@
                                   <p class="post-header"><%= post.user.username %></p>
                                 <% end %>
                                 <p class="post-content"><%= post.content %></p>
-                                <%= image_tag post.image, class: "post-image", height: 400, width: 400 if post.image.attached? %>
+
+                                <%= render 'image_video', post: post %>
+
                                 <%= render 'likes', post: post %>
                                 <% if current_user == post.user %>
                                   <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link" do %>

@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     # binding.pry
     @user = User.find(params[:id])
     @posts = @user.posts
-
+    @posts = Post.order(created_at: :desc)
   end
 
   def edit

@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   has_one_attached :image
+  has_one_attached :video
   # after_create     :resize_image
 
   belongs_to :user                               #ユーザー
