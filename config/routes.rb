@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   end
 
 
-  resources :chats, only:[:show, :create]
+  resources :chats, only:[:show, :create] do
+    member do
+      patch :read
+    end
+  end
+
   resources :relationships, only:[:create]
   resources :notifications, only:[:index, :update]
   resources :rooms, only:[:show]

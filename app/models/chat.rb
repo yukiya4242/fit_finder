@@ -6,4 +6,8 @@ class Chat < ApplicationRecord
 
   validates :message, length: { in: 1..140 }
 
+  def read!
+    self.update(read: true)
+  end
+
 end

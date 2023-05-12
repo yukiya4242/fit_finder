@@ -48,6 +48,12 @@ class ChatsController < ApplicationController
   end
   end
 
+  def read
+    chat = Chat.find(params[:id])
+    chat.read! if current_user != chat.user
+    head :ok
+  end
+
 
 
   private
@@ -61,7 +67,7 @@ class ChatsController < ApplicationController
     def reject_non_related
     user = User.find(params[:id])
     unless current_user.following?(user) && user.following?(current_user)
-      redirect_to books_path
+      redirect_to posts_path
     end
     end
 end
