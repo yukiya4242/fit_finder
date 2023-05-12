@@ -1,44 +1,16 @@
-<% visitor = notification.visitor %>
-<% visited = notification.visited %>
 <div class="col-md-6 mx-auto">
-  <div class="form-inline">
-    <span>
-      <%= link_to user_path(visitor) do %>
-        <%#= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
-        <strong><%= visitor.username %></strong>
-      <% end %>
-      さんが
-      <% case notification.action %>
-      <% when 'follow' %>
-      あなたをフォローしました
-      <% when 'dm' %>
-      あなたに
-        <%= link_to 'メッセージ', chat_history_user_path(current_user) %>
-        を送りました
-      <% when 'like' %>
-        <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
-        にいいねしました
-      <% when 'comment' %>
-        <% if notification.post.user_id == visited.id %>
-          <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
-        <% else %>
-          <span>
-            <%= link_to post_path(notification.post) do %>
-              <%#= image_tag avatar_url(notification.post.user).to_s, class: "icon_mini" %>
-              <strong><%= notification.post.user.username + 'さんの投稿' %></strong>
-            <% end %>
-          </span>
-        <% end %>
-        にコメントしました
-        <p class="text-muted mb-0">
-          <%#= Comment.find_by(id: notification.comment_id)&.comment %>
-        </p>
-      <% end %>
-    </span>
+  <% visitor = notification.visitor %>
+  <% visited = notification.visited %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <%= link_to user_path(visitor) do %>
+            <%#= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
+            <strong><%= visitor.username %></strong>
+          <% end %>
+          <span class="ml-2">さんが</span>
+      </div>
+    </div>
   </div>
-  <div class="small text-muted text-right">
-    <%#= time_ago_in_words(notification.created_at).upcase %>
-    <%= notification.decorate.how_long_ago %>
-  </div>
-  <hr>
 </div>

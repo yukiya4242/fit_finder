@@ -1,6 +1,7 @@
 <div class="chat-container">
   <div class="chat-topbar">
-    <h2><%= @user.username %> さんとのチャット</h2>
+    <h2><%= link_to @user.username, user_path(@user) %> さんとのチャット</h2>
+
   </div>
   <div class="message">
     <%= render "chats/messages", chats: @chats %>
