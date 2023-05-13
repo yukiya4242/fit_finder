@@ -78,10 +78,10 @@
             <%= render 'posts/likes', post: post %>
             <% if current_user == post.user %>
               <%= link_to edit_post_path(post.id), class: "btn btn-link" do %>
-                <i class="fas fa-edit"></i> Edit
+                <i class="fas fa-edit"></i> 編集
               <% end %>
               <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "btn btn-link" do %>
-                <i class="fas fa-trash"></i> Delete
+                <i class="fas fa-trash"></i> 削除
               <% end %>
             <% end %>
           </div>
