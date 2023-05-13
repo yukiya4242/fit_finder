@@ -6,9 +6,17 @@ body {
 
 
 <div class="chat-container">
+
   <div class="chat-topbar">
+    <a href="#" onclick="event.preventDefault(); window.history.back();" style="color: white;">
+      <h3 class="back-button">
+        <span class="back-symbol">&lt;</span>
+        <span class="back-tooltip">戻る</span>
+      </h3>
+    </a>
     <h2><%= link_to @user.username, user_path(@user) %> さんとのチャット</h2>
   </div>
+
 
   <div class="message-container">
     <div class="message">
