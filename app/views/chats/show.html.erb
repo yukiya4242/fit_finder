@@ -20,7 +20,9 @@ body {
 
   <div class="message-container">
     <div class="message">
-      <%= render "chats/messages", chats: @chats %>
+      <%= @chats[0].id %>
+      <%#= render "chats/messages", chats: @chats %>
+ <%= render "chats/conver", chats: @chats %>
     </div>
   </div>
 

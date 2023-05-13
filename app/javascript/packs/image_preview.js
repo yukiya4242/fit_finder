@@ -14,6 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
       reader.readAsDataURL(event.target.files[0]);
     });
   } else {
-    console.error("要素が見つからないため、イベントリスナーを追加できません。");
   }
 });

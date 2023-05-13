@@ -14,7 +14,8 @@ class ChatsController < ApplicationController
       UserRoom.create(user_id: current_user.id, room_id: @room.id)#自分の中間テーブルを作成
       UserRoom.create(user_id: @user.id, room_id: @room.id)#相手の中間テーブルを作成
     end
-    @chats = @room.chats#チャットの一覧
+    
+    @chats = @room.chats #チャットの一覧
     @chat = Chat.new(room_id: @room.id)#チャットの投稿
   end
 
@@ -23,7 +24,6 @@ class ChatsController < ApplicationController
   @room = @chat.room
   @chats = @room.chats
   render :validater unless @chat.save
-
   if @chat.save
     another_entry = UserRoom.where(room_id: @room.id).where.not(user_id: current_user.id).first
     visited_id = another_entry.user_id

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @posts = Post.all
-    @users = User.where(is_deleted: false)
+    @users = User.where(is_deleted: false).where.not(email: 'guest@example.com')
   end
 
   def show
