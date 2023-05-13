@@ -407,6 +407,7 @@ body {
   background-color: #1E90FF;
   color: #fff;
   margin-right: 10px;
+
 }
 
 .other .message-body {
@@ -448,6 +449,38 @@ body {
   background-color: #29b6f6;
   color: #fff;
   cursor: pointer;
+}
+
+.chat-form label {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.chat-form label i {
+  font-size: 20px;
+  color: #333;
+}
+
+.chat-form input[type="file"] {
+  display: none;
+}
+
+.chat-form input[type="submit"] {
+  background-color: #2989f6;
+  color: #fff;
+
+  &.sending {
+    background-color: #90caf9;
+    color: #fff;
+  }
+
+  &.sent {
+    background-color: #90caf9;
+    color: #fff;
+  }
 }
 
 // posts/index レイアウト
@@ -711,4 +744,12 @@ a.btn-border-red {
 
 .post-text {
   margin-right: 20px; /* ここで間隔を調整します。適切な値に変更してください。 */
+}
+
+.self.no-bg .message-body {
+    background-color: transparent;
+}
+
+.other.no-bg .message-body {
+    background-color: transparent;
 }

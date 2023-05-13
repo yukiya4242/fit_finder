@@ -24,17 +24,26 @@ body {
     </div>
   </div>
 
-  <div class="chat-form">
-    <%= form_with model: @chat, data: {remote: true} do |f| %>
-      <%= f.text_field :message, placeholder: "メッセージを入力してください", autocomplete: "off" %>
-      <%= f.hidden_field :room_id, value: @room.id %>
+<div class="chat-form">
+  <%= form_with model: @chat, data: {remote: true} do |f| %>
+    <%= f.text_field :message, placeholder: "メッセージを入力してください", autocomplete: "off" %>
+    <%= f.hidden_field :room_id, value: @room.id %>
 
-      <%= f.file_field :image %>
-      <%= f.file_field :video %>
-      <%= f.submit "送信" %>
-    <% end %>
-  </div>
+    <label for="chat_image" style="cursor: pointer;">
+      <i class="fas fa-image fa-lg"></i>
+    </label>
+    <%= f.file_field :image, id: "chat_image", style: "display:none;" %>
+
+    <label for="chat_video" style="cursor: pointer;">
+      <i class="fas fa-video fa-lg"></i>
+    </label>
+    <%= f.file_field :video, id: "chat_video", style: "display:none;" %>
+
+    <%= f.submit "送信" %>
+  <% end %>
 </div>
+</div>
+
 
 
 <script>
@@ -50,4 +59,21 @@ body {
       }
     });
   });
+
+
+  document.addEventListener('ajax:beforeSend', function(event) {
+  var submitButton = event.target.querySelector('input[type="submit"]');
+  submitButton.classList.add('sending');
+});
+
+document.addEventListener('ajax:complete', function(event) {
+  var submitButton = event.target.querySelector('input[type="submit"]');
+  submitButton.classList.remove('sending');
+  submitButton.classList.add('sent');
+
+  setTimeout(function() {
+    submitButton.classList.remove('sent');
+  }, 3000);
+});
+
 </script>

@@ -3,21 +3,22 @@
   width: 100%;
   height: auto;
 }
+
 </style>
 <div class="chat-message overflow-auto" style="max-height: 750px;">
   <% chats.each do |chat| %>
   <div id="<%= chat.id %>">
     <% if chat.user_id == current_user.id %>
-      <div class="message self">
-        <div class="message-body <%= 'no-background' if chat.image.attached? || chat.video.attached? %>">
+      <div class="message self <%= 'no-bg' if chat.image.attached? || chat.video.attached? %>">
+        <div class="message-body">
           <%= chat.message %>
           <!--ここから-->
           <% if chat.image.attached? %>
-            <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto') %>
+            <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto', class: 'rounded') %>
           <% end %>
 
           <% if chat.video.attached? %>
-            <%= video_tag rails_blob_path(chat.video), controls: true, class: 'responsive-video' if chat.video.attached? %>
+            <%= video_tag rails_blob_path(chat.video), controls: true, class: 'responsive-video rounded' if chat.video.attached? %>
           <% end %>
           </div>
 
@@ -27,7 +28,7 @@
         </div>
       </div>
     <% else %>
-      <div class="message other">
+      <div class="message other <%= 'no-bg' if chat.image.attached? || chat.video.attached? %>">
         <div class="message-sender"><%= chat.user.username %></div>
         <div class="message-body">
           <%= chat.message %>
