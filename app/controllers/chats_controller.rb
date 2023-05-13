@@ -14,7 +14,7 @@ class ChatsController < ApplicationController
       UserRoom.create(user_id: current_user.id, room_id: @room.id)#自分の中間テーブルを作成
       UserRoom.create(user_id: @user.id, room_id: @room.id)#相手の中間テーブルを作成
     end
-    
+
     @chats = @room.chats #チャットの一覧
     @chat = Chat.new(room_id: @room.id)#チャットの投稿
   end
@@ -60,7 +60,7 @@ class ChatsController < ApplicationController
 
 
     def chat_params
-      params.require(:chat).permit(:message, :room_id)
+      params.require(:chat).permit(:message, :room_id, :image, :video)
     end
 
 

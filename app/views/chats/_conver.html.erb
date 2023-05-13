@@ -1,11 +1,26 @@
+<style>
+  .responsive-video {
+  width: 100%;
+  height: auto;
+}
+</style>
 <div class="chat-message overflow-auto" style="max-height: 750px;">
   <% chats.each do |chat| %>
   <div id="<%= chat.id %>">
     <% if chat.user_id == current_user.id %>
       <div class="message self">
-        <div class="message-body">
+        <div class="message-body <%= 'no-background' if chat.image.attached? || chat.video.attached? %>">
           <%= chat.message %>
+          <!--ここから-->
+          <% if chat.image.attached? %>
+            <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto') %>
+          <% end %>
+
+          <% if chat.video.attached? %>
+            <%= video_tag rails_blob_path(chat.video), controls: true, class: 'responsive-video' if chat.video.attached? %>
+          <% end %>
           </div>
+
           <% if chat.read %>
             <span class="read">既読</span>
           <% end %>
@@ -16,6 +31,15 @@
         <div class="message-sender"><%= chat.user.username %></div>
         <div class="message-body">
           <%= chat.message %>
+
+          <!--ここから-->
+          <% if chat.image.attached? %>
+            <%= image_tag chat.image %>
+          <% end %>
+
+          <% if chat.video.attached? %>
+            <%= video_tag chat.video, controls: true %>
+          <% end %>
         </div>
       </div>
       </div>

@@ -20,9 +20,7 @@ body {
 
   <div class="message-container">
     <div class="message">
-      <%= @chats[0].id %>
-      <%#= render "chats/messages", chats: @chats %>
- <%= render "chats/conver", chats: @chats %>
+     <%= render "chats/conver", chats: @chats %>
     </div>
   </div>
 
@@ -30,6 +28,9 @@ body {
     <%= form_with model: @chat, data: {remote: true} do |f| %>
       <%= f.text_field :message, placeholder: "メッセージを入力してください", autocomplete: "off" %>
       <%= f.hidden_field :room_id, value: @room.id %>
+
+      <%= f.file_field :image %>
+      <%= f.file_field :video %>
       <%= f.submit "送信" %>
     <% end %>
   </div>
