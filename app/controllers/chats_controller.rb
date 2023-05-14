@@ -42,7 +42,10 @@ class ChatsController < ApplicationController
 
     notification.save if notification.valid?
 
-    # redirect_to room_path(@chat.room)
+    respond_to do |format|
+      format.html { redirect_to room_path(@chat.room) }
+        format.js
+        end
   else
     redirect_back(fallback_location: root_path)
   end
