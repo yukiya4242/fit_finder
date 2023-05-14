@@ -441,7 +441,11 @@ body {
   background-color: #1E90FF;
   color: #fff;
   margin-right: 10px;
+}
 
+.self .chat-timestamp {
+  align-self: flex-end;
+  color: #D3D3D3;
 }
 
 .other .message-body {
@@ -449,6 +453,10 @@ body {
   background-color: #FF8C00;
   color: #333;
   font-weight: bold;
+}
+
+.other .chat-timestamp {
+  color: #D3D3D3;
 }
 
 .chat-form {

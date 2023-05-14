@@ -25,9 +25,13 @@
 
           </div>
 
+
           <% if chat.read %>
             <span class="read">既読</span>
           <% end %>
+
+          <p class="chat-timestamp"><%= chat.created_at.strftime("%Y-%m-%d %H:%M:%S")%></p>
+
         </div>
       </div>
     <% else %>
@@ -55,6 +59,7 @@
           <% end %>
 
         </div>
+        <p class="chat-timestamp"><%= chat.created_at.strftime("%Y-%m-%d %H:%M:%S")%></p>
       </div>
       </div>
     <% end %>
