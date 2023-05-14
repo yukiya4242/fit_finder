@@ -1,6 +1,8 @@
 class Chat < ApplicationRecord
   belongs_to :user
   belongs_to :room
+  has_many   :saved_files
+  has_many   :saved_by_users, through: :saved_files, source: :user #チャットが特定のユーザーによって保存されたかどうかの確認
   has_many   :notifications, dependent: :destroy
 
   has_one_attached :image

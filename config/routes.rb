@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :relationships, only:[:create]
   resources :notifications, only:[:index, :update]
   resources :rooms, only:[:show]
+  resources :saved_files, only:[:create]
 
 
 
