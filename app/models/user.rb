@@ -5,7 +5,8 @@ class User < ApplicationRecord
 
          has_many :user_rooms
          has_many :chats
-         has_many :saved_files, through: :saved_files, source: :chat
+         has_many :saved_files
+         has_many :saved_chats, through: :saved_filed, source: :chat
          has_many :rooms, through: :user_rooms
          has_many :active_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
          has_many :following, through: :active_relationships, source: :followed

@@ -308,6 +308,40 @@ body {
 
 // ________________________ chatroom
 
+.file-container {
+  position: relative;
+
+  .save-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+
+    &.checked-btn::before {
+      content: "/2713";
+    }
+
+    &.saved {
+      background-color: green;
+    }
+  }
+}
+
+.responsive-video {
+  width: 100%;
+  height: auto;
+}
+
+
+
 .back-button {
   position: relative;
 
@@ -412,8 +446,9 @@ body {
 
 .other .message-body {
   align-self: flex-start;
-  background-color: #f5f5f5;
+  background-color: #FF8C00;
   color: #333;
+  font-weight: bold;
 }
 
 .chat-form {

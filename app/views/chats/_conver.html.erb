@@ -1,10 +1,4 @@
-<style>
-  .responsive-video {
-  width: 100%;
-  height: auto;
-}
 
-</style>
 <div class="chat-message overflow-auto" style="max-height: 750px;">
   <% chats.each do |chat| %>
   <div id="<%= chat.id %>">
@@ -12,14 +6,23 @@
       <div class="message self <%= 'no-bg' if chat.image.attached? || chat.video.attached? %>">
         <div class="message-body">
           <%= chat.message %>
-          <!--ここから-->
-          <% if chat.image.attached? %>
-            <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto', class: 'rounded') %>
+
+          <% if chat.image.attached? && chat.user_id != current_user.id %>
+            <div class='file-container'>
+              <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto', class: 'rounded') %>
+              <%= button_to '保存', saved_files_path(chat_id: chat.id), method: :post, remote: true, class: 'save-btn' %>
+               <span id="status-<%= chat.id %>" class="status" style="display: none;">保存済み</span>
+            </div>
           <% end %>
 
-          <% if chat.video.attached? %>
-            <%= video_tag rails_blob_path(chat.video), controls: true, class: 'responsive-video rounded' if chat.video.attached? %>
+          <% if chat.video.attached? && chat.user_id != current_user.id %>
+            <div class='file-container'>
+              <%= video_tag rails_blob_path(chat.video), controls: true, class: 'responsive-video rounded' %>
+              <%= button_to '保存', saved_files_path(chat_id: chat.id), method: :post, remote: true, class: 'save-btn' %>
+              <span id="status-<%= chat.id %>" class="status" style="display: none;">保存済み</span>
+            </div>
           <% end %>
+
           </div>
 
           <% if chat.read %>
@@ -33,17 +36,48 @@
         <div class="message-body">
           <%= chat.message %>
 
-          <!--ここから-->
-          <% if chat.image.attached? %>
-            <%= image_tag chat.image %>
+
+          <% if chat.image.attached? && chat.user_id != current_user.id %>
+            <div class="file-container">
+              <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto', class: 'rounded') %>
+              <%= button_to '保存', saved_files_path(chat_id: chat.id), method: :post, remote: true, class: 'save-btn' %>
+              <span id="status-<%= chat.id %>" class="status" style="display: none;">保存済み</span>
+            </div>
           <% end %>
 
-          <% if chat.video.attached? %>
-            <%= video_tag chat.video, controls: true %>
+
+          <% if chat.video.attached? && chat.user_id != current_user.id %>
+            <div class="file-container">
+              <%= video_tag rails_blob_path(chat.video), controls: true, class: 'responsive-video rounded' %>
+              <%= button_to '保存', saved_files_path(chat_id: chat.id), method: :post, remote: true, class: 'save-btn' %>
+              <span id="status-<%= chat.id %>" class="status" style="display: none;">保存済み</span>
+            </div>
           <% end %>
+
         </div>
       </div>
       </div>
     <% end %>
   <% end %>
 </div>
+
+<script>
+  document.querySelectorAll('.file-container').forEach(function(container) {
+  container.addEventListener('mouseover', function() {
+    container.querySelector('.save-btn').style.display = 'block';
+  });
+
+  container.addEventListener('mouseout', function() {
+    container.querySelector('.save-btn').style.display = 'none';
+  });
+
+  var saveBtn = container.querySelector('.save-btn');
+  var statusElement = container.querySelector('.status');
+
+  saveBtn.addEventListener('click', function() {
+    statusElement.style.display = 'inline-block';
+    statusElement.textContent = '保存済み';
+  });
+});
+
+</script>
