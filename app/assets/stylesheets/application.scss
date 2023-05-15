@@ -428,6 +428,7 @@ body {
   overflow-y: scroll;
   padding: 20px;
   height: calc(100vh - 120px); // 120pxは.chat-topbarと.chat-formの高さの合計値
+  background-color: #F0F8FF;
 }
 
 .message-body {

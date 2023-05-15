@@ -1,6 +1,8 @@
 class Chat < ApplicationRecord
   belongs_to :user
   belongs_to :room
+  belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
+  belongs_to :receiver, class_name: 'User', foreign_key: 'receiver_id'
   has_many   :saved_files
   has_many   :saved_by_users, through: :saved_files, source: :user #チャットが特定のユーザーによって保存されたかどうかの確認
   has_many   :notifications, dependent: :destroy

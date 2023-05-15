@@ -20,10 +20,13 @@ class ChatsController < ApplicationController
   end
 
   def create
-  @chat = current_user.chats.new(chat_params)
+  room_id = params[:chat][:room_id] #追加
+  another_entry = UserRoom.where(room_id: room_id).where.not(user_id: current_user.id).first #追加
+  receiver_id = another_entry.user_id #追加
+  @chat = current_user.chats.new(chat_params.merge(sender_id: current_user.id, receiver_id: receiver_id)) #追加
   @room = @chat.room
-  @chats = @room.chats
-  render :validater unless @chat.save
+  @chats = @chat.room.chats
+  # byebug
   if @chat.save
     another_entry = UserRoom.where(room_id: @room.id).where.not(user_id: current_user.id).first
     visited_id = another_entry.user_id
@@ -47,13 +50,17 @@ class ChatsController < ApplicationController
         format.js
         end
   else
-    redirect_back(fallback_location: root_path)
+     flash[:alert] = "メッセージの送信に失敗しました。"
+    respond_to do |format|
+      format.js { render :create_failed }
+      end
+    # redirect_back(fallback_location: root_path)
   end
   end
 
   def read
     chat = Chat.find(params[:id])
-    chat.read! if current_user != chat.user
+    chat.read! if chat.receiver == current_user && !chat.read
     head :ok
   end
 
