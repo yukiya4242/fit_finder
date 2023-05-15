@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
     @notifications = current_user.passive_notifications.includes(:visitor, :comment, :post).page(params[:page]).per(20)
     @notification = Notification.find_by(id: params[:id])
     @notification = @notification.decorate if @notification.present?
-      @notifications.update(checked: true)
+    @notifications.update(checked: true)
   end
 
   def update

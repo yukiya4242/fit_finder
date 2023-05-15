@@ -8,7 +8,9 @@ class User < ApplicationRecord
          has_many :sent_chats, class_name: 'Chat', foreign_key: 'sender_id'
          has_many :received_chats, class_name: 'Chat', foreign_key: 'receiver_id'
          has_many :saved_files
-         has_many :saved_chats, through: :saved_filed, source: :chat
+         has_many :saved_chats, through: :saved_files, source: :chat
+
+        # has_many :saved_chats, through: :saved_filed, source: :chat #admin側でエラーが出る
          has_many :rooms, through: :user_rooms
          has_many :active_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
          has_many :following, through: :active_relationships, source: :followed

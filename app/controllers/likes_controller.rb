@@ -9,7 +9,7 @@ class LikesController < ApplicationController
 
     #通知
     post.create_notification_like!(current_user)
-    puts "create_notification_like! has been called." # ログ出力
+    # puts "create_notification_like! has been called." # ログ出力
     respond_to :js
   end
 

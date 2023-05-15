@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     if @comment.save
       post.create_notification_comment!(current_user, @comment.id)
       flash[:notice] = "コメントを投稿しました"
-      redirect_to post_path(@user)
+      redirect_to posts_path
     else
       render 'posts/show'
     end
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   private
 
   def comments_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, :post_id)
   end
 
 end

@@ -399,6 +399,7 @@ body {
   color: #fff;
   height: 50px;
   padding: 0 20px;
+  border-radius: 15px;
 }
 
 .chat-topbar h2 {
@@ -792,4 +793,51 @@ a.btn-border-red {
 
 .other.no-bg .message-body {
     background-color: transparent;
+}
+
+// users/edit
+
+.container.mt-5 {
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.btn.btn-primary {
+  border-radius: 30px;
+  padding: 10px 30px;
+  background-color: #007bff;
+  border-color: #007bff;
+
+  &:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+}
+
+.btn-outline-danger {
+  border-radius: 30px;
+  padding: 10px 30px;
+
+  &:hover {
+    background-color: #f5c6cb;
+    border-color: #f5c6cb;
+  }
+}
+
+.profile-picture-container .picture-border{
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+  z-index: 1;
+}
+
+.profile-picture-container .form-control {
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+  cursor: pointer;
 }
