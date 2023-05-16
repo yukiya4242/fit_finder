@@ -841,3 +841,30 @@ a.btn-border-red {
   z-index: 2;
   cursor: pointer;
 }
+
+.post-picture-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 20px;
+
+  .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5em;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  &:hover .overlay {
+    display: flex;
+  }
+}

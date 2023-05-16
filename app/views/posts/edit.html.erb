@@ -1,28 +1,60 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card mt-5" style="border-color: #ffcc99;">
-        <div class="card-header text-center" style="background-color: FFcc99;">
-          <h1>投稿編集</h1>
-        </div>
-        <div class="card-body">
-          <%= form_with model: @post, url: post_path(@post), method: :patch do |f| %>
-            <div class="form-group">
-              <%= f.label :投稿文, class: 'h4' %>
-              <%= f.text_area :content, class: 'form-control' %>
-            </div>
+<style>
+body {
+  background-color: #f8f9fa;
+}
 
-            <div class="form-group">
-              <%= f.label :画像, class: 'h4' %>
-              <%= f.file_field :image, accept: "/image/*", class: 'form-control-file' %>
-            </div>
+.form-control {
+  border-radius: 30px;
+  border-color: #ced4da;
+  box-shadow: none !important;
+}
 
-            <div class="form-group">
-              <%= f.submit '保存', class: 'btn btn-primary btn-block' %>
-            </div>
-            <% end %>
+.post-picture {
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+</style>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <h1 class="mb-5 text-center">投稿編集</h1>
+
+      <%= form_with model: @post, url: post_path(@post), method: :patch, html: {class: "needs-validation", novalidate: true} do |f| %>
+        <div class="form-group text-center">
+           <label class="post-picture-container">
+             <% if f.object.image.attached? %>
+               <%= image_tag f.object.image, class: 'post-picture' %>
+               <% else %>
+               <%= image_tag 'default_post_image.png', class: 'post-picture' %>
+             <% end %>
+             <div class="overlay">
+             <%= f.file_field :image, accept: 'image/*', class: "form-control", id: "post-picture-input", style: "display: none;" %>
+             </div>
+           </label>
         </div>
-      </div>
+
+        <div class="form-group">
+          <%= f.label :投稿文, class: "form-label" %>
+          <%= f.text_area :content, class: "form-control", autofocus: true, autocomplete: "content" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "保存", class: "btn btn-primary btn-block" %>
+        </div>
+
+        <div class="form-group text-center">
+          <a href="#" onclick="event.preventDefault(); window.history.back();" >
+            <h3 class="back-button">
+              <i class="fas fa-arrow-left fa-lg"></i>
+              <span class="back-tooltip">戻る</span>
+            </h3>
+          </a>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
