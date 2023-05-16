@@ -15,6 +15,8 @@ import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import $ from 'jquery';
 
+require("packs/post_picture")
+
 
 
 // require("@rails/ujs").start()

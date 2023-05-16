@@ -17,22 +17,23 @@
 
  @import "custom";
 
+
 .top-image1 {
-  background-image: asset-url('top-image100.jpeg');
+  background-image: image-url("top-image100.jpeg");
   background-size: cover;
   background-position: center;
   height: 700px; // 画像の高さを指定してください。
 }
 
 .top-image2 {
-  background-image: asset-url('training2.jpeg');
+  background-image: image-url("training2.jpeg");
   background-size: cover;
   background-position: center;
   height: 700px; // 画像の高さを指定してください。
 }
 
 .top-image3 {
-  background-image: asset-url('training100.jpeg');
+  background-image: image-url("training100.jpeg");
   background-size: cover;
   background-position: center;
   height: 700px; // 画像の高さを指定してください。
