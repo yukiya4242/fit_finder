@@ -39,6 +39,17 @@
   height: 700px; // 画像の高さを指定してください。
 }
 
+.navbar {
+  background-color: #FFE4B5;
+}
+
+.footer {
+
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+
 
 a.btn-border {
   border: 2px solid #000;
@@ -99,7 +110,7 @@ a.btn-border {
 
 .box-top div {
   scroll-snap-align: start;
-  width: calc(100% - 20px); /* 左右の空白分（10px*2）を引いた幅に設定 */
+  width: calc(100% - 5px); /* 左右の空白分（10px*2）を引いた幅に設定 */
   margin: 5px;
   flex-shrink: 0;
 }
@@ -546,6 +557,7 @@ body {
   max-height: 50%;
   height: auto;
   margin-bottom: 1rem;
+  border-radius: 15px;
 }
 
 .post-video {
@@ -869,3 +881,4 @@ a.btn-border-red {
     display: flex;
   }
 }
+
