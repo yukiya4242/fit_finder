@@ -6,6 +6,8 @@ ActiveAdmin.setup do |config|
    config.clear_javascripts!
    config.register_javascript 'active_admin'
 
+   config.root_to = 'dashboard#index'
+
 
   # == Site Title
   #
