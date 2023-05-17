@@ -49,6 +49,10 @@
   background-color: #f5f5f5;
 }
 
+a.btn--orange.btn--border-solid {
+  border: 2px solid #b84c00;
+}
+
 
 
 a.btn-border {
@@ -841,8 +845,8 @@ a.btn-border-red {
 
 .profile-picture-container .picture-border{
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 97px;
+  height: 100px;
   border-radius: 50%;
   border: 3px solid #007bff;
   z-index: 1;

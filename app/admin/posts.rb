@@ -1,5 +1,7 @@
 ActiveAdmin.register Post do
 
+ permit_params :content, :image, :user_id
+
  index do
    selectable_column
    id_column
