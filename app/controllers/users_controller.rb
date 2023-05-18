@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @user = current_user
+    @all_users = User.all
     @posts = Post.all
     @users = User.where(is_deleted: false).where.not(email: 'guest@example.com')
   end
@@ -48,6 +49,7 @@ class UsersController < ApplicationController
 
 
   def chat_history
+    @user = current_user
     rooms = current_user.user_rooms.pluck(:room_id) # ログイン中のユーザーの部屋情報を全て取得
     @chat_users = User.joins(:user_rooms).where(user_rooms: { room_id: rooms }).where.not(id: current_user)
   end

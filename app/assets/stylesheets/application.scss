@@ -12,13 +12,15 @@
  *
  .
  *= require_self
+ *= require_tree
+ #追加
  */
 /*
  */
 
 
- @import "custom";
- @import "active_admin";
+// @import "custom";
+// @import "active_admin";
 
 
 
