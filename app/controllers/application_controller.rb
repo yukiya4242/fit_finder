@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_current_user
+  #before_action :set_current_user
 
   def after_sign_in_path_for(resource)
     user_path(current_user)
@@ -43,10 +43,10 @@ end
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation])
   end
 
-  def set_current_user #どのページでも@userがcurrent_userとして使える様になる
-    # @current_user = User.find_by(id: session[:user_id])
-    @user = User.find(current_user)
-  end
+  # def set_current_user #どのページでも@userがcurrent_userとして使える様になる
+  #   # @current_user = User.find_by(id: session[:user_id])
+  #   @user = User.find(current_user)
+  # end
 
 
 end
