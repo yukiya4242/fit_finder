@@ -13,11 +13,11 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
          panel "Recentry Active Users" do
-           ul do
-             User.where("updated_at >= ?", 1.day.ago).map do |user|
-               li link_to(user.email, admin_user_path(user))
-             end
-           end
+          ul do
+            User.where("updated_at >= ?", 1.day.ago).map do |user|
+              li link_to(user.email, admin_admin_user_path(user))
+            end
+          end
          end
       end
     end
