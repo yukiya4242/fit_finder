@@ -1,14 +1,4 @@
 ActiveAdmin.setup do |config|
-
-   config.clear_stylesheets!
-   config.register_stylesheet 'active_admin'
-
-   config.clear_javascripts!
-   config.register_javascript 'active_admin'
-
-   config.root_to = 'dashboard#index'
-
-
   # == Site Title
   #
   # Set the title that is displayed on the main layout
@@ -341,7 +331,5 @@ ActiveAdmin.setup do |config|
   # By default, Active Admin uses Sprocket's asset pipeline.
   # You can switch to using Webpacker here.
   #
-  # config.use_webpacker = true
-  config.comments = false
-
+  config.use_webpacker = true
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config.merge(controllers: { sessions: 'admin_users/sessions' }) #adminでログインしたらダッシュボードに遷移するため
-  ActiveAdmin.routes(self)     #adminに必要なルーティングは全て自動生成
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   root to:  'homes#top'
   get 'homes/about' => 'homes#about'
 

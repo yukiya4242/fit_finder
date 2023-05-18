@@ -1,6 +1,4 @@
-ActiveAdmin.register AdminUser, as: "AdminUser" do
-  menu label: '管理ユーザー'
-
+ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
 
   index do
@@ -18,15 +16,6 @@ ActiveAdmin.register AdminUser, as: "AdminUser" do
   filter :sign_in_count
   filter :created_at
 
-  show do
-    attributes_table do
-      row :id
-      row :email
-      row :created_at
-      row :updated_at
-    end
-  end
-
   form do |f|
     f.inputs do
       f.input :email
@@ -35,4 +24,5 @@ ActiveAdmin.register AdminUser, as: "AdminUser" do
     end
     f.actions
   end
+
 end
