@@ -1,7 +1,7 @@
 ActiveAdmin.setup do |config|
 
    config.clear_stylesheets!
-   config.register_stylesheet 'active_admin'
+   config.register_stylesheet 'active_admin.scss'
 
    config.clear_javascripts!
    config.register_javascript 'active_admin'
