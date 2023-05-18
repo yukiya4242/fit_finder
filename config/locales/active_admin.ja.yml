@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        introduction: "自己紹介"
+        location: "お住まい"
+        is_deleted: "会員ステータス"
+        profile_picture: "プロフィール画像"
+      post:
+        user: "ユーザー名"
+        content: "投稿文"
+        created_at: "作成日"
+        updated_at: "更新日"
+        image: "投稿画像"
+        video: "投稿動画"
+      like:
+        created_at: "作成日"
+        updated_at: "更新日"
+        user: "ユーザー名"
+        post: "投稿"

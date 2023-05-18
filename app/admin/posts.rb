@@ -1,4 +1,5 @@
-ActiveAdmin.register Post do
+ActiveAdmin.register Post, as: "Post" do
+ menu label: '投稿'
 
  permit_params :content, :image, :user_id
 
