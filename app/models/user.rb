@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
 
 
-         validates :email,           presence: true
+         validates :email,           presence: true, uniqueness: true #同じアドレスは1つのみ
          validates :username,        presence: true
         # validates :profile_picture, presence: true
          validates :introduction,    presence: true

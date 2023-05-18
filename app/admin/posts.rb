@@ -7,6 +7,7 @@ ActiveAdmin.register Post do
    id_column
    column :user
    column :created_at
+   column :updated_at
    actions
 end
 
@@ -27,6 +28,16 @@ end
      row :content
      row :created_at
      row :updated_at
+     row :image do |post|
+      if post.image.attached?
+       image_tag url_for(post.image), width: '40%', height: '40%'
+      end
+     end
+     row :video do |post|
+      if post.video.attached?
+       video_tag url_for(post.video), controls: true, width: '40%', height: '40%'
+      end
+    end
  end
 end
 
