@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def liked_posts
-    @user = User.find(params[:id])
+    @user = current_user
     @liked_posts = @user.liked_posts
   end
 
@@ -96,6 +96,7 @@ class UsersController < ApplicationController
   end
 
   def search
+    @user = current_user
     @keyword = params[:keyword] #検索キーワドを取得
     @type    = params[:type]
     if @keyword.present? #もしキーワードが入力されていたら
