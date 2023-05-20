@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only:[:edit, :update]
-  before_action :set_user,           only:[:edit, :update]
+  # before_action :set_user,           only:[:edit, :update]
   before_action :check_user_status,  only:[:show]
 
 
-  def set_user
-    @user = User.find(params[:id])
-  end
+  # def set_user
+  #   @user = User.find(params[:id])
+  # end
 
   def index
     @user = current_user

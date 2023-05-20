@@ -42,9 +42,10 @@
         <%= link_to edit_user_path, class: 'user-info' do %>
           <i class="fas fa-user-edit fa-lg"></i>
         <% end %>
+        <p class="user-info">メールアドレス: <%= @user.email %></p>
       <% end %>
 
-      <p class="user-info">メールアドレス: <%= @user.email %></p>
+
       <p class="user-info">自己紹介: <%= @user.introduction %></p>
       <p class="user-info">お住まい: <%= @user.location %></p>
     </div>
