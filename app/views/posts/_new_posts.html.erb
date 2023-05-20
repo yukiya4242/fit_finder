@@ -1,9 +1,9 @@
 
 <h2>
   <% if current_or_guest_user.email == 'guest@example.com' %>
-    <%= link_to raw('<i class="fas fa-plus-circle"></i> 新しい投稿'), "#", class: "btn btn-custom-posts", id: "guest-alert" %>
+    <%= link_to raw('<i class="fas fa-plus-circle"></i> 新しい投稿'), "#", class: "btn btn-new-posts", id: "guest-alert" %>
   <% else %>
-    <%= link_to raw('<i class="fas fa-plus-circle"></i> 新しい投稿'), "#newPostModal", class: "btn btn-custom-posts", data: {toggle: "modal"} %>
+    <%= link_to raw('<i class="fas fa-plus-circle"></i> 新しい投稿'), "#newPostModal", class: "btn btn-new-posts", data: {toggle: "modal"} %>
   <% end %>
 </h2>
 

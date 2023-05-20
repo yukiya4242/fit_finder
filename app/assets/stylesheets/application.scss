@@ -22,10 +22,7 @@
 @import "custom";
 // @import "active_admin";
 
-// このaはなぜか本番環境でリンクが青のままなので強制的に黒くしています
-// a {
-//   color: #696969 !important;
-// }
+
 
 .top-image1 {
   background-image: image-url("top-image100.jpeg");
@@ -208,7 +205,7 @@ body {
 }
 
 
-.btn-custom-posts {
+.btn-new-posts {
   background-color: #ff9c5b;
   color: white;
   border-radius: 30px;
