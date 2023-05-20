@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const inputElement = document.getElementById('profile-picture-input');
+  // const inputElement = document.getElementById('profile-picture-input');
   const previewImage = document.querySelector('.profile-picture');
 
   console.log("inputElement:", inputElement);
@@ -14,5 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
       reader.readAsDataURL(event.target.files[0]);
     });
   } else {
+    console.error('Either profile-picture-input or profile-picture element not found');
   }
 });
