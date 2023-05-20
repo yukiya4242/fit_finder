@@ -33,8 +33,8 @@
     <div class="text-center">
         <h3 class="user-info"><%#= @user.username %></h3>
           <div class="follow-info">
-            <p class="user-info"><%= link_to "フォロー: #{@user.following.count}", following_user_path(@user) %></p>
-            <p class="user-info"><%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user) %></p>
+            <p class="user-info"><%= link_to "Follows: #{@user.following.count}", following_user_path(@user) %></p>
+            <p class="user-info"><%= link_to "Followers: #{@user.followers.count}", followers_user_path(@user) %></p>
           </div>
         <%= render 'chats/info' %>
 
@@ -46,7 +46,7 @@
 
       <p class="user-info">メールアドレス: <%= @user.email %></p>
       <p class="user-info">自己紹介: <%= @user.introduction %></p>
-      <p class="user-info">場所: <%= @user.location %></p>
+      <p class="user-info">お住まい: <%= @user.location %></p>
     </div>
   </div>
 

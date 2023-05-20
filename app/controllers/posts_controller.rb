@@ -33,26 +33,26 @@ class PostsController < ApplicationController
     puts "Updating post with params: #{post_params.inspect}"
     if @post.update(post_params)
     redirect_to post_path(@post)
-  else
+    else
     render :edit
-  end
+    end
   end
 
   def show
   @post = Post.find_by(id: params[:id])
   if @post.nil?
-    flash[:alert] = "投稿が見つかりません"
     redirect_to posts_path
   else
     @comment = Comment.new
   end
-end
+  end
 
 
 
   def destroy
     post = Post.find(params[:id])
     post.destroy
+    flash[:notice] = "投稿を削除しました"
     redirect_to post_path
   end
 

@@ -1,22 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :set_current_user
 
-  def after_sign_in_path_for(resource)
-    user_path(current_user)
-  end
-
-  def after_sign_up_path_for(resorces)
-    user_path(current_user)
-  end
-
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(resource) #管理者ならダッシュボード、それ以外はマイページに遷移
     if resource.is_a?(AdminUser)
     admin_dashboard_path
-  else
-    root_path
+    else
+    user_path(current_user)
+    end
   end
-end
 
   def after_sign_out_path_for(resource)
     root_path
@@ -42,10 +33,6 @@ end
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation])
   end
-
-  # def set_current_user #どのページでも@userがcurrent_userとして使える様になる
-  #   # @current_user = User.find_by(id: session[:user_id])
-  # end
 
 
 end

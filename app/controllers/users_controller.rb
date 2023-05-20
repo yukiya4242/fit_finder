@@ -26,12 +26,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user = User.update(user_params)
-    redirect_to user_path, notice: "ユーザーの情報が更新されました。"
-    else
-    render :edit
-    end
+  @user = User.find(params[:id])
+  if @user.update(update_params)
+    redirect_to @user
+  else
+    p @user.errors
+    render 'edit'
   end
+  end
+
 
   def liked_posts
     @user = current_user
@@ -121,7 +124,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation)
+    params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation, :current_password)
   end
 
   def update_params

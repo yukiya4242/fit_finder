@@ -19,11 +19,13 @@
   object-position: center;
 }
 
-.profile-picture-container {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 20px;
+.profile-picture-container .picture-border {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+    z-index: 1;
 }
 
 
@@ -64,7 +66,7 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :場所, class: "form-label" %>
+          <%= f.label :お住まい, class: "form-label" %>
           <%= f.text_field :location, class: "form-control", autofocus: true, autocomplete: "location" %>
         </div>
          <div class="form-group">

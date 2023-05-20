@@ -19,7 +19,7 @@
                   <!-- ユーザーが存在した場合の処理 -->
                   <div class="user-list">
                     <% @users.each do |user| %>
-                      <% unless user.is_deleted %>
+                      <% unless user.is_deleted ||user == current_user %>
                         <!-- ゲストユーザーを除外 -->
 
                         <div class="user-item">
@@ -43,7 +43,7 @@
                               <% if current_user.guest? %>
                                 <button onclick="alert('ゲストユーザーはこの操作はできません')" class='follow-button'>Follow</button>
                               <% elsif current_user.following?(user) %>
-                                <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}" %>
+                                <%= button_to "Unollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}" %>
                                 <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}", style: 'display:none;' %>
                               <% else %>
                                 <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}" %>
