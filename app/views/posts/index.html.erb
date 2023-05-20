@@ -34,10 +34,10 @@
                                 <%= render 'likes', post: post %>
                                 <% if current_user == post.user %>
                                   <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link" do %>
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit" style="color: #FFE4C4;"></i>
                                   <% end %>
                                   <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "icon-button btn btn-link" do %>
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash" style="color: #FFE4C4;"></i>
                                   <% end %>
                                 <% end %>
                               </div>
