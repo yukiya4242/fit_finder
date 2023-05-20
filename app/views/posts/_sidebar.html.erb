@@ -49,7 +49,7 @@
     <% end %>
 
     <li class="nav-item mb-3">
-      <%= link_to liked_posts_user_path(@user), class: 'nav-link' do %>
+      <%= link_to liked_posts_user_path(current_user), class: 'nav-link' do %>
         <i class="fas fa-heart fa-lg"></i> いいね一覧
       <% end %>
     </li>
