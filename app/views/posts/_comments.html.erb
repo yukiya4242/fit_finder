@@ -1,5 +1,6 @@
+<div id="comments">
 <% post.comments.each do |comment| %>
-  <div class="comment-container">
+  <div class="comment-container" id="comment_<%= comment.id%>" >
     <div class="d-flex justify-content-between align-items-start">
       <div>
         <p class="comment-header"><%= comment.user.username %>:</p>
@@ -7,7 +8,8 @@
       </div>
       <% if current_user == comment.user %>
         <div>
-          <%= link_to post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
+          <%= link_to post_comment_path(post, comment), method: :delete, remote: true,
+          data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
             <i class="fas fa-trash" style="color: #FF6347;"></i>
           <% end %>
         </div>
@@ -15,8 +17,9 @@
     </div>
   </div>
 <% end %>
+</div>
 
-<%= form_with(model: [post, Comment.new], local: true) do |f| %>
+<%= form_with(model: [post, Comment.new], local: false) do |f| %>
   <%= f.hidden_field :post_id, value: post.id %>
 
   <% if current_or_guest_user.email == 'guest@example.com' %>
