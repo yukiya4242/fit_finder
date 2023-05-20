@@ -7,7 +7,9 @@
       </div>
       <% if current_user == comment.user %>
         <div>
-          <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" %>
+          <%= link_to post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
+            <i class="fas fa-trash" style="color: #FF6347;"></i>
+          <% end %>
         </div>
       <% end %>
     </div>
