@@ -4,7 +4,7 @@
       <div class="message-body">
         <%= chat.message %>
 
-        <% if chat.image.attached? %>
+        <% if chat.image.attached? && chat.image.blob.content_type.start_with?('image/') %>
           <div class='file-container'>
             <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto', class: 'rounded') %>
             <%= button_to '保存', saved_files_path(chat_id: chat.id), method: :post, remote: true, class: 'save-btn' %>

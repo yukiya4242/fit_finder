@@ -51,6 +51,7 @@ class ChatsController < ApplicationController
         end
   else
      flash[:alert] = "メッセージの送信に失敗しました。"
+     Rails.logger.debug @chat.errors.full_messages
     respond_to do |format|
       format.js { render :create_failed }
       end
