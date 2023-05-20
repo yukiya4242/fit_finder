@@ -24,7 +24,7 @@
                               <% end %>
                             </div>
                             <div class="ml-3">
-                              <h6 class="post-header"><%= link_to post.user.username, user_path(post.user) %></h6>
+                              <h6 class="post-header text-dark"><%= link_to post.user.username, user_path(post.user) %></h6>
                               <p class="post-content"><%= post.content %></p>
                               <%= image_tag post.image, class: "post-image", height: 200, width: 200 if post.image.attached? %>
                             </div>
