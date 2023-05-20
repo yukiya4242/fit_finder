@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
   before_action :reject_non_related, only: [:show]
 
+
   def show
     @user = User.find(params[:id]) #チャットする相手は誰？
     rooms = current_user.user_rooms.pluck(:room_id) #ログイン中のユーザーの部屋情報を全て取得
@@ -66,6 +67,19 @@ class ChatsController < ApplicationController
   end
 
 
+#   def destroy
+#   @chat = Chat.find(params[:id])
+#   if @chat.user_id == current_user.id
+#     @chat.destroy
+#     flash[:success] = "メッセージを削除しました。"
+#     redirect_to room_path(@chat.room)
+#   else
+#     flash[:alert] = "自分のメッセージのみ削除できます。"
+#     redirect_to room_path(@chat.room)
+#   end
+# 　end
+
+
 
   private
 
@@ -73,6 +87,7 @@ class ChatsController < ApplicationController
     def chat_params
       params.require(:chat).permit(:message, :room_id, :image, :video)
     end
+
 
 
     def reject_non_related

@@ -472,6 +472,11 @@ body {
   color: #D3D3D3;
 }
 
+.chat-delete {
+  align-self :flex-end;
+  margin-bottom: 0;
+}
+
 .other .message-body {
   align-self: flex-start;
   background-color: #FF8C00;

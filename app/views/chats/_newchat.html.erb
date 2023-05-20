@@ -21,9 +21,12 @@
         <% end %>
       </div>
 
+
       <% if chat.read %>
         <span class="read">既読</span>
       <% end %>
+
+      <p class="chat-delete"><%#= link_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" } %></p>
 
       <p class="chat-timestamp"><%= chat.created_at.strftime("%Y-%m-%d %H:%M")%></p>
     </div>
@@ -71,4 +74,6 @@
     statusElement.textContent = '保存済み';
   });
 });
+
+
 </script>
