@@ -15,7 +15,7 @@
         <h1 class="text-center mb-4 user-info"><%= render 'posts/new_posts', post: @post %></h1>
         <% end %>
         <div class="d-flex justify-content-center user-info-row">
-          <%= image_tag url_for(@user.profile_picture), class: 'profile-picture' if @user.profile_picture.attached? %>
+          <%= image_tag url_for(@user.profile_picture), id: 'profile-picture-input', class: 'profile-picture' if @user.profile_picture.attached? %>
         </div>
         <div class="d-flex justify-content-center mt-2">
           <h3 class="user-info mr-2 mt-2"><%= @user.username %></h3>

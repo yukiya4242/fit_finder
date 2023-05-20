@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // const inputElement = document.getElementById('profile-picture-input');
+  const inputElement = document.getElementById('profile-picture-input');
   const previewImage = document.querySelector('.profile-picture');
+  
 
   console.log("inputElement:", inputElement);
   console.log("previewImage:", previewImage);
