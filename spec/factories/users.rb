@@ -2,7 +2,7 @@
 FactoryBot.define do
   factory :user do
     username { "TestUser" }
-    email { "test@example.com" }
+    sequence(:email) { |n| "test#{n}@example.com" } #テストのの度ランダムでアドレスが生成される。バリデーションでエラーにならないようにする
     password { "password" }
     password_confirmation { "password" }
     introduction { "This is a test introduction" }
