@@ -13,9 +13,9 @@ class Chat < ApplicationRecord
   validates :message, length: { in: 1..140 }, allow_blank: true
   validate :message_or_media_present?
 
-  def read!
-    self.update(read: true)
-  end
+  # def read!
+  #   self.update(read: true)
+  # end
 
   private
 
