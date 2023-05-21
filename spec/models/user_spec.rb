@@ -136,7 +136,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-
   describe '#create_notification_follow!' do
     let(:current_user) { FactoryBot.create(:user) }
     let(:user) { FactoryBot.create(:user) }

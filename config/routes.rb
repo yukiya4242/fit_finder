@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       get    :following, :followers
       post   :follow
       delete :unfollow
-      delete "/users/:id/hide" => "users#hide", as: 'users_hide'
+      delete :hide, as: 'users_hide'
     end
     collection do
       get    :search
