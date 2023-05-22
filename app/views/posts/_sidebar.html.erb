@@ -21,7 +21,7 @@
       <% end %>
     </li>
 
-   <% if current_user %>
+   <% if current_user && !current_user.guest? %>
     <li class="nav-item mb-3">
       <%= link_to user_path(current_user), class: 'nav-link' do %>
         <i class="fas fa-user fa-lg"></i> マイページ
@@ -29,7 +29,7 @@
     </li>
     <% end %>
 
-    <% if current_user&.guest? %>
+    <% if current_user && !current_user.guest? %>
       <li class="nav-item mb-3">
         <%= link_to chat_history_user_path(current_user), class: 'nav-link' do %>
           <i class="fab fa-telegram-plane fa-lg"></i> メッセージ
@@ -37,7 +37,7 @@
       </li>
     <% end %>
 
-    <% if current_user&.guest? %>
+    <% if current_user && !current_user.guest? %>
       <li class="nav-item mb-3">
         <%= link_to notifications_path(current_user), class: 'nav-link notification-badge' do %>
           <i class="fas fa-bell fa-lg"></i>&nbsp; 通知
@@ -50,7 +50,7 @@
       </li>
     <% end %>
 
-    <% if current_user&.guest? %>
+    <% if current_user && !current_user.guest? %>
     <li class="nav-item mb-3">
       <%= link_to liked_posts_user_path(current_user), class: 'nav-link' do %>
         <i class="fas fa-heart fa-lg"></i> いいね一覧

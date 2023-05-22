@@ -279,6 +279,55 @@ end
     end
   end
 
+    describe "GET #search" do
+    context 'when searching for users' do
+      before do
+        get search_users_path, params: { keyword: user.username, type: 'user' }
+      end
+
+      it 'returns a successful response' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'assigns @users' do
+        expect(assigns(:users)).to eq([user]) #@usersに検索にユーザーが入っているか確認。
+      end
+    end
+
+    context 'when searching for posts' do
+      let(:user) { create(:user) }
+      let(:post) { create(:post, content: 'test content') }
+      before do
+        sign_in user
+        get search_users_path, params: { keyword: post.content, type: 'post' }
+      end
+
+      it 'returns a successful response' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'assigns @posts' do
+        expect(assigns(:posts)).to eq([post]) # @postsに検索した内容が入っているか確認
+      end
+    end
+
+    context 'when keyword is not present?' do
+      before do
+        get search_users_path
+      end
+
+      it 'returns a successful response' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'assigns @users and @posts' do
+        expect(assigns(:users)).to eq(User.all)
+        expect(assigns(:posts)).to eq(Post.all)
+      end
+    end
+  end
+
+
 
 end
 
@@ -336,4 +385,10 @@ end
   #     end
   #   end
   # end
+
+
+
+
+
+
 
