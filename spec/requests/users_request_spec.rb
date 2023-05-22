@@ -226,7 +226,58 @@ describe "DELETE #unfollow" do
   end
 end
 
+  describe "GET #following" do
+    context "when user is authenticated" do
+      before do
+        sign_in user
+        user.follow(other_user)
+      end
 
+      it "returns a successful response" do
+        get following_user_path(user.id)
+        expect(response).to have_http_status(:success)
+      end
+
+      it "renders 'show_follow'" do
+        get following_user_path(user.id)
+        expect(response).to render_template('show_follow')
+      end
+    end
+
+    context "when user is not authenticated" do
+      it "redirects to the login page" do
+        get following_user_path(user.id)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+
+  describe "GET #followers" do
+    context "when user is authenticated" do
+      before do
+        sign_in user
+        other_user.follow(user)
+      end
+
+      it "returns a succsseful response" do
+        get followers_user_path(user.id)
+        expect(response).to have_http_status(:success)
+      end
+
+      it "renders 'show_follow' " do
+        get followers_user_path(user.id)
+        expect(response).to render_template('show_follow')
+      end
+    end
+
+    context "when user is not authenticated" do
+      it "redirect to the login page" do
+        get followers_user_path(user.id)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
 
 
 end

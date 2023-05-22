@@ -60,6 +60,17 @@ class User < ApplicationRecord
     following.find_by(id: other_user.id).present?
   end
 
+   # ユーザーをフォローする
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id) unless self.following?(other_user)
+  end
+
+  # ユーザーのフォローを解除する
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy if self.following?(other_user)
+  end
+
+
   #退会ユーザーはログインできなくする
   def active_for_authentication?
     super && (self.is_deleted == false)

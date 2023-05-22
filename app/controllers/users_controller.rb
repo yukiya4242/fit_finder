@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only:[:edit, :update, :index, :liked_posts, :chat_history, :follow, :unfollow]
+  before_action :authenticate_user!, only:[:edit, :update, :index, :liked_posts, :chat_history, :follow, :unfollow, :following, :followers]
   # before_action :set_user,           only:[:edit, :update]
   before_action :check_user_status,  only:[:show]
 
@@ -96,6 +96,8 @@ class UsersController < ApplicationController
     @users = @user.followers
     render 'show_follow'
   end
+
+
 
   def search
     @user = current_user
