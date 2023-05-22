@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only:[:edit, :update]
+  before_action :authenticate_user!, only:[:edit, :update, :index]
   # before_action :set_user,           only:[:edit, :update]
   before_action :check_user_status,  only:[:show]
 
@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # binding.pry
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
   end
