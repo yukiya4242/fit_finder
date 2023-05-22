@@ -19,6 +19,7 @@ RSpec.configure do |config|
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Rails.application.routes.url_helpers
 
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
