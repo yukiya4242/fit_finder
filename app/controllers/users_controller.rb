@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only:[:edit, :update, :index]
+  before_action :authenticate_user!, only:[:edit, :update, :index, :liked_posts]
   # before_action :set_user,           only:[:edit, :update]
   before_action :check_user_status,  only:[:show]
 
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def liked_posts
     @user = current_user
-    @liked_posts = @user.liked_posts
+    @liked_posts = @user&.liked_posts
   end
 
 

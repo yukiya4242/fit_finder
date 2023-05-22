@@ -94,4 +94,54 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+
+  describe "GET #liked_posts" do
+    context "when user is authenticated" do
+      let(:user)  { create(:user) }
+      let(:post1) { create(:post) }
+      let(:post2) { create(:post) }
+
+      before do
+        user.likes.create(post_id: post1.id)
+        sign_in user
+        get liked_posts_user_path(user)
+      end
+
+      it "responds successfuly" do
+        expect(response).to be_successful
+      end
+
+      it "returns a 200 response" do
+        expect(response).to have_http_status "200"
+      end
+
+      it "assigns the requested liked_posts to @liked_posts" do
+        expect(assigns(:liked_posts)).to match_array(user.liked_posts)
+      end
+    end
+
+      context "when user is not authenticated" do
+        it "redirects to login page" do
+          sign_out user
+          get liked_posts_user_path(user)
+          expect(response).to redirect_to new_user_session_path
+        end
+      end
+    end
+
+    describe "PATCH #hide" do
+      let(:user) { create(:user) }
+
+      context "when user is authenticated" do
+        before do
+          sign_in user
+          patch hide_user_path(user)
+          expect(response).to redirect_to new_user_session_path
+        end
+      end
+    end
+
+
+
 end
