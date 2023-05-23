@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'homes/about' => 'homes#about'
 
 
+
   devise_for :users, controllers: {
     session:       'users/sessions',
     registrations: 'users/registrations'

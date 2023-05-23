@@ -60,11 +60,11 @@ class ChatsController < ApplicationController
   end
   end
 
-  def read
-    chat = Chat.find(params[:id])
-    chat.read! if chat.receiver == current_user && !chat.read
-    head :ok
-  end
+  # def read
+  #   chat = Chat.find(params[:id])
+  #   chat.read! if chat.receiver == current_user && !chat.read
+  #   head :ok
+  # end
 
 
 #   def destroy
