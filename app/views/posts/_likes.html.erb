@@ -8,4 +8,7 @@
     <i class="fas fa-heart" onclick="alert('ゲストユーザーはこの操作はできません')"></i>
   <% end %>
   <span class="like-count"><%= post.likes.count %></span>
+  <%= link_to post_path(post.id) do %>
+  <i class="fas fa-comments"></i> <%= post.comments.count %>
+<% end %>
 </p>

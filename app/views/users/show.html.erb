@@ -20,7 +20,7 @@
         <div class="d-flex justify-content-center mt-2">
           <h3 class="user-info mr-2 mt-2"><%= @user.username %></h3>
           <% if current_user.present? && !current_user.guest? && current_user != @user && @user.present? %>
-            <div class="d-flex align-items-center mb-3 pb-3 ml-3" >
+            <div class="d-flex align-items-center pb-2 ml-3" >
               <% if current_user.following.include?(@user) %>
                 <span><%= button_to "unfollow", unfollow_user_path(@user), method: :delete, class: 'follow-btn small-btn' %></span>
               <% else %>

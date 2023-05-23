@@ -580,6 +580,7 @@ body {
   max-height: 50%;
   height: auto;
   margin-bottom: 1rem;
+  border-radius: 15px;
 }
 
 
@@ -595,13 +596,13 @@ body {
 }
 .btn-custom {
   background-color: #ffcc99;
-  border: none;
+  border-radius: 60px;
   color: #ffffff;
   transition: all 0.3s;
 }
 .btn-custom:hover {
-  background-color: #ffb366;
-  color: #ffffff;
+  background-color: #87CEFA;
+  color: black;
 }
 .icon-button {
   color: #ffcc99;
@@ -615,12 +616,12 @@ body {
 // コメント欄レイアウト
 
 .comment-container {
-  background-color: #fff3e6;
+  background-color: #F0F8FF;
   padding: 0.25rem;
-  border-radius: 8px;
+  border-radius: 15px;
   margin-bottom: 1rem;
-  border: 3px solid #e1e4e8;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  border: 1px solid #e1e4e8;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .comment-header {
@@ -905,5 +906,15 @@ a.btn-border-red {
   .img-fluid {
     max-width: 50px;
     max-height: 80%;
+  }
+}
+
+.img-thumbnail {
+  border-radius: 15px !important;
+}
+
+@media (max-width: 767px) {
+  .post-video {
+    max-width: 50%;
   }
 }
