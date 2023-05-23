@@ -37,4 +37,49 @@ RSpec.describe PostsController, type: :request do
       end
     end
   end
+  
+  describe 'GET #index' do
+    it 'returns a successful response' do
+      get '/posts'
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET #edit' do
+    it 'returns a successful response' do
+      get "/posts/#{post.id}/edit"
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'PATCH #update' do
+    let(:valid_params) { { post: attributes_for(:post) } }
+    let(:invalid_params) { { post: attributes_for(:post, title: '') } }
+
+    it 'updates the post with valid parameters' do
+      patch "/posts/#{post.id}", params: valid_params
+      expect(response).to redirect_to(post_path(post))
+    end
+
+    it 'does not update the post with invalid parameters' do
+      patch "/posts/#{post.id}", params: invalid_params
+      expect(response).to render_template(:edit)
+    end
+  end
+
+    describe 'GET #show' do
+      it 'returns a successful response' do
+        get "/posts/#{post.id}"
+        expect(response).to be_successful
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'deletes the post' do
+        delete "/posts/#{post.id}"
+        expect(response).to redirect_to(posts_path)
+        expect(flash[:notice]).to eq '投稿を削除しました'
+      end
+    end
+  end
 end
