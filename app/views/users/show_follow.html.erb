@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="follow-unfollow-buttons">
-                              <% if user_signed_in? %>
+                              <% if user_signed_in? && current_user != user %>
                                 <% if current_user.guest? %>
                                   <button onclick="alert('ゲストユーザーはこの操作はできません')" class='follow-button'>Follow</button>
                                 <% elsif current_user.following?(user) %>
