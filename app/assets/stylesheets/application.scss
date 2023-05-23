@@ -854,6 +854,7 @@ a.btn-border-red {
   }
 }
 
+
 .profile-picture-container .picture-border{
   position: absolute;
   width: 97px;
@@ -897,3 +898,12 @@ a.btn-border-red {
   }
 }
 
+
+// レスポンシブ
+
+@media (max-width: 767px) {
+  .img-fluid {
+    max-width: 50px;
+    max-height: 80%;
+  }
+}
