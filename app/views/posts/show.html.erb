@@ -3,39 +3,38 @@
     <%= render 'sidebar' %>
     <div class="col-md-6 offset-md-1">
       <div class="card shadow-lg mb-5">
-        <div class="card-header bg-dark text-white text-center">
-          <h3 class="my-2"><i class="fas fa-info-circle"></i> 投稿詳細</h3>
+        <div class="card-header text-dark text-center">
+          <div class="d-flex align-items-center">
+            <% if @post.user.profile_picture.attached? %>
+              <%= image_tag @post.user.profile_picture, size: "60x60", class: 'rounded-circle mr-2' %>
+            <% end %>
+            <h3 class="my-2"><%= @post.user.username %></h3>
+          </div>
         </div>
         <div class="card-body">
+          <div class="form-group">
+            <p class="lead"><%= @post.content %></p>
+          </div>
+          <% if @post.image.attached? %>
+            <div class="form-group">
+              <%= image_tag @post.image, class: 'img-fluid rounded' %>
+            </div>
+          <% end %>
+          <%= render 'likes', post: @post %>
           <div class="mb-4">
             <h5>
               <i class="far fa-calendar-alt"></i>
-              <span class="text-muted">作成日時: <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+              <span class="text-muted">投稿日時: <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+
             </h5>
           </div>
-          <div class="mb-4">
-            <h5>
-              <i class="fas fa-edit"></i>
-              <span class="text-muted">更新日時: <%= @post.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
-            </h5>
-          </div>
-          <div class="form-group">
-            <h4 class="text-center">投稿文</h4>
-            <p class="text-center lead"><%= @post.content %></p>
-          </div>
-          <% if @post.image.attached? %>
-            <div class="form-group text-center">
-              <h4 class="mb-3"></h4>
-              <%= image_tag @post.image, size: "300x300", class: 'rounded img-thumbnail' %>
-            </div>
-          <% end %>
           <% if current_user == @post.user %>
-          <div class="form-group">
-            <%= link_to '編集', edit_post_path(@post.id), class: 'btn btn-primary btn-block' %>
-          </div>
-          <div class="form-group">
-            <%= link_to '削除', post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: 'btn btn-danger btn-block' %>
-          </div>
+           <%= link_to edit_post_path(@post.id), class: "btn btn-link" do %>
+                <i class="fas fa-edit" style="color: #FFA07A;"></i>
+              <% end %>
+              <%= link_to post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "btn btn-link" do %>
+                <i class="fas fa-trash" style="color: #FFA07A;"></i>
+              <% end %>
           <% end %>
         </div>
       </div>
