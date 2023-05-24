@@ -10,6 +10,7 @@ RSpec.describe LikesController, type: :request do
 
   describe 'POST #create' do
     it 'creates a new like' do
+      sign_in user
       expect {
         post post_likes_path(post)
       }.to change(Like, :count).by(1)
@@ -20,6 +21,7 @@ RSpec.describe LikesController, type: :request do
     let!(:like) { create(:like, user: user, post: post) }
 
     it 'deletes the like' do
+      sign_in user
       expect {
         delete post_like_path(post, like)
       }.to change(Like, :count).by(-1)

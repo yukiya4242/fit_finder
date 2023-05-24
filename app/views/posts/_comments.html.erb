@@ -7,8 +7,7 @@
     <% if current_user.profile_picture.attached? %>
       <%= image_tag current_user.profile_picture, size: "50x50", class: 'rounded-circle' %>
     <% end %>
-    <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control-comment" %>
-    <%= f.submit "コメントする", class: "btn btn-custom guest-action" %>
+    <%= f.text_field :content, placeholder: "ゲストユーザーはコメントできません", class: "form-control-comment" %>
   </div>
 </div>
 
@@ -39,7 +38,7 @@
       </div>
       <% if current_user == comment.user %>
         <div class="ml-auto mt-auto">
-          <%= link_to post_comment_path(post, comment), method: :delete, remote: true,
+          <%= link_to post_comment_path(@post, comment), method: :delete, remote: true,
           data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
             <i class="fas fa-trash" style="color: #FF6347;"></i>
           <% end %>

@@ -13,7 +13,7 @@ RSpec.describe RelationshipsController, type: :request do
       it 'follows the other user and creates a notification' do
         expect {
           post '/relationships', params: { relationship: { following_id: other_user.id } }, xhr: true
-        }.to change(user.followings, :count).by(1)
+        }.to change(user.following, :count).by(1)
         .and change(other_user.followers, :count).by(1)
         .and change(other_user.notifications, :count).by(1)
 

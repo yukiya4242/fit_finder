@@ -21,12 +21,13 @@ RSpec.describe PostsController, type: :request do
       end
 
       it 'does not create a new post with invalid parameters' do
+        invalid_params = { post: { content: "" } }
         expect {
-          post '/posts', params: valid_params
+          post '/posts', params: invalid_params
         }.not_to change(Post, :count)
 
         expect(flash[:danger]).to eq '投稿に失敗しました。もう一度お試しください'
-        expect(response).to redirect_to(new_post_path)
+        expect(response).to redirect_to(posts_path)
       end
     end
 
@@ -39,47 +40,67 @@ RSpec.describe PostsController, type: :request do
   end
 
   describe 'GET #index' do
+    let(:user) { create(:user) }
     it 'returns a successful response' do
+      sign_in user
       get '/posts'
       expect(response).to be_successful
     end
   end
 
   describe 'GET #edit' do
+    let(:user) { create(:user) }
+    let(:post) { create(:post, user: user) }
+
     it 'returns a successful response' do
+      sign_in user
       get "/posts/#{post.id}/edit"
       expect(response).to be_successful
     end
   end
 
   describe 'PATCH #update' do
-    let(:valid_params) { { post: attributes_for(:post) } }
-    let(:invalid_params) { { post: attributes_for(:post, title: '') } }
+    let(:user) { create(:user) }
+    let(:post) { create(:post, user: user) }
+    let(:valid_params) { { post: { content: 'New Content' } } }
+    let(:invalid_params) { { post: { content: "" } } }
 
     it 'updates the post with valid parameters' do
+      sign_in user
       patch "/posts/#{post.id}", params: valid_params
       expect(response).to redirect_to(post_path(post))
+      expect(post.reload.content).to eq 'New Content'
     end
 
     it 'does not update the post with invalid parameters' do
+      sign_in user
       patch "/posts/#{post.id}", params: invalid_params
       expect(response).to render_template(:edit)
+      expect(post.reload.content).not_to eq ''
     end
   end
 
-    describe 'GET #show' do
-      it 'returns a successful response' do
-        get "/posts/#{post.id}"
-        expect(response).to be_successful
-      end
-    end
+  describe 'GET #show' do
+    let(:user) { create(:user) }  # Create a test user
+    let(:post) { create(:post, user: user) }  # Add post
 
-    describe 'DELETE #destroy' do
-      it 'deletes the post' do
-        delete "/posts/#{post.id}"
-        expect(response).to redirect_to(posts_path)
-        expect(flash[:notice]).to eq '投稿を削除しました'
-      end
+    it 'returns a successful response' do
+      sign_in user
+      get "/posts/#{post.id}"
+      expect(response).to be_successful
     end
   end
+
+  describe 'DELETE #destroy' do
+    let(:user) { create(:user) }  # Create a test user
+    let(:post) { create(:post, user: user) }  # Add post
+
+    it 'deletes the post' do
+      sign_in user
+      delete "/posts/#{post.id}"
+      expect(response).to redirect_to(posts_path)
+      expect(Post.exists?(post.id)).to be_falsey  # Check post does not exist
+    end
+  end
+end
 

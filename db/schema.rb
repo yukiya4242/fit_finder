@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_013628) do
+ActiveRecord::Schema.define(version: 2023_05_24_064534) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2023_05_17_013628) do
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "read", default: false
     t.integer "sender_id"
     t.integer "receiver_id"
   end

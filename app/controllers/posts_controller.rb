@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, expect: [:index, :show]
+  before_action :authenticate_user!, expect: [:index, :show, :new]
   before_action :check_guest_user, only: [:edit, :update, :destroy]
 
   def new
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     post.destroy
     flash[:notice] = "投稿を削除しました"
-    redirect_to post_path
+    redirect_to posts_path
   end
 
   private

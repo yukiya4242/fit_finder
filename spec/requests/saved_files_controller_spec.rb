@@ -19,18 +19,16 @@ RSpec.describe SavedFilesController, type: :request do
       end
     end
 
-    context 'when user is not authenticated' do
-      before do
-        sign_out user
-      end
+       context 'when user is not authenticated' do
+        it 'does not allow the user to save the chat' do
+          sign_out user
 
-      it 'does not allow the user to save the chat' do
-        expect {
-          post "/saved_files", params: { chat_id: chat.id }, xhr: true
-        }.not_to change(user.saved_files, :count)
+          expect {
+            post "/saved_files", params: { chat_id: chat.id }, xhr: true
+          }.not_to change(SavedFile, :count)  # SavedFileの数を数える
 
-        expect(response).to have_http_status(:unauthorized)  # response should be 'unauthorized' because user is not signed in
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
-    end
   end
 end
