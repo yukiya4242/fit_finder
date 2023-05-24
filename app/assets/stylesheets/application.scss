@@ -182,8 +182,20 @@ body {
 
 .form-control,
 .form-control:focus {
-  border-radius: 10px;
+  border: 1px solid #ADD8E6;
 }
+
+.form-control-comment {
+  border: none;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+
 
 .custom-file-input,
 .custom-file-input:focus {
@@ -191,7 +203,8 @@ body {
 }
 
 .btn-custom {
-  margin-left: 25px;
+  margin-left: 5px;
+  margin-bottom: 7px;
   border-radius: 10px;
   background-color: #007bff;
   color: white;
@@ -203,6 +216,13 @@ body {
      color: white;
    }
 }
+
+// .user-comment {
+//   border: 0.5px solid #F5F5F5;
+// }
+// #comments {
+//   border: none;
+// }
 
 
 .btn-new-posts {
@@ -615,8 +635,13 @@ body {
 
 // コメント欄レイアウト
 
+.img-fluid-comment {
+  max-width: 10%;
+  height: auto;
+}
+
 .comment-container {
-  background-color: #F0F8FF;
+  // background-color: #F0F8FF;
   padding: 0.25rem;
   border-radius: 15px;
   margin-bottom: 1rem;
@@ -670,9 +695,9 @@ body {
   font-size: 12px;
 }
 
-.btn-likes {
-  margin-left: 20px;
-}
+// .btn-likes {
+//   margin-left: 20px;
+// }
 
 /* アニメーション */
 @keyframes heart-beat {
@@ -800,7 +825,7 @@ a.btn-border-red {
 }
 
 .post-tops {
-  max-width: 50%;
+  max-width: 100%;
 }
 
 .post-side {

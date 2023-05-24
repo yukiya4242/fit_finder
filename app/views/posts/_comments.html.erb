@@ -1,34 +1,42 @@
 <%= form_with(model: [@post, Comment.new], local: false) do |f| %>
   <%= f.hidden_field :@post_id, value: @post.id %>
 
+<div class="user-comment">
   <% if current_or_guest_user.email == 'guest@example.com' %>
   <div class="form-group d-flex">
     <% if current_user.profile_picture.attached? %>
       <%= image_tag current_user.profile_picture, size: "50x50", class: 'rounded-circle' %>
     <% end %>
-    <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control" %>
+    <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control-comment" %>
     <%= f.submit "コメントする", class: "btn btn-custom guest-action" %>
   </div>
+</div>
 
   <% else %>
+<div class="user-comment">
   <div class="form-group d-flex">
+    <% if current_user.profile_picture.attached? %>
     <%= image_tag current_user.profile_picture, size: "50x50", class: 'rounded-circle' %>
-    <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control" %>
+    <% end %>
+    <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control-comment ml-2 mt-1" %>
     <%= f.submit "コメントする", class: "btn btn-custom" %>
+    </div>
   </div>
 <% end %>
 <% end %>
+
 
 <div id="comments">
 <% @post.comments.each do |comment| %>
   <div class="comment-container ml-3" id="comment_<%= comment.id%>" >
-    <div class="d-flex justify-content-between align-items-start">
+    <div class="d-flex align-items-start">
+        <%= image_tag url_for(comment.user.profile_picture), class: 'img-fluid-comment rounded-circle mr2' if comment.user.profile_picture.attached? %>
       <div>
-        <p class="comment-header"><%= comment.user.username %>:</p>
-        <p class="comment-content"><%= comment.content %></p>
+        <p class="comment-header ml-3"><%= link_to comment.user.username, user_path(comment.user) %></p>
+        <p class="comment-content ml-3"><%= comment.content %></p>
       </div>
       <% if current_user == comment.user %>
-        <div>
+        <div class="ml-auto mt-auto">
           <%= link_to post_comment_path(@post, comment), method: :delete, remote: true,
           data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
             <i class="fas fa-trash" style="color: #FF6347;"></i>
@@ -51,5 +59,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   });
 });
-
 </script>

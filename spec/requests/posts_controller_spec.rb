@@ -37,7 +37,7 @@ RSpec.describe PostsController, type: :request do
       end
     end
   end
-  
+
   describe 'GET #index' do
     it 'returns a successful response' do
       get '/posts'
@@ -82,4 +82,4 @@ RSpec.describe PostsController, type: :request do
       end
     end
   end
-end
+
