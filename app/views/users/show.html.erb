@@ -65,9 +65,9 @@
               <div class="col-md-1">
                 <%= link_to user_path(post.user) do %>
                   <% if post.user.profile_picture.attached? %>
-                    <%= image_tag url_for(post.user.profile_picture), class: 'img-fluid rounded-circle' %>
+                    <%= image_tag url_for(post.user.profile_picture), size: "40x40", class: 'rounded-circle mr-2' %>
                   <% else %>
-                    <%= image_tag 'default_profile_picture', class: 'img-fluid rounded-circle' %>
+                    <%= image_tag 'default_profile_picture', size: "40x40", class: 'rounded-circle mr-2' %>
                   <% end %>
                 <% end %>
               </div>

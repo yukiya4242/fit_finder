@@ -23,9 +23,9 @@
                           <div class="post-tops d-flex justify-content-between">
                             <div>
                               <% if post.user.profile_picture.attached? %>
-                                <%= image_tag url_for(post.user.profile_picture), class: 'profile-picture' %>
+                                <%= image_tag url_for(post.user.profile_picture), size: "50x50", class: 'rounded-circle' %>
                               <% else %>
-                                <%= image_tag "default_profile_picture.png", class: 'profile_picture' %>
+                                <%= image_tag 'default_profile_picture.png', size: "50x50", class: 'rounded-circle mr-2' %>
                               <% end %>
                             </div>
                             <div class="ml-3">

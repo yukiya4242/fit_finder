@@ -8,7 +8,12 @@
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <%= link_to user_path(visitor) do %>
-            <%#= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
+            <% if visitor.profile_picture.attached? %>
+              <%= image_tag url_for(visitor.profile_picture), size: "30x30", class: 'rounded-circle mr-2' %>
+            <% else %>
+              <%= image_tag 'default_profile_picture.png', size: "30x30", class: 'img-fluid rounded-circle mr-2' %>
+            <% end %>
+
             <strong class="text-dark"><%= visitor.username %></strong>
           <% end %>
           <span class="ml-2">さんが</span>
