@@ -15,9 +15,9 @@ RSpec.describe RelationshipsController, type: :request do
           post '/relationships', params: { relationship: { following_id: other_user.id } }, xhr: true
         }.to change(user.following, :count).by(1)
         .and change(other_user.followers, :count).by(1)
-        .and change(other_user.notifications, :count).by(1)
+        .and change(other_user.passive_notifications, :count).by(1)
 
-        expect(response).to be_successful  # response should be successful because we're using Ajax
+        expect(response).to be_successful
       end
     end
 
@@ -29,9 +29,9 @@ RSpec.describe RelationshipsController, type: :request do
       it 'does not allow the user to follow other users' do
         expect {
           post '/relationships', params: { relationship: { following_id: other_user.id } }, xhr: true
-        }.not_to change(user.followings, :count)
+        }.not_to change(user.following, :count)
 
-        expect(response).to have_http_status(:unauthorized)  # response should be 'unauthorized' because user is not signed in
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end

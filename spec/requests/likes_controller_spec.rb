@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LikesController, type: :request do
   let(:user) { create(:user) }
-  let(:post) { create(:post, user: user) }
+  let(:post_item) { create(:post, user: user) }
 
   before do
     sign_in user
@@ -12,18 +12,18 @@ RSpec.describe LikesController, type: :request do
     it 'creates a new like' do
       sign_in user
       expect {
-        post post_likes_path(post)
+        post post_likes_path(post_item), xhr: true
       }.to change(Like, :count).by(1)
     end
   end
 
   describe 'DELETE #destroy' do
-    let!(:like) { create(:like, user: user, post: post) }
+    let!(:like) { create(:like, user: user, post: post_item) }
 
     it 'deletes the like' do
       sign_in user
       expect {
-        delete post_like_path(post, like)
+        delete post_like_path(post_item, like)
       }.to change(Like, :count).by(-1)
     end
   end

@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only:[:index, :update]
 
   def index
     @notifications = current_user.passive_notifications.includes(:visitor, :comment, :post).page(params[:page]).per(20)

@@ -4,9 +4,9 @@ RSpec.describe NotificationsController, type: :request do
   describe 'GET #index' do
     let(:user) { create(:user) }
     let(:visitor) { create(:user) }
-    let!(:notification1) { create(:notification, visitor: visitor, visited: user) }
-    let!(:notification2) { create(:notification, visitor: visitor, visited: user) }
-    let!(:notification3) { create(:notification, visitor: visitor, visited: user) }
+    let!(:notification1) { create(:notification, visitor: visitor, visited_id: user.id) }
+    let!(:notification2) { create(:notification, visitor: visitor, visited_id: user.id) }
+    let!(:notification3) { create(:notification, visitor: visitor, visited_id: user.id) }
 
     before do
       sign_in user
