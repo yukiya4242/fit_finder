@@ -12,17 +12,14 @@ class CommentsController < ApplicationController
     end
   end
 
-
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
   end
-
 
   private
 
   def comments_params
     params.require(:comment).permit(:content, :post_id)
   end
-
 end
