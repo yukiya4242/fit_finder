@@ -5,7 +5,8 @@
 #   describe 'GET #show' do
 #     let(:user) { create(:user) }
 #     let(:other_user) { create(:user) }
-#     let(:room) { create(:room) }
+#     let(:room) { create(:room, :with_notifications) }
+
 
 #     context 'when user has related user room' do
 #       before do
