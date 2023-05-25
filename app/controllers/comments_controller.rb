@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       @post.create_notification_comment!(current_user, @comment.id)
+      @comments = @post.comments.order(created_at: :desc)
     else
      @error_message = "コメントの投稿に失敗しました"
     end
