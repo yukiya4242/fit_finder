@@ -1,5 +1,7 @@
 <% if @error_message.present? %>
   alert("<%= @error_message %>")
 <% else %>
-  $("#comments").append("<%= j(render('posts/comment', comment: @comment)) %>")
+  if ($("#comments").length > 0) {
+    $("#comments").prepend("<%= j(render('posts/comment', comment: @comment)) %>")
+  }
 <% end %>

@@ -1,4 +1,3 @@
-
 <div class="col-md-6 mx-auto">
   <% visitor = notification.visitor %>
   <% visited = notification.visited %>
@@ -13,7 +12,6 @@
             <% else %>
               <%= image_tag 'default_profile_picture.png', size: "30x30", class: 'img-fluid rounded-circle mr-2' %>
             <% end %>
-
             <strong class="text-dark"><%= visitor.username %></strong>
           <% end %>
           <span class="ml-2">さんが</span>
@@ -49,7 +47,6 @@
             <%#= Comment.find_by(id: notification.comment_id)&.comment %>
           </p>
         <% end %>
-
       </div>
     </div>
   </div>

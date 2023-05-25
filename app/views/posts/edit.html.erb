@@ -28,11 +28,11 @@ body {
            <label class="post-picture-container">
              <% if f.object.image.attached? %>
                <%= image_tag f.object.image, class: 'post-picture' %>
-               <% else %>
+             <% else %>
                <%= image_tag 'default_post_image.png', class: 'post-picture' %>
              <% end %>
              <div class="overlay">
-             <%= f.file_field :image, accept: 'image/*', class: "form-control", id: "post-picture-input", style: "display: none;" %>
+               <%= f.file_field :image, accept: 'image/*', class: "form-control", id: "post-picture-input", style: "display: none;" %>
              </div>
            </label>
         </div>
