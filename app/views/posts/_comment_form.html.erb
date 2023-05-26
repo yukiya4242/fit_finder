@@ -15,7 +15,7 @@
           <% else %>
             <%= image_tag 'default_profile_picture.png', size: "50x50", class: 'img-fluid rounded-circle mr-2' %>
           <% end %>
-          <%= f.text_field :content, placeholder: "コメント入力欄", class: "form-control-comment ml-2 mt-1" %>
+          <%= f.text_area :content, placeholder: "コメント入力欄", class: "form-control-comment ml-2 mt-1" %>
           <%= f.submit "コメントする", class: "btn btn-custom" %>
         </div>
       </div>

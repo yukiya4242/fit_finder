@@ -1,17 +1,18 @@
 <div class="comment-container ml-3" id="comment_<%= comment.id%>" >
   <div class="d-flex align-items-start">
-      <%= image_tag url_for(comment.user.profile_picture), class: 'img-fluid-comment rounded-circle mr2' if comment.user.profile_picture.attached? %>
+      <%= image_tag url_for(comment.user.get_profile_picture), class: 'img-fluid rounded-circle mr2 p-1', style: "width: 60px; height: 60px;" %>
     <div>
       <p class="comment-header ml-3"><%= link_to comment.user.username, user_path(comment.user) %></p>
-      <p class="comment-content ml-3"><%= comment.content %></p>
+      <p class="comment-content ml-3"><%= simple_format(comment.content) %></p>
     </div>
     <% if current_user == comment.user %>
       <div class="ml-auto mt-auto">
-        <%= link_to post_comment_path(@post, comment), method: :delete, remote: true,
-        data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
-          <i class="fas fa-trash" style="color: #FF6347;"></i>
-        <% end %>
-      </div>
-    <% end %>
+        <span class="comment-timestamp"><%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+          <%= link_to post_comment_path(@post, comment), method: :delete, remote: true,
+          data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
+            <i class="fas fa-trash" style="color: #FF6347;"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
