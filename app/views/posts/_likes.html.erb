@@ -9,7 +9,7 @@
   <% end %>
   <span class="like-count"><%= post.likes.count %></span>
   <%= link_to post_path(post.id) do %>
-    <i class="fas fa-comments"></i> <%= post.comments.count %>
+    <i class="fas fa-comments", style="color: #FFA07A;"></i> <%= post.comments.count %>
   <% end %>
 </p>
 
