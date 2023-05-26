@@ -35,6 +35,13 @@
 - ユーザー検索機能
 - ダイレクトメッセージ機能
 
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+
 ## 設計書
 ER図:
 
