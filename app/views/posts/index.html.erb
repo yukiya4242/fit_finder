@@ -49,7 +49,7 @@ h1 {
                             <div class="d-flex justify-content-between align-items-start">
                               <div class="post-tops">
                                 <%= link_to user_path(post.user) do %>
-                                  <div class="d-flex align-items-center mb-3">
+                                  <div class="d-flex align-items-center mb-2">
                                     <% if post.user.profile_picture.attached? %>
                                       <%= image_tag post.user.profile_picture, size: "40x40", class: 'rounded-circle mr-2' %>
                                     <% else %>
@@ -65,7 +65,7 @@ h1 {
                                 <%= render 'likes', post: post %>
 
                                 <% if current_user == post.user %>
-                                  <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link" do %>
+                                  <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link pl-1" do %>
                                     <i class="fas fa-edit" style="color: #FFA07A;"></i>
                                   <% end %>
                                   <%= link_to post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？？", class: "icon-button btn btn-link" do %>
@@ -73,10 +73,11 @@ h1 {
                                   <% end %>
                                 <% end %>
                               </div>
-                              <div class="post-side">
-                                <%#= render 'comments', post: post %>
-                              </div>
+                              <div class="ml-auto mt-auto">
+                              <span class="text-muted"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></span>
                             </div>
+                            </div>
+
                           </div>
                         </div>
                       <% end %>

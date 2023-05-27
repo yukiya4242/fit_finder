@@ -18,6 +18,7 @@ class Post < ApplicationRecord
 
 
 
+
    #いいねの通知メソッド
     def create_notification_like!(current_user)
       #いいね済みか検証

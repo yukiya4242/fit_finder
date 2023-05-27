@@ -1,9 +1,9 @@
 <p class="btn-likes">
   <% if current_user.liked_posts.include?(post) && !current_user.guest? %>
     <% like = current_user.likes.find_by(post: post) %>
-    <i class="fas fa-heart active" onclick="likeUnlikePost('<%= post_like_path(post.id, like.id) %>', 'DELETE')"></i>
+    <i class="fas fa-heart active" data-url="<%= post_like_path(post, like) %>"></i>
   <% elsif !current_user.guest? %>
-   <i class="fas fa-heart" onclick="likeUnlikePost('<%= post_likes_path(post.id) %>', 'POST')"></i>
+   <i class="fas fa-heart" data-url="<%= post_likes_path(post) %>"></i>
   <% else %>
     <i class="fas fa-heart" onclick="alert('ゲストユーザーはこの操作はできません')"></i>
   <% end %>
@@ -12,27 +12,3 @@
     <i class="fas fa-comments", style="color: #FFA07A;"></i> <%= post.comments.count %>
   <% end %>
 </p>
-
-
-<script>
-function likeUnlikePost(url, method) {
-  let data = {};
-  if (method === "POST") {
-    data = { post: { /* post data here */ } };
-  }
-  $.ajax({
-    url: url,  // This should be something like '/posts/1/likes'
-    type: method,  // This should be either 'POST' or 'DELETE'
-    data: data,
-    dataType: "json",
-    success: function(data) {
-      // Here, you can update the like count or change the like button's color
-    },
-    error: function(err) {
-      console.log(err);
-    }
-  });
-}
-
-
-</script>

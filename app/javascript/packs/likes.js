@@ -17,7 +17,6 @@ $(function() {
       url: $(this).data('url'),
       type: active ? 'DELETE' : 'POST',
       dataType: 'json',
-      data: {'_method': active ? 'DELETE' : 'POST'}
     })
     .done(function(data) {
       console.log(data);
