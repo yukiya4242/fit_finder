@@ -10,50 +10,58 @@
   <div class="row justify-content-center">
     <%= render 'posts/sidebar' %>
     <div class="col-md-8">
-      <div class="user-info-container mb-5">
-        <% if user_signed_in? %>
-        <h1 class="text-center mb-4 user-info"><%= render 'posts/new_posts', post: @post %></h1>
-        <% end %>
-        <div class="d-flex justify-content-center user-info-row">
-          <% if @user.profile_picture.attached? %>
-                    <%= image_tag url_for(@user.profile_picture), size: "120x120", class: 'rounded-circle mr-2' %>
-                  <% else %>
-                    <%= image_tag 'default_profile_picture', size: "120x120", class: 'rounded-circle mr-2' %>
-                  <% end %>
-        </div>
-        <div class="d-flex justify-content-center mt-2">
-          <h3 class="user-info mr-2 mt-2"><%= @user.username %></h3>
-          <% if current_user.present? && !current_user.guest? && current_user != @user && @user.present? %>
-            <div class="d-flex align-items-center pb-2 ml-3" >
-              <% if current_user.following.include?(@user) %>
-                <span><%= button_to "unfollow", unfollow_user_path(@user), method: :delete, class: 'follow-btn small-btn' %></span>
-              <% else %>
-                <span><%= button_to "Follow", follow_user_path(@user), method: :post, class: 'follow-btn small-btn' %></span>
-              <% end %>
-            </div>
+<div class="user-info-container mb-5">
+  <% if user_signed_in? %>
+    <h1 class="text-center mb-4 user-info">
+      <%= render 'posts/new_posts', post: @post %>
+    </h1>
+  <% end %>
+
+  <div class="d-flex justify-content-center user-info-row">
+    <% if @user.profile_picture.attached? %>
+      <%= image_tag url_for(@user.profile_picture), class: 'rounded-circle mr-2', style: "width: 120px; height: 120px;" %>
+    <% else %>
+      <%= image_tag 'default_profile_picture', class: 'rounded-circle mr-2', style: "width: 120px; height: 120px;" %>
+    <% end %>
+  </div>
+
+  <div class="card mt-3 shadow">
+    <div class="card-header text-center">
+      <h5 class="mb-0"><%= @user.username %></h5>
+      <% if current_user.present? && !current_user.guest? && current_user != @user && @user.present? %>
+        <div class="d-flex justify-content-center">
+          <% if current_user.following.include?(@user) %>
+            <%= button_to "Unfollow", unfollow_user_path(@user), method: :delete, class: 'btn btn-outline-danger btn-sm mt-2' %>
+          <% else %>
+            <%= button_to "Follow", follow_user_path(@user), method: :post, class: 'btn btn-outline-success btn-sm mt-2' %>
           <% end %>
         </div>
-
-    <div class="text-center">
-        <h3 class="user-info"><%#= @user.username %></h3>
-          <div class="follow-info">
-            <p class="user-info"><%= link_to "Follows: #{@user.following.count}", following_user_path(@user), class: 'text-dark'%></p>
-            <p class="user-info"><%= link_to "Followers: #{@user.followers.count}", followers_user_path(@user), class: 'text-dark'%></p>
-          </div>
-        <%= render 'chats/info' %>
-
-      <% if current_user == @user && !current_user.guest? %>
-        <%= link_to edit_user_path, class: 'user-info' do %>
-          <i class="fas fa-user-edit fa-lg"></i>
-        <% end %>
-        <p class="user-info">メールアドレス: <%= @user.email %></p>
       <% end %>
+    </div>
 
-
-      <p class="user-info">自己紹介: <%= @user.introduction %></p>
-      <p class="user-info">お住まい: <%= @user.location %></p>
+    <div class="card-body">
+      <% if current_user == @user && !current_user.guest? %>
+        <%= link_to edit_user_path, class: 'btn btn-outline-primary btn-sm float-right' do %>
+          <i class="fas fa-user-edit"></i> Edit Profile
+        <% end %>
+        <h6 class="card-subtitle mb-2 text-muted">メールアドレス: <%= @user.email %></h6>
+      <% end %>
+      <p class="card-text">自己紹介: <%= @user.introduction %></p>
+      <p class="card-text">お住まい: <%= @user.location %></p>
+      <div class="d-flex justify-content-between mt-3">
+        <p class="card-text">
+          <span class="fas fa-users"></span><%= link_to "Follows: #{@user.following.count}", following_user_path(@user), class: 'text-dark' %>
+        </p>
+        <p class="card-text">
+          <span class="fas fa-user-check"></span><%= link_to "Followers: #{@user.followers.count}", followers_user_path(@user), class: 'text-dark' %>
+        </p>
+      </div>
     </div>
   </div>
+
+  <%= render 'chats/info' %>
+</div>
+
 
 <div class="row">
   <% @posts.each do |post| %>

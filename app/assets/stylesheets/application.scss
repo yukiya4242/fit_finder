@@ -279,44 +279,6 @@ body {
   font-weight: bold;
 }
 
-.follow-info {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.small-btn {
-  font-size: 0.75em;
-  padding: 0.5em 1em;
-}
-
-.follow-btn {
-  background: #1DA1F2;
-  border-radius: 2.5em;
-  color: white;
-  padding: 1em 2em;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 4px 4px 0 #000;
-
-   &:hover {
-   transform: translate(4px, 4px);
-   box-shadow: none;
-   }
-}
-
-.follow-btn:active {
-  box-shadow: inset 4px 4px 0 #000;
-}
-.follow-btn span {
-  display: block;
-  transform: translate(4px, 4px);
-}
-
-.follow-btn:hover,
-.follow-btn:focus {
-  background: rgb(26, 145, 218);
-}
 
 
 .user-info-container {
@@ -892,6 +854,18 @@ a.btn-border-red {
   &:hover {
     background-color: #f5c6cb;
     border-color: #f5c6cb;
+  }
+}
+
+.btn-outline-success {
+  border-radius: 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #006400;
+    border-color: #006400;
+    cursor :pointer;
   }
 }
 
