@@ -62,7 +62,7 @@ h1 {
 
                                 <%= render 'image_video', post: post %>
 
-                                <%= render 'likes', post: post %>
+                                <div id="like_<%= post.id %>"><%= render 'likes', post: post %></div>
 
                                 <% if current_user == post.user %>
                                   <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link pl-1" do %>

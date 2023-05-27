@@ -1,6 +1,7 @@
 $(function() {
   // いいねボタンがクリックされたら
-  $('body').on('click', '.fa-heart', function(){
+  $('body').on('click', '.fa-home', function(){
+    console.log('active')
     // 現在の状態を取得
     var active = $(this).hasClass('active');
     // いいねの数の要素を取得
@@ -19,6 +20,12 @@ $(function() {
       dataType: 'json',
     })
     .done(function(data) {
+      // var like = data.data;
+      // var url = active ? '/posts/' + like.post_id + '/likes' : '/posts/' + like.post_id + '/likes/' + like.id ;
+      // console.log(url);
+      // console.log($(this));
+
+      // console.log($(this));
       console.log(data);
     })
     .fail(function() {
@@ -29,6 +36,6 @@ $(function() {
     });
 
     // ボタンのデフォルト動作を無効化
-    return false;
+    // return false;
   });
 });

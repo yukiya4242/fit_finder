@@ -1,14 +1,19 @@
 <p class="btn-likes">
   <% if current_user.liked_posts.include?(post) && !current_user.guest? %>
     <% like = current_user.likes.find_by(post: post) %>
-    <i class="fas fa-heart active" data-url="<%= post_like_path(post, like) %>"></i>
+     <%= link_to post_like_path(post, like), method: :delete, remote: true do %>
+    <i class="fas fa-heart active" data-url="<%= post_like_path(post, like)  %>"></i>
+     <% end %>
   <% elsif !current_user.guest? %>
+  <%= link_to post_likes_path(post), method: :post, remote: true do %>
    <i class="fas fa-heart" data-url="<%= post_likes_path(post) %>"></i>
+   <% end %>
   <% else %>
-    <i class="fas fa-heart" onclick="alert('ゲストユーザーはこの操作はできません')"></i>
+    <!--<i class="fas fa-heart" onclick="alert('ゲストユーザーはこの操作はできません')"></i>-->
   <% end %>
   <span class="like-count"><%= post.likes.count %></span>
   <%= link_to post_path(post.id) do %>
-    <i class="fas fa-comments", style="color: #FFA07A;"></i> <%= post.comments.count %>
+    <i class="fas fa-comments", style="color: #FFA07A;"></i>
+    <span class="comment-count"><%= post.comments.count %></span>
   <% end %>
 </p>
