@@ -3,7 +3,7 @@
     <% if current_or_guest_user.email == 'guest@example.com' %>
       <div class="form-group d-flex">
         <% if current_user.profile_picture.attached? %>
-          <%= image_tag current_user.profile_picture, class: 'rounded-circle', style: "width: 50px;, height:50px" %>
+          <%= image_tag current_user.profile_picture, class: 'rounded-circle', style: "width: 50px; height:50px" %>
         <% end %>
         <%= f.text_field :content, placeholder: "ゲストユーザーはコメントできません", class: "form-control-comment" %>
       </div>
@@ -11,7 +11,7 @@
       <div class="user-comment">
         <div class="form-group d-flex">
           <% if current_user.profile_picture.attached? %>
-            <%= image_tag current_user.profile_picture, lass: 'rounded-circle', style: "width: 50px;, height: 50px;" %>
+            <%= image_tag current_user.profile_picture, lass: 'rounded-circle', style: "width: 50px; height: 50px;" %>
           <% else %>
             <%= image_tag 'default_profile_picture.png', size: "50x50", class: 'img-fluid rounded-circle mr-2' %>
           <% end %>
