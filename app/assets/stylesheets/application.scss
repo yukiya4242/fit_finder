@@ -426,13 +426,17 @@ body {
 }
 
 .chat-delete {
-  background-color: pink;
+  background-color: #FFE4E1;
   color: white;
   padding: 5px 10px;
   text-decoration: none;
   border-radius: 15px;
   margin: 5px;
+  align-self :flex-end;
+  margin-bottom: 0;
+  font-size: 13px;
 }
+
 
 
 .message {
@@ -473,10 +477,6 @@ body {
   color: #D3D3D3;
 }
 
-.chat-delete {
-  align-self :flex-end;
-  margin-bottom: 0;
-}
 
 .other .message-body {
   align-self: flex-start;
