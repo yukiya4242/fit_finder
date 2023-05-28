@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   actions :all, except: [:new, :create] #管理者は新規の一般ユーザーを作成できないようにする
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation, :is_deleted
 
   index do
     selectable_column
@@ -25,6 +25,16 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+
+  form do |f|
+   f.inputs do
+    f.input :email
+    f.input :password
+    f.input :password_comfirmation
+    f.input :is_deleted
+  end
+  f.actions
+end
 
   show do
     attributes_table do
