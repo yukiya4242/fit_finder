@@ -23,7 +23,7 @@ RSpec.describe LikesController, type: :request do
     it 'deletes the like' do
       sign_in user
       expect {
-        delete post_like_path(post_item, like)
+        delete post_like_path(post_item, like), xhr: true
       }.to change(Like, :count).by(-1)
     end
   end

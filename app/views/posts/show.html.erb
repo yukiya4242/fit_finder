@@ -20,7 +20,7 @@
               <%= image_tag @post.image, class: 'img-fluid rounded' %>
             </div>
           <% end %>
-          <%= render 'likes', post: @post %>
+          <div id="like_<%= @post.id %>"><%= render 'likes', post: @post %></div>
           <div class="mb-4">
             <h5>
               <i class="far fa-calendar-alt"></i>
