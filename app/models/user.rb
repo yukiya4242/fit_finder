@@ -35,10 +35,9 @@ class User < ApplicationRecord
 
   def get_profile_picture
     unless profile_picture.attached?
-      file_path = Rails.root.join('app/assets/images/ogura.png')
+      file_path = Rails.root.join('app/assets/images/default_profile_picture.png')
       profile_picture.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
     end
-    # you need to define the width and height
     width, height = 100, 100
     profile_picture.variant(resize_to_limit: [width, height]).processed
   end
