@@ -1,4 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+// ターボリンクス
+window.document.addEventListener('turbolinks:load', function() {
+
+//document.addEventListener('DOMContentLoaded', () => {
   const profilePictureInput = document.getElementById('profile-picture-input');
 
   if (profilePictureInput) {
@@ -8,11 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        const profilePicture = document.querySelector('.card-img-top.profile-picture');
+        const profilePicture = document.querySelector('.profile-picture');
         profilePicture.src = e.target.result;
       };
 
       reader.readAsDataURL(file);
     });
   }
-});
+//});
+}, false)

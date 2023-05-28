@@ -25,7 +25,9 @@
 </div>
 
 
+<% if current_or_guest_user.email == 'guest@example.com' %>
 <script>
+alert('current_or_guest_user.email');
   document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('guest-alert').addEventListener('click', (event) => {
       event.preventDefault();
@@ -33,3 +35,4 @@
     });
   });
 </script>
+<% end %>
