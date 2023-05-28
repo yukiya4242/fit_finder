@@ -425,6 +425,16 @@ body {
   padding: 20px;
 }
 
+.chat-delete {
+  background-color: pink;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 15px;
+  margin: 5px;
+}
+
+
 .message {
   display: flex;
   flex-direction: column;

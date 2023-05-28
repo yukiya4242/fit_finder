@@ -4,6 +4,7 @@
       <div class="message-body">
         <%= chat.message %>
 
+
         <% if chat.image.attached? && chat.image.blob.content_type.start_with?('image/') %>
           <div class='file-container'>
             <%= image_tag(chat.image.variant(resize_to_limit: [500, 500]), width: '100%', height: 'auto', class: 'rounded') %>
@@ -19,10 +20,15 @@
             <span id="status-<%= chat.id %>" class="status" style="display: none;">保存済み</span>
           </div>
         <% end %>
+
+
+
       </div>
-
-      <p class="chat-delete"><%#= link_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" } %></p>
-
+      <p class="ml-auto chat-delete">
+        <% if chat.user_id == current_user.id %>
+        <%= link_to '削除', chat_path(chat), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+      </p>
       <p class="chat-timestamp"><%= chat.created_at.strftime("%Y-%m-%d %H:%M")%></p>
     </div>
   <% else %>

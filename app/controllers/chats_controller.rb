@@ -67,17 +67,18 @@ class ChatsController < ApplicationController
   # end
 
 
-#   def destroy
-#   @chat = Chat.find(params[:id])
-#   if @chat.user_id == current_user.id
-#     @chat.destroy
-#     flash[:success] = "メッセージを削除しました。"
-#     redirect_to room_path(@chat.room)
-#   else
-#     flash[:alert] = "自分のメッセージのみ削除できます。"
-#     redirect_to room_path(@chat.room)
-#   end
-# 　end
+  def destroy
+  @chat = Chat.find(params[:id])
+  chat_partner_id = @chat.receiver_id == current_user.id ? @chat.sender_id : @chat.receiver_id
+  if @chat.user_id == current_user.id
+    @chat.destroy
+    flash[:success] = "メッセージを削除しました。"
+    redirect_to chat_path(chat_partner_id)
+  else
+    flash[:alert] = "自分のメッセージのみ削除できます。"
+    redirect_to room_path(room_id)
+  end
+  end
 
 
 

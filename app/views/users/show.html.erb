@@ -27,7 +27,10 @@
 
   <div class="card mt-3 shadow">
     <div class="card-header text-center">
-      <h5 class="mb-0"><%= @user.username %></h5>
+      <h5 class="mb-0 pl-2">
+        <span><%= @user.username %></span>
+        <span><%= render 'chats/info' %></span>
+        </h5>
       <% if current_user.present? && !current_user.guest? && current_user != @user && @user.present? %>
         <div class="d-flex justify-content-center">
           <% if current_user.following.include?(@user) %>
@@ -37,9 +40,6 @@
           <% end %>
         </div>
       <% end %>
-      <div class="ml-auto mt-auto">
-        <%= render 'chats/info' %>
-      </div>
     </div>
 
     <div class="card-body">
