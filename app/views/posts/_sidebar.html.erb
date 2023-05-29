@@ -122,7 +122,7 @@
 
     <% if current_user && !current_user.guest? %>
       <li class="nav-item mb-3">
-        <%= link_to notifications_path(current_user), class: 'nav-link notification-badge' do %>
+        <%= link_to notifications_path, class: 'nav-link notification-badge' do %>
           <i class="fas fa-bell fa-lg"></i>&nbsp; 通知
           <% unless unchecked_notifications.empty? %>
             <span class="badge badge-danger">
