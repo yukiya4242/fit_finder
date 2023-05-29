@@ -61,11 +61,13 @@ h1 {
                                   </div>
                                 <% end %>
                                 <p class="post-content"><%= post.content %></p>
-                                <small class="text-muted pb-3"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></small>
-
                                 <%= render 'image_video', post: post %>
 
+
+
+
                                 <div id="like_<%= post.id %>"><%= render 'likes', post: post %></div>
+
 
                                 <% if current_user == post.user %>
                                   <%= link_to edit_post_path(post.id), class: "icon-button btn btn-link pl-1" do %>
@@ -75,6 +77,7 @@ h1 {
                                     <i class="fas fa-trash" style="color: #FFA07A;"></i>
                                   <% end %>
                                 <% end %>
+                                <small class="text-muted pb-3"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></small>
                               </div>
                             </div>
 
