@@ -20,6 +20,12 @@
               <%= image_tag @post.image, class: 'img-fluid rounded' %>
             </div>
           <% end %>
+          <% if @post.video.attached? %>
+            <div class="form-group">
+              <%= video_tag url_for(@post.video), class: 'img-fluid rounded', controls: true %>
+            </div>
+          <% end %>
+
           <div id="like_<%= @post.id %>"><%= render 'likes', post: @post %></div>
           <div class="mb-4">
             <h5>
