@@ -4,4 +4,5 @@
   if ($("#comments").length > 0) {
     $("#comments").prepend("<%= j(render('posts/comment', comment: @comment)) %>")
   }
+ $('#comment_content').val("");
 <% end %>
