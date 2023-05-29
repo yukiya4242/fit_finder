@@ -48,7 +48,8 @@ body {
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', (event) => {
+window.document.addEventListener('turbolinks:load', function() {
+  // document.addEventListener('DOMContentLoaded', (event) => {
     const chatBox = document.querySelector('.message');
     chatBox.addEventListener('scroll', (e) => {
       if (chatBox.scrollHeight - chatBox.scrollTop === chatBox.clientHeight) {
@@ -59,15 +60,19 @@ body {
         xhr.send();
       }
     });
-  });
+  // });
+}, false)
 
-
-  document.addEventListener('ajax:beforeSend', function(event) {
+window.document.addEventListener('turbolinks:load', function() {
+  // document.addEventListener('ajax:beforeSend', function(event) {
   var submitButton = event.target.querySelector('input[type="submit"]');
   submitButton.classList.add('sending');
-});
+// });
+}, false)
 
-document.addEventListener('ajax:complete', function(event) {
+
+window.document.addEventListener('turbolinks:load', function() {
+// document.addEventListener('ajax:complete', function(event) {
   var submitButton = event.target.querySelector('input[type="submit"]');
   submitButton.classList.remove('sending');
   submitButton.classList.add('sent');
@@ -75,7 +80,8 @@ document.addEventListener('ajax:complete', function(event) {
   setTimeout(function() {
     submitButton.classList.remove('sent');
   }, 3000);
-});
+// });
+}, false)
 
 
 </script>
