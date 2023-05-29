@@ -56,15 +56,8 @@ class ChatsController < ApplicationController
     respond_to do |format|
       format.js { render :create_failed }
       end
-    # redirect_back(fallback_location: root_path)
   end
   end
-
-  # def read
-  #   chat = Chat.find(params[:id])
-  #   chat.read! if chat.receiver == current_user && !chat.read
-  #   head :ok
-  # end
 
 
   def destroy

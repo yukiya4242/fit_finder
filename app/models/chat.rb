@@ -16,7 +16,7 @@ class Chat < ApplicationRecord
 
   private
 
-  def message_or_media_present?
+  def message_or_media_present? 
     if [message.present?, image.attached?, video.attached?].count(true) == 0
       errors.add(:base, "メッセージ、画像、またはビデオのいずれかが必要です。")
     end

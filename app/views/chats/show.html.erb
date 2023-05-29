@@ -48,8 +48,7 @@ body {
 
 
 <script>
-window.document.addEventListener('turbolinks:load', function() {
-  // document.addEventListener('DOMContentLoaded', (event) => {
+  document.addEventListener('DOMContentLoaded', (event) => {
     const chatBox = document.querySelector('.message');
     chatBox.addEventListener('scroll', (e) => {
       if (chatBox.scrollHeight - chatBox.scrollTop === chatBox.clientHeight) {
@@ -60,19 +59,15 @@ window.document.addEventListener('turbolinks:load', function() {
         xhr.send();
       }
     });
-  // });
-}, false)
+  });
 
-window.document.addEventListener('turbolinks:load', function() {
-  // document.addEventListener('ajax:beforeSend', function(event) {
+
+  document.addEventListener('ajax:beforeSend', function(event) {
   var submitButton = event.target.querySelector('input[type="submit"]');
   submitButton.classList.add('sending');
-// });
-}, false)
+});
 
-
-window.document.addEventListener('turbolinks:load', function() {
-// document.addEventListener('ajax:complete', function(event) {
+document.addEventListener('ajax:complete', function(event) {
   var submitButton = event.target.querySelector('input[type="submit"]');
   submitButton.classList.remove('sending');
   submitButton.classList.add('sent');
@@ -80,8 +75,7 @@ window.document.addEventListener('turbolinks:load', function() {
   setTimeout(function() {
     submitButton.classList.remove('sent');
   }, 3000);
-// });
-}, false)
+});
 
 
 </script>

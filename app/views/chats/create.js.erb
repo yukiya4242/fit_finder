@@ -1,3 +1,10 @@
+<!--.chat-messageクラスを持つエレメントを参照、.appendで選択された内部に新しいHTMLを追加(<%#=%>~~)-->
 $('.chat-message').append("<%= j(render 'newchat', chat: @chat) %>");
-$('input[type=text]').val("");
+<!--ID:chat_messageを持つformをクリアにする-->
+$('#chat_message').val("");
 
+<!--name="chat[image]"を持つフォームを空にする-->
+$('[name="chat[image]"]').val("");
+
+<!--name="chat[video]を持つフォームを空にする"-->
+$('[name="chat[video]"]').val("");
