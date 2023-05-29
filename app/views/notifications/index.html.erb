@@ -13,9 +13,9 @@
 <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
   <% if notifications.exists? %>
     <%= render notifications %>
-      <div class="d-flex justify-content-center">
-        <%= paginate notifications.all %>
-      </div>
+    <div class="d-flex justify-content-center">
+      <%= paginate notifications.all %>
+    </div>
   <% else %>
   <p>通知はありません</p>
 <% end %>

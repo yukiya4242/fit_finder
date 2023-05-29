@@ -8,6 +8,7 @@ class NotificationsController < ApplicationController
     @notifications.update(checked: true)
   end
 
+
   def update
     notification = Notification.find(params[:id])
     if notification.update(checked: true)
