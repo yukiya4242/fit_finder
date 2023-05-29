@@ -5,21 +5,13 @@
       <p class="comment-header ml-3"><%= link_to comment.user.username, user_path(comment.user) %></p>
       <p class="comment-content ml-3"><%= simple_format(comment.content) %></p>
     </div>
-    <div class="ml-auto mt-auto">
-      <% if current_user == comment.user %>
-      <span class="comment-timestamp"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></span>
-        <%= link_to post_comment_path(@post, comment), method: :delete, remote: true,
-        data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
-          <i class="fas fa-trash" style="color: #FF6347;"></i>
-          <% end %>
-          <% end %>
-
-        <% if current_user != comment.user %>
-          <div class="ml-auto mt-auto">
-            <span class="comment-timestamp timer"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></span>
-            <i class="fas fa-clock mr-2" style="color: #006400"></i>
-          </div>
-        <% end %>
-    </div>
   </div>
+  <span class="comment-timestamp timer"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+  <span><i class="fas fa-clock" style="color: #006400"></i></span>
+   <% if current_user == comment.user %>
+     <%= link_to post_comment_path(@post, comment), method: :delete, remote: true,
+     data: { confirm: "本当に削除しますか？" }, class: "comment-delete-link btn btn-link" do %>
+     <span><i class="fas fa-trash mb-auto" style="color: #FF6347;"></i></span>
+   <% end %>
+   <% end %>
 </div>
