@@ -1,18 +1,21 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_sign_in_path_for(resource) #管理者ならダッシュボード、それ以外はマイページに遷移
-    if resource.is_a?(AdminUser)
+  #ユーザーがログイン後にリダイレクトされるパスを設定
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(AdminUser) #adminならダッシュボード
     admin_dashboard_path
-    else
+    else #ユーザーならマイページ
     user_path(current_user)
     end
   end
 
+  #ユーザーがログアウト後にリダイレクトされるパスを定義
   def after_sign_out_path_for(resource)
     root_path
   end
 
+  #未確認の通知を取得するヘルパーメソッド
   helper_method :unchecked_notifications
   def unchecked_notifications
     current_user.passive_notifications.where(checked: false)

@@ -21,7 +21,7 @@
     <% if @user.profile_picture.attached? %>
       <%= image_tag url_for(@user.profile_picture), class: 'rounded-circle mr-2', style: "width: 120px; height: 120px;" %>
     <% else %>
-      <%= image_tag 'default_profile_picture', class: 'rounded-circle mr-2', style: "width: 120px; height: 120px;" %>
+      <%= image_tag 'default_profile_picture.png', class: 'rounded-circle mr-2', style: "width: 120px; height: 120px;" %>
     <% end %>
   </div>
 

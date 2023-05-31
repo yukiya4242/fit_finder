@@ -21,17 +21,20 @@ class ChatsController < ApplicationController
   end
 
   def create
-  room_id = params[:chat][:room_id] #追加
-  another_entry = UserRoom.where(room_id: room_id).where.not(user_id: current_user.id).first #追加
-  receiver_id = another_entry.user_id #追加
-  @chat = current_user.chats.new(chat_params.merge(sender_id: current_user.id, receiver_id: receiver_id)) #追加
-  @room = @chat.room
-  @chats = @chat.room.chats
-  # byebug
+    room_id = params[:chat][:room_id] #パラメータからチャットルームのIDを取得
+    another_entry = UserRoom.where(room_id: room_id).where.not(user_id: current_user.id).first #チャットルームに参加しているユーザーを取得(ログイン中ユーザーのみ)
+    receiver_id = another_entry.user_id #受信者のIDを取得
+
+    #新しいチャットメッセージを作成
+    @chat = current_user.chats.new(chat_params.merge(sender_id: current_user.id, receiver_id: receiver_id)) #追加
+    @room = @chat.room
+    @chats = @chat.room.chats
+
   if @chat.save
     another_entry = UserRoom.where(room_id: @room.id).where.not(user_id: current_user.id).first
     visited_id = another_entry.user_id
 
+    #新しい通知を作成
     notification = current_user.active_notifications.new(
       room_id: @room.id,
       chat_id: @chat.id,
@@ -44,8 +47,9 @@ class ChatsController < ApplicationController
       notification.checked = true
     end
 
-    notification.save if notification.valid?
+    notification.save if notification.valid? #通知をDBに保存
 
+    #ブラウザに応答を返す
     respond_to do |format|
       format.html { redirect_to room_path(@chat.room) }
         format.js
@@ -61,15 +65,17 @@ class ChatsController < ApplicationController
 
 
   def destroy
-  @chat = Chat.find(params[:id])
-  chat_partner_id = @chat.receiver_id == current_user.id ? @chat.sender_id : @chat.receiver_id
+  @chat = Chat.find(params[:id]) #メッセージを見つける
+  chat_partner_id = @chat.receiver_id == current_user.id ? @chat.sender_id : @chat.receiver_id #チャット相手のIDを設定
+
+  #メッセージの制作者が現在のユーザーの場合
   if @chat.user_id == current_user.id
-    @chat.destroy
+    @chat.destroy #メッセージを削除
     flash[:success] = "メッセージを削除しました。"
-    redirect_to chat_path(chat_partner_id)
+    redirect_to chat_path(chat_partner_id) #パートナーとの画面にリダイレクト
   else
     flash[:alert] = "自分のメッセージのみ削除できます。"
-    redirect_to room_path(room_id)
+    redirect_to room_path(room_id) #チャットルーム画面にリダイレクト
   end
   end
 
@@ -77,17 +83,19 @@ class ChatsController < ApplicationController
 
   private
 
-
+    #メッセージの作成時に必要なパワメータを設定
     def chat_params
       params.require(:chat).permit(:message, :room_id, :image, :video)
     end
 
 
-
+    #相互フォローか確認
     def reject_non_related
-    user = User.find(params[:id])
+    user = User.find(params[:id]) #ユーザーを見つける
+    
+    #current_userと指定されたユーザーが相互フォローでない場合
     unless current_user.following?(user) && user.following?(current_user)
-      redirect_to posts_path
+      redirect_to posts_path #投稿一覧にリダイレクト
     end
     end
 end

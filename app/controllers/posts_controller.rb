@@ -7,8 +7,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post = current_user.posts.build(post_params)
+    # @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params) #投稿データをDBに保存
     if @post.save
       flash[:success] = '投稿が完了しました'
     redirect_to posts_path
@@ -19,9 +19,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @user = current_user
-    @posts = Post.all
-    @posts = Post.order(created_at: :desc)
+    @user = current_user #現在のユーザー
+    @posts = Post.all #投稿情報を全て取得
+    @posts = Post.order(created_at: :desc) #取得した投稿を降順（新しい順）に並び替える
   end
 
   def edit
@@ -29,10 +29,9 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-    puts "Updating post with params: #{post_params.inspect}"
-    if @post.update(post_params)
-    redirect_to post_path(@post)
+    @post = Post.find(params[:id]) #対象の投稿を見つける
+    if @post.update(post_params) #投稿を更新したら
+    redirect_to post_path(@post) #その投稿の詳細ページにリダイレクト
     else
     render :edit
     end

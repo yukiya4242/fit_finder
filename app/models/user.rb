@@ -43,13 +43,19 @@ class User < ApplicationRecord
   end
 
   def self.guest      #ゲストログイン機能
-    find_or_create_by(email: 'guest@example.com') do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.username = 'Guest'
-      user.introduction = 'Hello, I am a Guest User'
-      user.location = 'Anywhere'
+  find_or_create_by(email: 'guest@example.com') do |user|
+    user.password = SecureRandom.urlsafe_base64
+    user.username = 'Guest'
+    user.introduction = 'Hello, I am a Guest User'
+    user.location = 'Anywhere'
+
+    unless user.profile_picture.attached?
+      file_path = Rails.root.join('app/assets/images/default_profile_picture.png')
+      user.profile_picture.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
     end
   end
+  end
+
 
   def guest?
     email == 'guest@example.com'

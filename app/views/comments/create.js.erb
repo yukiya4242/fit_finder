@@ -1,8 +1,14 @@
 <% if @error_message.present? %>
+<!--もしもコメントの作成に問題があれば(空白や141文字以上など)エラーを表示-->
   alert("<%= @error_message %>")
 <% else %>
+<!--IDが"commeents"が存在する場合は新たに作成したコメントを表示する-->
   if ($("#comments").length > 0) {
+  <!--部分テンプレートは"views/posts/_comment"書くコメントを表示するファイル-->
+  <!--"commnet:@commnet"はローカル変数をパーシャルに渡すため、@commentは新しく作成されたコメントを持っている。-->
     $("#comments").prepend("<%= j(render('posts/comment', comment: @comment)) %>")
   }
+<!--コメントの投稿が完了したらID"commnet_content"(コメント入力欄)空にする(.val(""))-->
+<!--非同期通信の場合はフォームにデータが残ったままになるから-->
  $('#comment_content').val("");
 <% end %>
