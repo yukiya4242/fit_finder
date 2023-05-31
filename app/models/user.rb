@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   def get_profile_picture
     unless profile_picture.attached?
-      file_path = Rails.root.join('app/assets/images/default_profile_picture.png')
+      file_path = Rails.root.join('app/assets/images/')
       profile_picture.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
     end
     width, height = 100, 100
@@ -55,7 +55,6 @@ class User < ApplicationRecord
     end
   end
   end
-
 
   def guest?
     email == 'guest@example.com'
