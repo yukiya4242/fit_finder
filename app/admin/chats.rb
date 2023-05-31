@@ -1,10 +1,9 @@
 ActiveAdmin.register Chat do
- permit_params :user_id, :post_id, :message, :room_id, :image, :vodeo
+ permit_params :user_id, :message, :room_id, :image, :vodeo
 
  show do
    attributes_table do
      row :user_id
-     row :post_id
      row :message
      row :room_id
 
