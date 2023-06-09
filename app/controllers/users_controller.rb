@@ -2,11 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only:[:edit, :update, :index, :liked_posts, :chat_history, :follow, :unfollow, :following, :followers, :showq]
   # before_action :set_user,           only:[:edit, :update]
   before_action :check_user_status,  only:[:show]
+  before_action :logged_in_user,     only:[:edit, :chat_history]
 
 
-  # def set_user
-  #   @user = User.find(params[:id])
-  # end
 
   def index
     @user = current_user
@@ -132,10 +130,17 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation)
   end
 
+  def logged_in_user
+    unless logged_in_user
+      flash[:danger] = "ログインしてください"
+      redirect_to new_user_session_path, status: :see_other
+    end
+  end
+
   def check_user_status
     user = User.find(params[:id])
     if user.is_deleted
       redirect_to root_path
+    end
   end
-end
 end
