@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
     #コメントの投稿に成功したら
     if @comment.save
        @post.create_notification_comment!(current_user, @comment.id) #通知を作成
-      @comments = @post.comments.order(created_at: :desc) #投稿を全て取得し、降順(新しい順)に並び替え
+       @comments = @post.comments.order(created_at: :desc) #投稿を全て取得し、降順(新しい順)に並び替え
     else
-     @error_message = "コメントの投稿に失敗しました"
+      @error_message = "コメントの投稿に失敗しました"
     end
   end
 

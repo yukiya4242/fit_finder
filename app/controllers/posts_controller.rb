@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     if @post.update(post_params) #投稿を更新したら
       redirect_to post_path(@post) #その投稿の詳細ページにリダイレクト
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     post.destroy
     flash[:notice] = "投稿を削除しました"
-    redirect_to posts_path
+    redirect_to posts_path, status: :see_other
   end
 
   private

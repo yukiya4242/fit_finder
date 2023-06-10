@@ -72,10 +72,10 @@ class ChatsController < ApplicationController
   if @chat.user_id == current_user.id
     @chat.destroy #メッセージを削除
     flash[:success] = "メッセージを削除しました。"
-    redirect_to chat_path(chat_partner_id) #パートナーとの画面にリダイレクト
+    redirect_to chat_path(chat_partner_id), status: :see_other #パートナーとの画面にリダイレクト
   else
     flash[:alert] = "自分のメッセージのみ削除できます。"
-    redirect_to room_path(room_id) #チャットルーム画面にリダイレクト
+    redirect_to room_path(room_id), status: :see_other #チャットルーム画面にリダイレクト
   end
   end
 
