@@ -16,4 +16,10 @@ class NotificationsController < ApplicationController
       redirect_to notifications_path #通知一覧にリダイレクト
     end
   end
+
+  def destroy
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+  end
+
 end

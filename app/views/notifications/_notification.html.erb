@@ -48,6 +48,11 @@
           </p>
         <% end %>
       </div>
+      <small class="mt-1">
+        <%= form_with url: notification_path(notification), method: :delete, local: false do |f| %>
+          <%= f.submit "削除" %>
+        <% end %>
+      </small>
     </div>
   </div>
 </div>
