@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only:[:edit, :update, :index, :liked_posts, :chat_history, :follow, :unfollow, :following, :followers, :showq]
-  # before_action :set_user,           only:[:edit, :update]
   before_action :check_user_status,  only:[:show]
   before_action :logged_in_user,     only:[:edit, :chat_history]
+  before_action :correct_user,       only:[:edit, :update]
 
 
 
@@ -130,8 +130,15 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :username, :profile_picture, :introduction, :location, :password, :password_confirmation)
   end
 
+  def correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to(user_path(current_user), alert: "不正なアクセスです。")
+    end
+  end
+
   def logged_in_user
-    unless logged_in_user
+    unless user_signed_in?
       flash[:danger] = "ログインしてください"
       redirect_to new_user_session_path, status: :see_other
     end
