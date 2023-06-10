@@ -23,9 +23,9 @@ class UsersController < ApplicationController
   end
 
   def update
-  @user = User.find(params[:id])
+    @user = User.find(params[:id])
   if @user.update(update_params)
-    redirect_to @user
+     redirect_to @user
   else
     p @user.errors
     render 'edit'
@@ -57,19 +57,19 @@ class UsersController < ApplicationController
 
 
   def follow
-  @user = User.find(params[:id])
-  current_user.following << @user #current_userが対象のユーザー(@user)をfollowing
+    @user = User.find(params[:id])
+    current_user.following << @user #current_userが対象のユーザー(@user)をfollowing
+    
+    notification = current_user.active_notifications.new(
+      visited_id: @user.id,
+      action: 'follow'
+      )
 
-  notification = current_user.active_notifications.new(
-    visited_id: @user.id,
-    action: 'follow'
-    )
-
-  notification.save if notification.valid?
-  respond_to do |format|
-    format.html { redirect_to @user}
-    format.js
-  end
+    notification.save if notification.valid?
+    respond_to do |format|
+      format.html { redirect_to @user}
+      format.js
+    end
   end
 
   def unfollow

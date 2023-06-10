@@ -44,7 +44,7 @@ class ChatsController < ApplicationController
     )
 
     if notification.visitor_id == notification.visited_id
-      notification.checked = true
+       notification.checked = true
     end
 
     notification.save if notification.valid? #通知をDBに保存
@@ -92,7 +92,7 @@ class ChatsController < ApplicationController
     #相互フォローか確認
     def reject_non_related
     user = User.find(params[:id]) #ユーザーを見つける
-    
+
     #current_userと指定されたユーザーが相互フォローでない場合
     unless current_user.following?(user) && user.following?(current_user)
       redirect_to posts_path #投稿一覧にリダイレクト

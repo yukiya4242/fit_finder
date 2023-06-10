@@ -6,8 +6,7 @@ class LikesController < ApplicationController
     likes = current_user.likes.new(post_id: @post.id) #新しいいいねを作成
     if likes.save #DBにいいねを保存
     #通知を作成
-    @post.create_notification_like!(current_user)
-    else
+      @post.create_notification_like!(current_user)
     end
   end
 

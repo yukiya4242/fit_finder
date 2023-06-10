@@ -13,10 +13,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params) #投稿データをDBに保存
     if @post.save
       flash[:success] = '投稿が完了しました'
-    redirect_to posts_path
+      redirect_to posts_path
     else
       flash[:danger] = '投稿に失敗しました。もう一度お試しください'
-    redirect_to posts_path
+      redirect_to posts_path
     end
   end
 
@@ -33,17 +33,17 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id]) #対象の投稿を見つける
     if @post.update(post_params) #投稿を更新したら
-    redirect_to post_path(@post) #その投稿の詳細ページにリダイレクト
+      redirect_to post_path(@post) #その投稿の詳細ページにリダイレクト
     else
-    render :edit
+      render :edit
     end
   end
 
   def show
-  @post = Post.find_by(id: params[:id])
-  @comments = @post.comments.order(created_at: :desc)
+    @post = Post.find_by(id: params[:id])
+    @comments = @post.comments.order(created_at: :desc)
   if @post.nil?
-    redirect_to posts_path
+     redirect_to posts_path
   else
     @comment = Comment.new
   end
@@ -73,7 +73,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-  params.require(:post).permit(:content, :image, :video)
+    params.require(:post).permit(:content, :image, :video)
   end
 
 
