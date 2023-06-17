@@ -59,4 +59,4 @@ https://docs.google.com/spreadsheets/d/1VCdMlP42f1r6HkcsEV5kwja1gYglopXkAToD4WtK
 
 詳細設計：
 
-[https://docs.google.com/spreadsheets/d/1sK3](https://docs.google.com/spreadsheets/d/1sK3sUhcotC2FdtSsESO5kw1S_LKDDKTMrBvqwlLyoYA/edit?usp=sharing)https://docs.google.com/spreadsheets/d/1sK3sUhcotC2FdtSsESO5kw1S_LKDDKTMrBvqwlLyoYA/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1sK3sUhcotC2FdtSsESO5kw1S_LKDDKTMrBvqwlLyoYA/edit?usp=sharing
