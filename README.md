@@ -47,6 +47,10 @@ ER図:
 
 [https://drive.google.com/file/d/1QjSHCv6Ag7AYXRK4zwwvnLaB-Jv3ywpz/view?usp=sharing](https://drive.google.com/file/d/1dIcHdUNRuQApBR3x0BSuDducazZTZRn4/view?usp=sharing)
 
+ER図PDF:[PF.erd.pdf](https://github.com/yukiya4242/fit_finder/files/11778141/PF.erd.pdf)
+
+
+
 テーブル定義書：
 
 https://docs.google.com/spreadsheets/d/1VCdMlP42f1r6HkcsEV5kwja1gYglopXkAToD4WtKesk/edit?usp=sharing
