@@ -1,59 +1,61 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-10">
-      <div class="container mt-3">
-        <div class="row">
-          <%= render 'posts/sidebar' %>
-          <div class="col-8">
-            <div class="main-container">
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="container mt-3">
+          <div class="row">
+            <%= render 'posts/sidebar' %>
+            <div class="col-8">
               <div class="main-container">
-                <h1 class="mb-3" style="font-size: 24px; font-weight: bold;">
-                  <% if action_name == 'following' %>
-                    <%= @user.username %> さんのフォロー
-                  <% else %>
-                    <%= @user.username %> さんのフォロワー
-                  <% end %>
-                </h1>
+                <div class="main-container">
+                  <h1 class="mb-3" style="font-size: 24px; font-weight: bold;">
+                    <% if action_name == 'following' %>
+                      <%= @user.username %> さんのフォロー
+                    <% else %>
+                      <%= @user.username %> さんのフォロワー
+                    <% end %>
+                  </h1>
 
 
-                <div class="row">
-                  <% @users.each do |user| %>
-                    <%# next if user == current_user %>
-                    <div class="col-12 mb-1">
-                      <div class="post-container">
-                        <div class="d-flex justify-content-between align-items-start">
-                          <div class="post-tops d-flex justify-content-between">
-                            <div>
-                              <% if user.profile_picture.attached? %>
-                                <%= image_tag user.profile_picture, class: 'profile-picture' %>
-                              <% else %>
-                                <%= image_tag "default_profile_picture.png", class: 'profile-picture' %>
-                              <% end %>
-                            </div>
-
-                            <div class="ml-3">
-                              <h6 class="post-header"><%= link_to user.username, user_path(user), class: 'text-dark' %></h6>
-                              <p class="post-content"><%= user.introduction %></p>
-                            </div>
-                            </div>
-
-                            <div class="follow-unfollow-buttons">
-                              <% if user_signed_in? && current_user != user %>
-                                <% if current_user.guest? %>
-                                  <button onclick="alert('ゲストユーザーはこの操作はできません')" class='follow-button'>Follow</button>
-                                <% elsif current_user.following?(user) %>
-                                  <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}" %>
-                                  <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}", style: 'display:none;' %>
+                  <div class="row">
+                    <% @users.each do |user| %>
+                      <%# next if user == current_user %>
+                      <div class="col-12 mb-1">
+                        <div class="post-container">
+                          <div class="d-flex justify-content-between align-items-start">
+                            <div class="post-tops d-flex justify-content-between">
+                              <div>
+                                <% if user.profile_picture.attached? %>
+                                  <%= image_tag user.profile_picture, class: 'profile-picture' %>
                                 <% else %>
-                                  <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}" %>
-                                  <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}", style: 'display:none;' %>
+                                  <%= image_tag "default_profile_picture.png", class: 'profile-picture' %>
                                 <% end %>
-                              <% end %>
+                              </div>
+
+                              <div class="ml-3">
+                                <h6 class="post-header"><%= link_to user.username, user_path(user), class: 'text-dark' %></h6>
+                                <p class="post-content"><%= user.introduction %></p>
+                              </div>
+                              </div>
+
+                              <div class="follow-unfollow-buttons">
+                                <% if user_signed_in? && current_user != user %>
+                                  <% if current_user.guest? %>
+                                    <button onclick="alert('ゲストユーザーはこの操作はできません')" class='follow-button'>Follow</button>
+                                  <% elsif current_user.following?(user) %>
+                                    <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}" %>
+                                    <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}", style: 'display:none;' %>
+                                  <% else %>
+                                    <%= button_to "Follow", follow_user_path(user), remote: true, class: 'follow-button', id: "follow-button-#{user.id}" %>
+                                    <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, remote: true, class: 'unfollow-button', id: "unfollow-button-#{user.id}", style: 'display:none;' %>
+                                  <% end %>
+                                <% end %>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                  <% end %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -62,4 +64,4 @@
       </div>
     </div>
   </div>
-</div>
+</body>
